@@ -1,4 +1,5 @@
 import React from 'react'
+import cs from 'classnames'
 import styles from './nativeSelector.css'
 
 class NativeSelector extends React.PureComponent {
@@ -23,14 +24,14 @@ class NativeSelector extends React.PureComponent {
   }
 
   render () {
-    const { value, onChange } = this.props
+    const { value, onChange, className } = this.props
 
     return (
       <select
         value={value}
         ref={this.ref}
         onChange={onChange}
-        className={styles.select}
+        className={cs(styles.select, className)}
       >
         {this.renderOptions()}
       </select>
@@ -39,6 +40,7 @@ class NativeSelector extends React.PureComponent {
 }
 
 NativeSelector.defaultProps = {
+  className: '',
   options: [],
   value: '',
   onSelect: () => {},

@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
+import cs from 'classnames'
 
-import Selector from './NativeSelector/index'
-import OutsideClickHandler from '../shared/components/OutsideClickHandler'
+import Selector from '../NativeSelector/index'
 import styles from './index.css'
 
 const initValue = (options) => {
@@ -22,26 +22,10 @@ class App extends React.PureComponent {
 
     this.state = {
       value: initValue(options),
-      open: false,
     }
 
-    this.handleOnOpen = this.handleOnOpen.bind(this)
-    this.handleOnClose = this.handleOnClose.bind(this)
     this.handleOnChange = this.handleOnChange.bind(this)
     this.renderSelector = this.renderSelector.bind(this)
-    this.renderMultiLevelSelector = this.renderMultiLevelSelector.bind(this)
-  }
-
-  handleOnOpen () {
-    this.setState({
-      open: true,
-    })
-  }
-
-  handleOnClose () {
-    this.setState({
-      open: false,
-    })
   }
 
   handleOnChange (id, index, subOptions) {
@@ -75,6 +59,7 @@ class App extends React.PureComponent {
 
   renderSelector (index, options) {
     if (options && options.length) {
+      const { selectClassName } = this.props
       const { value } = this.state
       const selectIndex = value[index]
       const itemSelected = options[selectIndex]
@@ -88,6 +73,7 @@ class App extends React.PureComponent {
               const { value } = e.target
               this.handleOnChange(value, index, options)
             }}
+            className={selectClassName}
           />
           { this.renderSelector(index + 1, itemSelected.item) }
         </Fragment>
@@ -96,76 +82,22 @@ class App extends React.PureComponent {
     return null
   }
 
-  renderMultiLevelSelector () {
-    const { options } = this.props
+  render () {
+    const { options, className } = this.props
 
     return (
-      <div className={styles.selectors}>
+      <div className={ cs(styles.selectors, className) }>
         { this.renderSelector(0, options) }
       </div>
-    )
-  }
-
-  render () {
-    const { open } = this.state
-    return (
-      <OutsideClickHandler
-        onOutsideClick={this.handleOnClose}
-        className={styles.container}
-      >
-        <span
-          onClick={this.handleOnOpen}
-        >
-          hello world?
-        </span>
-        { open && this.renderMultiLevelSelector() }
-      </OutsideClickHandler>
     )
   }
 }
 
 App.defaultProps = {
+  className: '',
+  selectClassName: '',
   onChange: () => {},
-  options: [
-    {
-      id: 1,
-      value: 'item 1',
-      item: [
-        {
-          id: 2,
-          value: 'item 2',
-          item: [
-            {
-              id: 3,
-              value: 'item 3',
-            },
-            {
-              id: 4,
-              value: 'item 4',
-            },
-          ],
-        },
-        {
-          id: 5,
-          value: 'item 5',
-        },
-      ],
-    },
-    {
-      id: 6,
-      value: 'item 6',
-      item: [
-        {
-          id: 7,
-          value: 'item 7',
-        },
-        {
-          id: 8,
-          value: 'item 8',
-        },
-      ],
-    },
-  ],
+  options: [],
 }
 
 export default App
