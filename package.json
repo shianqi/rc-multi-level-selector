@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html "
+    "start": "parcel index.html ",
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "build-storybook": "build-storybook"
   },
   "repository": {
     "type": "git",
@@ -22,6 +24,7 @@
     "react-dom": "^15.x.x || ^16.x.x"
   },
   "devDependencies": {
+    "@storybook/react": "^3.4.8",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
@@ -33,15 +36,16 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-standard": "^3.1.0",
-    "parcel-bundler": "^1.9.6",
-    "postcss-modules": "^1.1.0"
+    "postcss-modules": "^1.1.0",
+    "postcss-preset-env": "^5.2.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
   },
   "dependencies": {
     "autoprefixer": "^8.6.5",
-    "babel-polyfill": "^6.26.0",
+    "babel-loader": "^7.1.5",
     "classnames": "^2.2.6",
     "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "webpack": "^4.16.1"
   }
 }

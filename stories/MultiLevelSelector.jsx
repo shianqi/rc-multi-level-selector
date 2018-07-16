@@ -1,21 +1,7 @@
-# rc-multi-level-selector
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import MultiLevelSelector from '../src/components/MultiLevelSelector'
 
-## props
-
-These are all of the available props (and their default values) for the main `<MultiLevelSelector />` component.
-
-```javascript
-{
-  className: '',
-  selectClassName: '',
-  onChange: () => {},
-  options: [],
-}
-```
-
-## example
-
-```javascript
 const options = [
   {
     id: 1,
@@ -42,10 +28,9 @@ const options = [
   },
 ]
 
-...
-<MultiLevelSelector
-  options={options}
-/>
-...
-
-```
+storiesOf('Button', module)
+  .add('with text', () => (
+    <MultiLevelSelector
+      options={options}
+    />
+  ))
