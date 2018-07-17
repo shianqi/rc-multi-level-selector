@@ -102,7 +102,7 @@ MultiLevelSelector.defaultProps = {
 MultiLevelSelector.propTypes = {
   className: PropTypes.string,
   selectClassName: PropTypes.string,
-  onChange: PropTypes.object,
+  onChange: PropTypes.func,
   options: PropTypes.array,
 }
 

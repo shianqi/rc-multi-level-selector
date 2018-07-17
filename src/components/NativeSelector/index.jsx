@@ -49,7 +49,10 @@ NativeSelector.defaultProps = {
 NativeSelector.propTypes = {
   className: PropTypes.string,
   options: PropTypes.array,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   onSelect: PropTypes.func,
 }
 
