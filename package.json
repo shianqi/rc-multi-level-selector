@@ -1,10 +1,12 @@
 {
   "name": "rc-multi-level-selector",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.1",
+  "description": "A React multilevel selector component",
+  "main": "./lib/index.js",
   "scripts": {
-    "start": "parcel index.html ",
+    "tag": "git tag v$npm_package_version",
+    "build": "babel ./src --out-dir ./lib --copy-files",
+    "eslint": "eslint --ext .js,jsx ./",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "build-storybook": "build-storybook"
   },
@@ -12,9 +14,9 @@
     "type": "git",
     "url": "git+https://github.com/shianqi/rc-multi-level-selector.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["multilevel", "selector", "react", "component"],
+  "author": "shianqi",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/shianqi/rc-multi-level-selector/issues"
   },
@@ -25,27 +27,27 @@
   },
   "devDependencies": {
     "@storybook/react": "^3.4.8",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
     "eslint": "^5.1.0",
-    "eslint-config-standard": "^11.0.0",
+    "eslint-config-standard": "^12.0.0-alpha.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-standard": "^3.1.0",
-    "postcss-modules": "^1.1.0",
-    "postcss-preset-env": "^5.2.2",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": "^16.4.1",
+    "webpack": "^4.16.1",
+    "webpack-command": "^0.4.1"
   },
   "dependencies": {
-    "autoprefixer": "^8.6.5",
-    "babel-loader": "^7.1.5",
     "classnames": "^2.2.6",
     "prop-types": "^15.6.2",
-    "webpack": "^4.16.1"
+    "styled-components": "^3.3.3"
   }
 }

@@ -28,8 +28,8 @@ const options = [
   },
 ]
 
-storiesOf('Button', module)
-  .add('with text', () => (
+storiesOf('MultiLevelSelector', module)
+  .add('base', () => (
     <MultiLevelSelector
       options={options}
     />

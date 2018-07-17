@@ -2,9 +2,7 @@ module.exports = {
   extends: "standard",
   parserOptions: {
     sourceType: "module",
-    ecmaFeatures: {
-      jsx: true
-    }
+    ecmaVersion: 2018,
   },
   env: {
     browser: true
