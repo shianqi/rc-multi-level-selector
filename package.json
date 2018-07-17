@@ -1,6 +1,6 @@
 {
   "name": "rc-multi-level-selector",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A React multilevel selector component",
   "main": "./lib/index.js",
   "scripts": {
@@ -14,7 +14,12 @@
     "type": "git",
     "url": "git+https://github.com/shianqi/rc-multi-level-selector.git"
   },
-  "keywords": ["multilevel", "selector", "react", "component"],
+  "keywords": [
+    "multilevel",
+    "selector",
+    "react",
+    "component"
+  ],
   "author": "shianqi",
   "license": "MIT",
   "bugs": {
@@ -27,6 +32,7 @@
   },
   "devDependencies": {
     "@storybook/react": "^3.4.8",
+    "@storybook/storybook-deployer": "^2.3.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
@@ -46,7 +52,6 @@
     "webpack-command": "^0.4.1"
   },
   "dependencies": {
-    "classnames": "^2.2.6",
     "prop-types": "^15.6.2",
     "styled-components": "^3.3.3"
   }

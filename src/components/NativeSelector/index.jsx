@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Select from './Select'
 
 class NativeSelector extends React.PureComponent {
@@ -43,6 +44,13 @@ NativeSelector.defaultProps = {
   options: [],
   value: '',
   onSelect: () => {},
+}
+
+NativeSelector.propTypes = {
+  className: PropTypes.string,
+  options: PropTypes.array,
+  value: PropTypes.string,
+  onSelect: PropTypes.func,
 }
 
 export default NativeSelector

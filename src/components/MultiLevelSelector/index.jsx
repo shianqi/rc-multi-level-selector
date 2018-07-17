@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 
 import Selector from '../NativeSelector/index'
 
@@ -96,6 +97,13 @@ MultiLevelSelector.defaultProps = {
   selectClassName: '',
   onChange: () => {},
   options: [],
+}
+
+MultiLevelSelector.propTypes = {
+  className: PropTypes.string,
+  selectClassName: PropTypes.string,
+  onChange: PropTypes.object,
+  options: PropTypes.array,
 }
 
 export default MultiLevelSelector
