@@ -60,3 +60,4 @@ const options = [
 
 - [ ] Default Value
 - [ ] Example with custom style
+- [ ] Async selector
