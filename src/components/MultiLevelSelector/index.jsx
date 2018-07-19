@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import Selector from '../NativeSelector/index'
@@ -12,6 +13,10 @@ const initValue = (options) => {
   }
   return value
 }
+
+const InlineDiv = styled.div`
+  display: inline;
+`
 
 class MultiLevelSelector extends React.PureComponent {
   constructor (props) {
@@ -85,9 +90,9 @@ class MultiLevelSelector extends React.PureComponent {
     const { options, className } = this.props
 
     return (
-      <div className={ className }>
+      <InlineDiv className={ className }>
         { this.renderSelector(0, options) }
-      </div>
+      </InlineDiv>
     )
   }
 }
