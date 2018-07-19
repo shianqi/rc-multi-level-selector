@@ -8,8 +8,7 @@ const options = [
     value: 'item 1',
     item: [
       {
-        id: 2,
-        value: 'item 2',
+        id: 2, value: 'item 2',
         item: [
           { id: 3, value: 'item 3' },
           { id: 4, value: 'item 4' },
@@ -19,8 +18,7 @@ const options = [
     ],
   },
   {
-    id: 6,
-    value: 'item 6',
+    id: 6, value: 'item 6',
     item: [
       { id: 7, value: 'item 7' },
       { id: 8, value: 'item 8' },
@@ -28,9 +26,18 @@ const options = [
   },
 ]
 
+class Example extends React.PureComponent {
+  render () {
+    return (
+      <MultiLevelSelector
+        options={options}
+        onChange={}
+      />
+    )
+  }
+}
+
 storiesOf('Button', module)
   .add('with text', () => (
-    <MultiLevelSelector
-      options={options}
-    />
+    <Example />
   ))
