@@ -55,3 +55,8 @@ const options = [
 ...
 
 ```
+
+## TODO
+
+-[ ] Default Value
+-[ ] Example with custom style
