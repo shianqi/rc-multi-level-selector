@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react'
-import cs from 'classnames'
+import PropTypes from 'prop-types'
 
 import Selector from '../NativeSelector/index'
-import styles from './index.css'
 
 const initValue = (options) => {
   const value = []
@@ -14,7 +13,7 @@ const initValue = (options) => {
   return value
 }
 
-class App extends React.PureComponent {
+class MultiLevelSelector extends React.PureComponent {
   constructor (props) {
     super(props)
 
@@ -86,18 +85,25 @@ class App extends React.PureComponent {
     const { options, className } = this.props
 
     return (
-      <div className={ cs(styles.selectors, className) }>
+      <div className={ className }>
         { this.renderSelector(0, options) }
       </div>
     )
   }
 }
 
-App.defaultProps = {
+MultiLevelSelector.defaultProps = {
   className: '',
   selectClassName: '',
   onChange: () => {},
   options: [],
 }
 
-export default App
+MultiLevelSelector.propTypes = {
+  className: PropTypes.string,
+  selectClassName: PropTypes.string,
+  onChange: PropTypes.func,
+  options: PropTypes.array,
+}
+
+export default MultiLevelSelector
