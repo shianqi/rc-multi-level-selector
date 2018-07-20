@@ -18,7 +18,7 @@ $ yarn add rc-multi-level-selector
 $ npm install --save rc-multi-level-selector
 ```
 
-## props
+## Props
 
 These are all of the available props (and their default values) for the main `<MultiLevelSelector />` component.
 
@@ -31,7 +31,7 @@ These are all of the available props (and their default values) for the main `<M
 }
 ```
 
-## example
+## Example
 
 ```javascript
 import MultiLevelSelector from 'rc-multi-level-selector'
@@ -56,8 +56,11 @@ const options = [
 
 ```
 
-## TODO
+## Features
 
-- [ ] Default Value
+- [ ] Enable Custom SubOption key
+- [ ] Enable value
+- [ ] Enable defaultValue
+- [ ] Enable onDefaultValue
 - [ ] Example with custom style
-- [ ] Async selector
+- [ ] Enable Async selector
