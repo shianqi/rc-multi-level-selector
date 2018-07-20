@@ -32,8 +32,31 @@ class MultiLevelSelector extends React.PureComponent {
     this.renderSelector = this.renderSelector.bind(this)
   }
 
+  componentDidMount () {
+    const { value } = this.state
+    const { onDefaultValue } = this.props
+
+    const selectedObject = this.getSelectedObject(value)
+    onDefaultValue && onDefaultValue(selectedObject)
+  }
+
+  getSelectedObject (value) {
+    const { options } = this.props
+
+    let opt = options
+    const data = []
+
+    value.forEach((i) => {
+      const { item, ...dataItem } = opt[i]
+      data.push(dataItem)
+      opt = item
+    })
+
+    return data
+  }
+
   handleOnChange (id, index, subOptions) {
-    const { onChange, options } = this.props
+    const { onChange } = this.props
     const { value } = this.state
 
     const res = value.slice(0, index)
@@ -50,15 +73,7 @@ class MultiLevelSelector extends React.PureComponent {
       value: res,
     })
 
-    let opt = options
-    const data = []
-
-    res.forEach((i) => {
-      const { item, ...dataItem } = opt[i]
-      data.push(dataItem)
-      opt = item
-    })
-    onChange && onChange(data)
+    onChange && onChange(this.getSelectedObject(res))
   }
 
   renderSelector (index, options) {

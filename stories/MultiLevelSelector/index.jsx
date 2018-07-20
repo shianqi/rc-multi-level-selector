@@ -1,5 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import { action } from '@storybook/addon-actions'
 
 import Monitor from './Monitor'
 import MultiLevelSelector from '../../src/components/MultiLevelSelector'
@@ -46,6 +47,7 @@ class Example extends React.PureComponent {
     this.setState({
       selectedOption: value,
     })
+    action('onChange')(options)
   }
 
   render () {
@@ -59,6 +61,7 @@ class Example extends React.PureComponent {
         <MultiLevelSelector
           options={options}
           onChange={this.onChangeMultiLevelSelector}
+          onDefaultValue={this.onChangeMultiLevelSelector}
         />
       </div>
     )

@@ -33,6 +33,7 @@
     "react-dom": "^15.x.x || ^16.x.x"
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^3.4.8",
     "@storybook/react": "^4.0.0-alpha.14",
     "@storybook/storybook-deployer": "^2.3.0",
     "babel-cli": "^6.26.0",
