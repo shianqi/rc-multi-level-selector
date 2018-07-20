@@ -1,10 +1,11 @@
 {
   "name": "rc-multi-level-selector",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A React multilevel selector component",
   "main": "./lib/index.js",
   "scripts": {
-    "tag": "git tag v$npm_package_version",
+    "publish": "npm run build && npm publish",
+    "tag": "git tag v$npm_package_version && git push origin --tags",
     "build": "babel ./src --out-dir ./lib --copy-files",
     "eslint": "eslint --ext .js,jsx ./",
     "storybook": "start-storybook -p 9001 -c .storybook",
