@@ -58,9 +58,10 @@ const options = [
 
 ## Features
 
-- [ ] Enable Custom SubOption key
+- [ ] Enable custom subOption key
 - [ ] Enable value
 - [ ] Enable defaultValue
 - [ ] Enable onDefaultValue
 - [ ] Example with custom style
 - [ ] Enable Async selector
+- [ ] Enable config subOption type('Array' or 'Map')
