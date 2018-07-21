@@ -4,16 +4,6 @@ import PropTypes from 'prop-types'
 
 import Selector from '../NativeSelector/index'
 
-const initValue = (options) => {
-  const value = []
-  let opts = options
-  while (opts && opts.length && opts.length > 0) {
-    value.push(0)
-    opts = opts[0].item
-  }
-  return value
-}
-
 const InlineDiv = styled.div`
   display: inline;
 `
@@ -25,7 +15,7 @@ class MultiLevelSelector extends React.PureComponent {
     const { options } = props
 
     this.state = {
-      value: initValue(options),
+      value: this.initValue(options),
     }
 
     this.handleOnChange = this.handleOnChange.bind(this)
@@ -38,6 +28,17 @@ class MultiLevelSelector extends React.PureComponent {
 
     const selectedObject = this.getSelectedObject(value)
     onDefaultValue && onDefaultValue(selectedObject)
+  }
+
+  initValue (options) {
+    const { subOptionKey } = this.props
+    const value = []
+    let opts = options
+    while (opts && opts.length && opts.length > 0) {
+      value.push(0)
+      opts = opts[0][subOptionKey]
+    }
+    return value
   }
 
   getSelectedObject (value) {
@@ -56,17 +57,17 @@ class MultiLevelSelector extends React.PureComponent {
   }
 
   handleOnChange (id, index, subOptions) {
-    const { onChange } = this.props
+    const { onChange, subOptionKey } = this.props
     const { value } = this.state
 
     const res = value.slice(0, index)
     const itemIndex = subOptions.findIndex((item) => (`${item.id}` === id))
     res.push(itemIndex)
 
-    let opts = subOptions[itemIndex].item
+    let opts = subOptions[itemIndex][subOptionKey]
     while (opts && opts.length && opts.length > 0) {
       res.push(0)
-      opts = opts[0].item
+      opts = opts[0][subOptionKey]
     }
 
     this.setState({
@@ -78,7 +79,7 @@ class MultiLevelSelector extends React.PureComponent {
 
   renderSelector (index, options) {
     if (options && options.length) {
-      const { selectClassName } = this.props
+      const { selectClassName, subOptionKey } = this.props
       const { value } = this.state
       const selectIndex = value[index]
       const itemSelected = options[selectIndex]
@@ -94,7 +95,7 @@ class MultiLevelSelector extends React.PureComponent {
             }}
             className={selectClassName}
           />
-          { this.renderSelector(index + 1, itemSelected.item) }
+          { this.renderSelector(index + 1, itemSelected[subOptionKey]) }
         </Fragment>
       )
     }
@@ -114,15 +115,19 @@ class MultiLevelSelector extends React.PureComponent {
 
 MultiLevelSelector.defaultProps = {
   className: '',
+  subOptionKey: 'item',
   selectClassName: '',
   onChange: () => {},
+  onDefaultValue: () => {},
   options: [],
 }
 
 MultiLevelSelector.propTypes = {
   className: PropTypes.string,
+  subOptionKey: PropTypes.string,
   selectClassName: PropTypes.string,
   onChange: PropTypes.func,
+  onDefaultValue: PropTypes.func,
   options: PropTypes.array,
 }
 
