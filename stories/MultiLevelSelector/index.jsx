@@ -68,7 +68,7 @@ class Example extends React.PureComponent {
   }
 }
 
-storiesOf('Button', module)
-  .add('with text', () => (
+storiesOf('MultiLevelSelector', module)
+  .add('base', () => (
     <Example />
   ))

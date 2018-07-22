@@ -33,10 +33,9 @@ class MultiLevelSelector extends React.PureComponent {
   initValue (options) {
     const { subOptionKey } = this.props
     const value = []
-    let opts = options
-    while (opts && opts.length && opts.length > 0) {
+    while (options && options.length && options.length > 0) {
       value.push(0)
-      opts = opts[0][subOptionKey]
+      options = options[0][subOptionKey]
     }
     return value
   }
@@ -60,20 +59,17 @@ class MultiLevelSelector extends React.PureComponent {
     const { onChange, subOptionKey } = this.props
     const { value } = this.state
 
-    const res = value.slice(0, index)
+    const head = value.slice(0, index)
     const itemIndex = subOptions.findIndex((item) => (`${item.id}` === id))
-    res.push(itemIndex)
 
     let opts = subOptions[itemIndex][subOptionKey]
-    while (opts && opts.length && opts.length > 0) {
-      res.push(0)
-      opts = opts[0][subOptionKey]
-    }
+    const tail = this.initValue(opts)
+
+    const res = [...head, itemIndex, ...tail]
 
     this.setState({
       value: res,
     })
-
     onChange && onChange(this.getSelectedObject(res))
   }
 
