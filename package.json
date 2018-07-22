@@ -30,8 +30,10 @@
   },
   "homepage": "https://github.com/shianqi/rc-multi-level-selector#readme",
   "peerDependencies": {
+    "prop-types": "^15.6.2",
     "react": "^15.x.x || ^16.x.x",
-    "react-dom": "^15.x.x || ^16.x.x"
+    "react-dom": "^15.x.x || ^16.x.x",
+    "styled-components": "^3.3.3"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.8",
@@ -50,13 +52,11 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-standard": "^3.1.0",
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "styled-components": "^3.3.3",
     "webpack": "^4.16.1",
     "webpack-command": "^0.4.1"
-  },
-  "dependencies": {
-    "prop-types": "^15.6.2",
-    "styled-components": "^3.3.3"
   }
 }
