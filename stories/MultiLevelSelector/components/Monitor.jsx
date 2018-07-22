@@ -4,8 +4,8 @@ const Monitor = styled.div`
   display: block;
   border-radius: 4px;
   padding: 4px;
-  width: 200px;
-  height: 16px;
+  width: 100%;
+  box-sizing: border-box;
   border: 1px solid #aaa;
   margin-bottom: 8px;
 `
