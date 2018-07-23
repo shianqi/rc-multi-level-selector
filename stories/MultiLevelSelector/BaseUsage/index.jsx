@@ -1,7 +1,15 @@
 import React from 'react'
 
 import options from '../shared/options'
-import Monitor from '../components/Monitor'
+import {
+  Br,
+  Card,
+  Title,
+  Monitor,
+  Container,
+} from '../components'
+
+import styles from './index.css'
 import MultiLevelSelector from '../../../src/components/MultiLevelSelector'
 
 class BaseUsage extends React.PureComponent {
@@ -29,16 +37,28 @@ class BaseUsage extends React.PureComponent {
     const { selectedOption } = this.state
 
     return (
-      <div>
-        <Monitor>
-          {selectedOption}
-        </Monitor>
-        <MultiLevelSelector
-          options={options}
-          onChange={this.onChangeMultiLevelSelector}
-          onDefaultValue={this.onChangeMultiLevelSelector}
-        />
-      </div>
+      <Container>
+        <Card>
+          <Title>BASE USAGE</Title>
+          <Monitor>
+            {selectedOption}
+          </Monitor>
+          <Br />
+          <MultiLevelSelector
+            options={options}
+            onChange={this.onChangeMultiLevelSelector}
+            onDefaultValue={this.onChangeMultiLevelSelector}
+          />
+        </Card>
+
+        <Card>
+          <Title>WITH CUSTOM STYLE</Title>
+          <MultiLevelSelector
+            options={options}
+            selectClassName={styles.select}
+          />
+        </Card>
+      </Container>
     )
   }
 }

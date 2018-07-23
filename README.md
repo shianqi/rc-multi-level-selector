@@ -63,6 +63,6 @@ const options = [
 - [ ] Enable fixed value
 - [ ] Enable defaultValue
 - [x] Enable onDefaultValue
-- [ ] Example with custom style
+- [x] Example with custom style
 - [ ] Enable Async selector
 - [ ] Enable config subOption type('Array' or 'Object')

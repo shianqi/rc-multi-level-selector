@@ -7,7 +7,6 @@ const Monitor = styled.div`
   width: 100%;
   box-sizing: border-box;
   border: 1px solid #aaa;
-  margin-bottom: 8px;
 `
 
 export default Monitor
