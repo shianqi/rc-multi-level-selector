@@ -24,12 +24,16 @@ These are all of the available props (and their default values) for the main `<M
 
 ```javascript
 {
+  style: {},
+  selectStyle: {},
   className: '',
-  subOptionKey: 'item',
   selectClassName: '',
+
+  options: [],
+  subOptionKey: 'item',
+
   onChange: () => {},
   onDefaultValue: () => {},
-  options: [],
 }
 ```
 
