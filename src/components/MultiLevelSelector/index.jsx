@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 
 import Selector from '../NativeSelector/index'
 
-const InlineDiv = styled.div`
-  display: inline;
+const InlineBlockDiv = styled.div`
+  display: inline-block;
 `
 
 class MultiLevelSelector extends React.PureComponent {
@@ -75,7 +75,12 @@ class MultiLevelSelector extends React.PureComponent {
 
   renderSelector (index, options) {
     if (options && options.length) {
-      const { selectClassName, subOptionKey } = this.props
+      const {
+        selectClassName,
+        subOptionKey,
+        selectStyle,
+      } = this.props
+
       const { value } = this.state
       const selectIndex = value[index]
       const itemSelected = options[selectIndex]
@@ -89,6 +94,7 @@ class MultiLevelSelector extends React.PureComponent {
               const { value } = e.target
               this.handleOnChange(value, index, options)
             }}
+            style={selectStyle}
             className={selectClassName}
           />
           { this.renderSelector(index + 1, itemSelected[subOptionKey]) }
@@ -99,19 +105,25 @@ class MultiLevelSelector extends React.PureComponent {
   }
 
   render () {
-    const { options, className } = this.props
+    const {
+      options,
+      className,
+      style,
+    } = this.props
 
     return (
-      <InlineDiv className={ className }>
+      <InlineBlockDiv className={ className } style={style}>
         { this.renderSelector(0, options) }
-      </InlineDiv>
+      </InlineBlockDiv>
     )
   }
 }
 
 MultiLevelSelector.defaultProps = {
+  style: {},
   className: '',
   subOptionKey: 'item',
+  selectStyle: {},
   selectClassName: '',
   onChange: () => {},
   onDefaultValue: () => {},
@@ -119,8 +131,10 @@ MultiLevelSelector.defaultProps = {
 }
 
 MultiLevelSelector.propTypes = {
+  style: PropTypes.object,
   className: PropTypes.string,
   subOptionKey: PropTypes.string,
+  selectStyle: PropTypes.object,
   selectClassName: PropTypes.string,
   onChange: PropTypes.func,
   onDefaultValue: PropTypes.func,

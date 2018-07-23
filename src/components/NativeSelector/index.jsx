@@ -24,10 +24,16 @@ class NativeSelector extends React.PureComponent {
   }
 
   render () {
-    const { value, onChange, className } = this.props
+    const {
+      value,
+      onChange,
+      className,
+      style,
+    } = this.props
 
     return (
       <Select
+        style={style}
         value={value}
         ref={this.ref}
         onChange={onChange}
@@ -40,6 +46,7 @@ class NativeSelector extends React.PureComponent {
 }
 
 NativeSelector.defaultProps = {
+  style: {},
   className: '',
   options: [],
   value: '',
@@ -47,6 +54,7 @@ NativeSelector.defaultProps = {
 }
 
 NativeSelector.propTypes = {
+  style: PropTypes.object,
   className: PropTypes.string,
   options: PropTypes.array,
   value: PropTypes.oneOfType([
