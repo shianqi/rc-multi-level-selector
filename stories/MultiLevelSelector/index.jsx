@@ -5,5 +5,5 @@ import BaseUsage from './BaseUsage'
 
 storiesOf('MultiLevelSelector', module)
   .add('base', () => (
-    <BaseUsage onChange={ action('onChange') }/>
+    <BaseUsage onChange={ action('onChange') } />
   ))
