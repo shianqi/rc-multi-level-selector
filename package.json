@@ -1,6 +1,6 @@
 {
   "name": "rc-multi-level-selector",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A React multilevel selector component",
   "main": "./lib/index.js",
   "scripts": {
@@ -9,8 +9,7 @@
     "build": "babel ./src --out-dir ./lib --copy-files",
     "eslint": "eslint --ext .js,jsx ./",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "storybook-deploy": "npm i && npm run build-storybook && npm run deploy-storybook",
-    "deploy-storybook": "storybook-to-ghpages",
+    "storybook-deploy": "npm i && npm run build-storybook && storybook-to-ghpages",
     "build-storybook": "build-storybook -c .storybook -o .out"
   },
   "repository": {
