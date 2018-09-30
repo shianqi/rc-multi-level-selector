@@ -9,8 +9,7 @@ import {
   Container,
 } from '../components'
 
-import styles from './index.css'
-import MultiLevelSelector from '../../../src/components/MultiLevelSelector'
+import MultiLevelSelector from '../../../src/index.js'
 
 class BaseUsage extends React.PureComponent {
   constructor (props) {
@@ -48,14 +47,6 @@ class BaseUsage extends React.PureComponent {
             options={options}
             onChange={this.onChangeMultiLevelSelector}
             onDefaultValue={this.onChangeMultiLevelSelector}
-          />
-        </Card>
-
-        <Card>
-          <Title>WITH CUSTOM STYLE</Title>
-          <MultiLevelSelector
-            options={options}
-            selectClassName={styles.select}
           />
         </Card>
       </Container>

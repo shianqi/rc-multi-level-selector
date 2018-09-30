@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
-import Selector from '../NativeSelector/index'
+import NativeSelector from '../NativeSelector/index'
 
 const InlineBlockDiv = styled.div`
   display: inline-block;
@@ -79,6 +79,7 @@ class MultiLevelSelector extends React.PureComponent {
         selectClassName,
         subOptionKey,
         selectStyle,
+        Selector,
       } = this.props
 
       const { value } = this.state
@@ -122,23 +123,27 @@ class MultiLevelSelector extends React.PureComponent {
 MultiLevelSelector.defaultProps = {
   style: {},
   className: '',
+
   subOptionKey: 'item',
   selectStyle: {},
   selectClassName: '',
   onChange: () => {},
   onDefaultValue: () => {},
   options: [],
+  Selector: NativeSelector,
 }
 
 MultiLevelSelector.propTypes = {
   style: PropTypes.object,
   className: PropTypes.string,
+
   subOptionKey: PropTypes.string,
   selectStyle: PropTypes.object,
   selectClassName: PropTypes.string,
   onChange: PropTypes.func,
   onDefaultValue: PropTypes.func,
   options: PropTypes.array,
+  Selector: PropTypes.func,
 }
 
 export default MultiLevelSelector

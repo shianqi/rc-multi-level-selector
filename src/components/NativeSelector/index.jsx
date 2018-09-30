@@ -50,7 +50,6 @@ NativeSelector.defaultProps = {
   className: '',
   options: [],
   value: '',
-  onSelect: () => {},
 }
 
 NativeSelector.propTypes = {
@@ -61,7 +60,6 @@ NativeSelector.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
-  onSelect: PropTypes.func,
 }
 
 export default NativeSelector
