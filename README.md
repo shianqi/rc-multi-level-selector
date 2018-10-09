@@ -65,8 +65,15 @@ const options = [
 
 - [x] Enable custom subOption key
 - [ ] Enable fixed value
-- [ ] Enable defaultValue
+- [x] Enable 'defaultValue' key for option
 - [x] Enable onDefaultValue
 - [x] Example with custom style
 - [ ] Enable Async selector
+- [ ] Add default selector not NativeSelector
+- [ ] Add ScrollSelector
 - [ ] Enable config subOption type('Array' or 'Object')
+
+## Docs
+
+- [ ] Use Material UI demo
+- [ ] Enable Custom selector
