@@ -36,7 +36,10 @@ class NativeSelector extends React.PureComponent {
         style={style}
         value={value}
         ref={this.ref}
-        onChange={onChange}
+        onChange={(e) => {
+          const { value } = e.target
+          onChange(value)
+        }}
         className={className}
       >
         {this.renderOptions()}

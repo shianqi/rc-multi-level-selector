@@ -25,7 +25,6 @@ These are all of the available props (and their default values) for the main `<M
 ```javascript
 {
   style: {},
-  selectStyle: {},
   className: '',
   selectClassName: '',
 
@@ -64,14 +63,12 @@ const options = [
 ## Features
 
 - [x] Enable custom subOption key
-- [ ] Enable fixed value
+- [x] Enable fixed value
 - [x] Enable 'defaultValue' key for option
 - [x] Enable onDefaultValue
 - [x] Example with custom style
-- [ ] Enable Async selector
 - [ ] Add default selector not NativeSelector
 - [ ] Add ScrollSelector
-- [ ] Enable config subOption type('Array' or 'Object')
 
 ## Docs
 
