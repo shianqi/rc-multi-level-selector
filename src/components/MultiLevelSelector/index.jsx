@@ -13,11 +13,10 @@ class MultiLevelSelector extends React.Component {
   constructor (props) {
     super(props)
 
-    const { options, defaultValue } = props
-    console.log(options)
+    const { options, defaultValue, value } = props
     this.oldOptions = options
     this.state = {
-      values: defaultValue || this.getDefaultValues(),
+      values: defaultValue || value || this.getDefaultValues(),
     }
 
     this.handleOnChange = this.handleOnChange.bind(this)
@@ -64,7 +63,6 @@ class MultiLevelSelector extends React.Component {
     return newValues
   }
 
-  // TODO: Remove props.value
   getValues (state) {
     const { values: stateValues = [] } = state || this.state || {}
     const { value: propsValues } = this.props
@@ -102,6 +100,8 @@ class MultiLevelSelector extends React.Component {
         const { item } = option
         objects.push(option)
         opts = item
+      } else {
+        break
       }
     }
 
@@ -242,6 +242,7 @@ MultiLevelSelector.propTypes = {
   className: PropTypes.string,
   selectClassName: PropTypes.string,
 
+  value: PropTypes.array,
   options: PropTypes.array,
   subOptionKey: PropTypes.string,
   Selector: PropTypes.func,
