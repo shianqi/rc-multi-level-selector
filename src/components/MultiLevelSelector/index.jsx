@@ -1,22 +1,23 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
 
 import NativeSelector from '../NativeSelector/index'
 
 const InlineBlockDiv = styled.div`
   display: inline-block;
 `
-
-class MultiLevelSelector extends React.PureComponent {
+// TODO: Remove lodash
+class MultiLevelSelector extends React.Component {
   constructor (props) {
     super(props)
 
-    const { options } = props
-
+    const { options, defaultValue } = props
+    console.log(options)
     this.oldOptions = options
     this.state = {
-      value: this.initValue(options),
+      values: defaultValue || this.getDefaultValues(),
     }
 
     this.handleOnChange = this.handleOnChange.bind(this)
@@ -24,100 +25,161 @@ class MultiLevelSelector extends React.PureComponent {
   }
 
   componentDidMount () {
-    const { value } = this.state
-    const { onDefaultValue, options } = this.props
+    const { onDefaultValue } = this.props
 
-    const selectedObject = this.getSelectedObject(value, options)
-    onDefaultValue && onDefaultValue(selectedObject)
+    const values = this.getValues()
+    onDefaultValue && onDefaultValue(this.getObjectsByValues(values))
   }
 
-  arrayIsIdentical (array1, array2) {
-    if (array1 == null || array2 == null || array1.length !== array2.length) {
+  shouldComponentUpdate (nextProps, nextState) {
+    const { options: nextOptions, value: nextValue } = nextProps
+    const { options, value } = this.props
+
+    if (_.isEqual(options, nextOptions) && _.isEqual(nextValue, value) && _.isEqual(nextState, this.state)) {
       return false
-    }
-    for (let i = 0; i < array1.length; i++) {
-      if (array1[i].id !== array2[i].id) {
-        return false
-      }
     }
     return true
   }
 
-  componentDidUpdate () {
-    const { value } = this.state
-    const { onChange, options } = this.props
-
-    const newValue = this.getSelectedObject(value, options)
-    const oldValue = this.getSelectedObject(this.oldValue, this.oldOptions || options)
-
-    if (!this.arrayIsIdentical(newValue, oldValue)) {
-      onChange && onChange(newValue)
+  componentWillUpdate (props, state) {
+    const values = this.updateValues(props, state)
+    if (!_.isEqual(values, this.getValues())) {
+      this.setValues(values)
     }
-    this.oldValue = value
-    this.oldOptions = options
   }
 
-  initValue (options) {
-    const { subOptionKey } = this.props
-    const value = []
-    while (options && options.length && options.length > 0) {
-      value.push(0)
-      options = options[0][subOptionKey]
-    }
-    return value
-  }
-
-  getValueIndexs () {
-    const { options, value, subOptionKey } = this.props
+  getValuesByOptions (options) {
     let opt = options
+    const newValues = []
 
-    if (!value) {
-      return null
-    }
-
-    return value.map((key) => {
-      const objIndex = opt.findIndex((item) => (item.id === key))
-      opt = opt[objIndex][subOptionKey]
-      return objIndex
-    })
-  }
-
-  getSelectedObject (value, options) {
-    if (value == null) {
-      return null
-    }
-
-    let opt = options
-    const data = []
-
-    for (let i of value) {
-      if (!opt || !opt[i]) {
-        return data
+    while (Array.isArray(opt)) {
+      if (opt.length <= 0) {
+        break
       }
-      const { item, ...dataItem } = opt[i]
-      data.push(dataItem)
+
+      const { item, id } = this.getOptionById(opt)
+      newValues.push(id)
       opt = item
     }
+    return newValues
+  }
 
-    return data
+  // TODO: Remove props.value
+  getValues (state) {
+    const { values: stateValues = [] } = state || this.state || {}
+    const { value: propsValues } = this.props
+
+    if (propsValues) {
+      return propsValues
+    }
+    return stateValues
+  }
+
+  setValues (values) {
+    const { value: propsValues, onChange } = this.props
+
+    if (!propsValues) {
+      this.setState({ values }, () => {
+        onChange && onChange(this.getObjectsByValues(values))
+      })
+    } else {
+      onChange && onChange(this.getObjectsByValues(values))
+    }
+  }
+
+  getObjectsByValues (values) {
+    const { options } = this.props
+    let opts = options
+    let objects = []
+
+    while (Array.isArray(opts)) {
+      if (opts.length <= 0) {
+        break
+      }
+      const index = objects.length
+      const option = this.getOptionById(opts, values[index])
+      if (option) {
+        const { item } = option
+        objects.push(option)
+        opts = item
+      }
+    }
+
+    return objects
+  }
+
+  getOptionById (options, id) {
+    if (options.length <= 0) {
+      return null
+    }
+    if (!id) {
+      return options[0]
+    }
+    return options.find(item => (`${item.id}` === `${id}`))
+  }
+
+  updateValues (props, state) {
+    const oldValues = this.getValues(state)
+
+    const { options } = props
+    let opts = options
+    let newValues = []
+
+    while (Array.isArray(opts)) {
+      if (opts.length <= 0) {
+        break
+      }
+      const index = newValues.length
+      if (oldValues[index] == null) {
+        const tail = this.getValuesByOptions(opts)
+        newValues = newValues.concat(tail)
+        break
+      }
+      const option = this.getOptionById(opts, oldValues[index])
+      if (option) {
+        const { item, id } = option
+        newValues.push(id)
+        opts = item
+      } else {
+        const tail = this.getValuesByOptions(opts)
+        newValues = newValues.concat(tail)
+        break
+      }
+    }
+    return newValues
+  }
+
+  /**
+   * 根据 options 和 value 计算最新的 value
+   */
+  getDefaultValues () {
+    const { options } = this.props
+    let opts = options
+    const newValues = []
+
+    while (Array.isArray(opts)) {
+      if (opts.length <= 0) {
+        break
+      }
+      const { item, id } = this.getOptionById(opts)
+      newValues.push(id)
+      opts = item
+    }
+    return newValues
   }
 
   handleOnChange (id, index, subOptions) {
-    const { onChange, subOptionKey, options } = this.props
-    const value = this.getValueIndexs() || this.state.value
+    const { subOptionKey } = this.props
+    const values = this.getValues()
 
-    const head = value.slice(0, index)
+    const head = values.slice(0, index)
     const itemIndex = subOptions.findIndex((item) => (`${item.id}` === `${id}`))
 
     let opts = subOptions[itemIndex][subOptionKey]
-    const tail = this.initValue(opts)
+    const tail = this.getValuesByOptions(opts)
+    const res = [...head, id, ...tail]
 
-    const res = [...head, itemIndex, ...tail]
-
-    this.setState({
-      value: res,
-    })
-    onChange && onChange(this.getSelectedObject(res, options))
+    this.setValues(res)
   }
 
   renderSelector (index, options) {
@@ -128,10 +190,11 @@ class MultiLevelSelector extends React.PureComponent {
         Selector,
       } = this.props
 
-      const value = this.getValueIndexs() || this.state.value
+      const values = this.getValues()
+      const selectIndex = values[index]
+      const itemSelected = this.getOptionById(options, selectIndex)
 
-      const selectIndex = value[index]
-      const itemSelected = options[selectIndex] || {}
+      if (!itemSelected) return null
 
       return (
         <Fragment>
@@ -179,11 +242,11 @@ MultiLevelSelector.propTypes = {
   className: PropTypes.string,
   selectClassName: PropTypes.string,
 
-  value: PropTypes.array,
   options: PropTypes.array,
   subOptionKey: PropTypes.string,
   Selector: PropTypes.func,
   onChange: PropTypes.func,
+  defaultValue: PropTypes.array,
   onDefaultValue: PropTypes.func,
 }
 

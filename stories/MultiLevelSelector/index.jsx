@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions'
 
 import BaseUsage from './BaseUsage'
 import CustomStyle from './CustomStyle'
+import OptionsChange from './OptionsChange'
 
 storiesOf('MultiLevelSelector', module)
   .add('base', () => (
@@ -12,3 +13,6 @@ storiesOf('MultiLevelSelector', module)
   .add('custom style', () => (
     <CustomStyle onChange={ action('onChange') } />
   ))
+  // .add('options change', () => (
+  //   <OptionsChange onChange={ action('onChange') }/>
+  // ))
