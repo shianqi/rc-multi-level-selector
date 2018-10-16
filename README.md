@@ -1,5 +1,10 @@
 # rc-multi-level-selector
 
+[![npm](https://img.shields.io/npm/v/rc-multi-level-selector.svg)](https://www.npmjs.com/package/rc-multi-level-selector)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![rc-multi-level-selector](https://img.shields.io/npm/dm/rc-multi-level-selector.svg)](https://www.npmjs.com/package/rc-multi-level-selector)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/shianqi/rc-multi-level-selector/master/LICENSE)
+
 A React multilevel selector component.
 
 ## Demos
@@ -10,7 +15,7 @@ A React multilevel selector component.
 
 Install `rc-multi-level-selector` as a dependency
 
-```shell
+```bash
 # Yarn
 $ yarn add rc-multi-level-selector
 
@@ -24,15 +29,14 @@ These are all of the available props (and their default values) for the main `<M
 
 ```javascript
 {
-  style: {},
   className: '',
   selectClassName: '',
 
   options: [],
   subOptionKey: 'item',
-
+  Selector: NativeSelector,
   onChange: () => {},
-  onDefaultValue: () => {},
+  onDefaultValue: () => {}
 }
 ```
 
@@ -44,12 +48,12 @@ import MultiLevelSelector from 'rc-multi-level-selector'
 const options = [
   {
     id: 1, value: 'item 1',
-    item: [ { id: 2, value: 'item 2' }, { id: 3, value: 'item 3' } ],
+    item: [ { id: 2, value: 'item 2' }, { id: 3, value: 'item 3' } ]
   },
   {
     id: 4, value: 'item 4',
-    item: [ { id: 5, value: 'item 5' }, { id: 6, value: 'item 6' } ],
-  },
+    item: [ { id: 5, value: 'item 5' }, { id: 6, value: 'item 6' } ]
+  }
 ]
 
 ...
