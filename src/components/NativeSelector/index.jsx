@@ -28,7 +28,7 @@ class NativeSelector extends React.PureComponent {
       value,
       onChange,
       className,
-      style,
+      style
     } = this.props
 
     return (
@@ -52,7 +52,7 @@ NativeSelector.defaultProps = {
   style: {},
   className: '',
   options: [],
-  value: '',
+  value: ''
 }
 
 NativeSelector.propTypes = {
@@ -61,8 +61,8 @@ NativeSelector.propTypes = {
   options: PropTypes.array,
   value: PropTypes.oneOfType([
     PropTypes.string,
-    PropTypes.number,
-  ]),
+    PropTypes.number
+  ])
 }
 
 export default NativeSelector

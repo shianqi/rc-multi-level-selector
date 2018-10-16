@@ -16,7 +16,7 @@ class MultiLevelSelector extends React.Component {
     const { options, defaultValue, value } = props
     this.oldOptions = options
     this.state = {
-      values: defaultValue || value || this.getDefaultValues(),
+      values: defaultValue || value || this.getDefaultValues()
     }
 
     this.handleOnChange = this.handleOnChange.bind(this)
@@ -187,7 +187,7 @@ class MultiLevelSelector extends React.Component {
       const {
         selectClassName,
         subOptionKey,
-        Selector,
+        Selector
       } = this.props
 
       const values = this.getValues()
@@ -216,11 +216,11 @@ class MultiLevelSelector extends React.Component {
   render () {
     const {
       options,
-      className,
+      className
     } = this.props
 
     return (
-      <InlineBlockDiv className={ className }>
+      <InlineBlockDiv className={className}>
         { this.renderSelector(0, options) }
       </InlineBlockDiv>
     )
@@ -235,7 +235,7 @@ MultiLevelSelector.defaultProps = {
   subOptionKey: 'item',
   Selector: NativeSelector,
   onChange: () => {},
-  onDefaultValue: () => {},
+  onDefaultValue: () => {}
 }
 
 MultiLevelSelector.propTypes = {
@@ -248,7 +248,7 @@ MultiLevelSelector.propTypes = {
   Selector: PropTypes.func,
   onChange: PropTypes.func,
   defaultValue: PropTypes.array,
-  onDefaultValue: PropTypes.func,
+  onDefaultValue: PropTypes.func
 }
 
 export default MultiLevelSelector

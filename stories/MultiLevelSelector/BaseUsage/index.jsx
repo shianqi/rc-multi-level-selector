@@ -6,7 +6,7 @@ import {
   Card,
   Title,
   Monitor,
-  Container,
+  Container
 } from '../components'
 
 import MultiLevelSelector from '../../../src/index.js'
@@ -16,7 +16,7 @@ class BaseUsage extends React.PureComponent {
     super(props)
 
     this.state = {
-      selectedOption: '',
+      selectedOption: ''
     }
 
     this.onChangeMultiLevelSelector = this.onChangeMultiLevelSelector.bind(this)
@@ -27,7 +27,7 @@ class BaseUsage extends React.PureComponent {
 
     const value = options.map(item => item.value).join(', ')
     this.setState({
-      selectedOption: value,
+      selectedOption: value
     })
     onChange(options)
   }
@@ -55,7 +55,7 @@ class BaseUsage extends React.PureComponent {
 }
 
 BaseUsage.defaultProps = {
-  onChange: () => {},
+  onChange: () => {}
 }
 
 export default BaseUsage

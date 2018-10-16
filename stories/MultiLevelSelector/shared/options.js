@@ -9,10 +9,10 @@ const options = [
         value: 'Guangdong',
         item: [
           { id: 'Guangzhou', value: 'Guangzhou' },
-          { id: 'Shenzhen', value: 'Shenzhen' },
-        ],
-      },
-    ],
+          { id: 'Shenzhen', value: 'Shenzhen' }
+        ]
+      }
+    ]
   },
   {
     id: 'United States',
@@ -23,12 +23,12 @@ const options = [
         value: 'California',
         item: [
           { id: 'Los Angeles', value: 'Los Angeles' },
-          { id: 'San Diego', value: 'San Diego' },
-        ],
+          { id: 'San Diego', value: 'San Diego' }
+        ]
       },
-      { id: 'New York', value: 'New York' },
-    ],
-  },
+      { id: 'New York', value: 'New York' }
+    ]
+  }
 ]
 
 export default options

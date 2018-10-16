@@ -3,5 +3,5 @@ import NativeSelector from './components/NativeSelector'
 
 export default MultiLevelSelector
 export {
-  NativeSelector,
+  NativeSelector
 }

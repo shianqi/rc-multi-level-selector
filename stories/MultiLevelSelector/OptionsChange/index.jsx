@@ -3,7 +3,7 @@ import React from 'react'
 import {
   Card,
   Title,
-  Container,
+  Container
 } from '../components'
 
 import MultiLevelSelector from '../../../src/index.js'
@@ -19,11 +19,11 @@ const options1 = [
         value: 'Guangdong',
         item: [
           { id: 'Guangzhou', value: 'Guangzhou' },
-          { id: 'Shenzhen', value: 'Shenzhen' },
-        ],
-      },
-    ],
-  },
+          { id: 'Shenzhen', value: 'Shenzhen' }
+        ]
+      }
+    ]
+  }
 ]
 
 const options2 = [{
@@ -35,11 +35,11 @@ const options2 = [{
       value: 'California',
       item: [
         { id: 'Los Angeles', value: 'Los Angeles' },
-        { id: 'San Diego', value: 'San Diego' },
-      ],
+        { id: 'San Diego', value: 'San Diego' }
+      ]
     },
-    { id: 'New York', value: 'New York' },
-  ],
+    { id: 'New York', value: 'New York' }
+  ]
 }]
 
 class OptionsChange extends React.PureComponent {
@@ -47,7 +47,7 @@ class OptionsChange extends React.PureComponent {
     super(props)
 
     this.state = {
-      useOption1: true,
+      useOption1: true
     }
     this.onButtonClick = this.onButtonClick.bind(this)
     this.onChangeMultiLevelSelector = this.onChangeMultiLevelSelector.bind(this)
@@ -62,7 +62,7 @@ class OptionsChange extends React.PureComponent {
     const { useOption1 } = this.state
 
     this.setState({
-      useOption1: !useOption1,
+      useOption1: !useOption1
     })
   }
 
@@ -90,7 +90,7 @@ class OptionsChange extends React.PureComponent {
 }
 
 OptionsChange.defaultProps = {
-  onChange: () => {},
+  onChange: () => {}
 }
 
 export default OptionsChange

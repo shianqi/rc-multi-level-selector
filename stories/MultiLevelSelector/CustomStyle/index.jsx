@@ -6,7 +6,7 @@ import options from '../shared/options'
 import {
   Card,
   Title,
-  Container,
+  Container
 } from '../components'
 
 import styles from './index.css'
@@ -44,7 +44,7 @@ class BaseUsage extends React.PureComponent {
 }
 
 BaseUsage.defaultProps = {
-  onChange: () => {},
+  onChange: () => {}
 }
 
 export default BaseUsage
