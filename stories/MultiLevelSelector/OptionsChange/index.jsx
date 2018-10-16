@@ -7,6 +7,7 @@ import {
 } from '../components'
 
 import MultiLevelSelector from '../../../src/index.js'
+import Button from '../components/Button'
 
 const options1 = [
   {
@@ -74,9 +75,9 @@ class OptionsChange extends React.PureComponent {
         <Card>
           <Title>BASE USAGE</Title>
 
-          <button onClick={this.onButtonClick}>
+          <Button onClick={this.onButtonClick}>
             change
-          </button>
+          </Button>
 
           <MultiLevelSelector
             options={useOption1 ? options1 : options2}
