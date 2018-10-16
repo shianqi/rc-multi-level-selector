@@ -44,12 +44,18 @@ class MultiLevelSelector extends React.Component {
     return true
   }
 
-  componentWillUpdate (props, state) {
-    const newValue = this.updateValue(props, state)
-    const value = this.getValue()
+  componentWillUpdate (nextProps, nextState) {
+    const newValue = this.updateValue(nextProps, nextState)
+    let value
+
+    if (nextProps.value) {
+      value = this.getValue()
+    } else {
+      value = nextState.value
+    }
 
     if (!arrayEquals(newValue, value)) {
-      this.setValue(value)
+      this.setValue(newValue)
     }
   }
 
