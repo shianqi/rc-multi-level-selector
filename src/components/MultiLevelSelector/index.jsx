@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react'
-import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
+import { Map } from 'immutable'
+import styled from 'styled-components'
 
 import NativeSelector from '../NativeSelector/index'
+import { arrayEquals } from '../../utils'
 
 const InlineBlockDiv = styled.div`
   display: inline-block;
 `
-// TODO: Remove lodash
 class MultiLevelSelector extends React.Component {
   constructor (props) {
     super(props)
@@ -16,7 +16,7 @@ class MultiLevelSelector extends React.Component {
     const { options, defaultValue, value } = props
     this.oldOptions = options
     this.state = {
-      values: defaultValue || value || this.getDefaultValues()
+      value: defaultValue || value || this.getDefaultValue()
     }
 
     this.handleOnChange = this.handleOnChange.bind(this)
@@ -26,30 +26,35 @@ class MultiLevelSelector extends React.Component {
   componentDidMount () {
     const { onDefaultValue } = this.props
 
-    const values = this.getValues()
-    onDefaultValue && onDefaultValue(this.getObjectsByValues(values))
+    const value = this.getValue()
+    onDefaultValue && onDefaultValue(this.getObjectsByValue(value))
   }
 
   shouldComponentUpdate (nextProps, nextState) {
-    const { options: nextOptions, value: nextValue } = nextProps
-    const { options, value } = this.props
+    const { props, state } = this
+    const nextPropsMap = Map(nextProps)
+    const nextStateMap = Map(nextState)
+    const propsMap = Map(props)
+    const stateMap = Map(state)
 
-    if (_.isEqual(options, nextOptions) && _.isEqual(nextValue, value) && _.isEqual(nextState, this.state)) {
+    if (nextPropsMap.equals(propsMap) && nextStateMap.equals(stateMap)) {
       return false
     }
     return true
   }
 
   componentWillUpdate (props, state) {
-    const values = this.updateValues(props, state)
-    if (!_.isEqual(values, this.getValues())) {
-      this.setValues(values)
+    const newValue = this.updateValue(props, state)
+    const value = this.getValue()
+
+    if (!arrayEquals(newValue, value)) {
+      this.setValue(value)
     }
   }
 
-  getValuesByOptions (options) {
+  getValueByOptions (options) {
     let opt = options
-    const newValues = []
+    const newValue = []
 
     while (Array.isArray(opt)) {
       if (opt.length <= 0) {
@@ -57,35 +62,35 @@ class MultiLevelSelector extends React.Component {
       }
 
       const { item, id } = this.getOptionById(opt)
-      newValues.push(id)
+      newValue.push(id)
       opt = item
     }
-    return newValues
+    return newValue
   }
 
-  getValues (state) {
-    const { values: stateValues = [] } = state || this.state || {}
-    const { value: propsValues } = this.props
+  getValue (state) {
+    const { value: stateValue = [] } = state || this.state || {}
+    const { value: propsValue } = this.props
 
-    if (propsValues) {
-      return propsValues
+    if (propsValue) {
+      return propsValue
     }
-    return stateValues
+    return stateValue
   }
 
-  setValues (values) {
-    const { value: propsValues, onChange } = this.props
+  setValue (value) {
+    const { value: propsValue, onChange } = this.props
 
-    if (!propsValues) {
-      this.setState({ values }, () => {
-        onChange && onChange(this.getObjectsByValues(values))
+    if (!propsValue) {
+      this.setState({ value }, () => {
+        onChange && onChange(this.getObjectsByValue(value))
       })
     } else {
-      onChange && onChange(this.getObjectsByValues(values))
+      onChange && onChange(this.getObjectsByValue(value))
     }
   }
 
-  getObjectsByValues (values) {
+  getObjectsByValue (value) {
     const { options } = this.props
     let opts = options
     let objects = []
@@ -95,7 +100,7 @@ class MultiLevelSelector extends React.Component {
         break
       }
       const index = objects.length
-      const option = this.getOptionById(opts, values[index])
+      const option = this.getOptionById(opts, value[index])
       if (option) {
         const { item } = option
         objects.push(option)
@@ -118,68 +123,68 @@ class MultiLevelSelector extends React.Component {
     return options.find(item => (`${item.id}` === `${id}`))
   }
 
-  updateValues (props, state) {
-    const oldValues = this.getValues(state)
+  updateValue (props, state) {
+    const oldValue = this.getValue(state)
 
     const { options } = props
     let opts = options
-    let newValues = []
+    let newValue = []
 
     while (Array.isArray(opts)) {
       if (opts.length <= 0) {
         break
       }
-      const index = newValues.length
-      if (oldValues[index] == null) {
-        const tail = this.getValuesByOptions(opts)
-        newValues = newValues.concat(tail)
+      const index = newValue.length
+      if (oldValue[index] == null) {
+        const tail = this.getValueByOptions(opts)
+        newValue = newValue.concat(tail)
         break
       }
-      const option = this.getOptionById(opts, oldValues[index])
+      const option = this.getOptionById(opts, oldValue[index])
       if (option) {
         const { item, id } = option
-        newValues.push(id)
+        newValue.push(id)
         opts = item
       } else {
-        const tail = this.getValuesByOptions(opts)
-        newValues = newValues.concat(tail)
+        const tail = this.getValueByOptions(opts)
+        newValue = newValue.concat(tail)
         break
       }
     }
-    return newValues
+    return newValue
   }
 
   /**
    * 根据 options 和 value 计算最新的 value
    */
-  getDefaultValues () {
+  getDefaultValue () {
     const { options } = this.props
     let opts = options
-    const newValues = []
+    const newValue = []
 
     while (Array.isArray(opts)) {
       if (opts.length <= 0) {
         break
       }
       const { item, id } = this.getOptionById(opts)
-      newValues.push(id)
+      newValue.push(id)
       opts = item
     }
-    return newValues
+    return newValue
   }
 
   handleOnChange (id, index, subOptions) {
     const { subOptionKey } = this.props
-    const values = this.getValues()
+    const value = this.getValue()
 
-    const head = values.slice(0, index)
+    const head = value.slice(0, index)
     const itemIndex = subOptions.findIndex((item) => (`${item.id}` === `${id}`))
 
     let opts = subOptions[itemIndex][subOptionKey]
-    const tail = this.getValuesByOptions(opts)
+    const tail = this.getValueByOptions(opts)
     const res = [...head, id, ...tail]
 
-    this.setValues(res)
+    this.setValue(res)
   }
 
   renderSelector (index, options) {
@@ -190,8 +195,8 @@ class MultiLevelSelector extends React.Component {
         Selector
       } = this.props
 
-      const values = this.getValues()
-      const selectIndex = values[index]
+      const value = this.getValue()
+      const selectIndex = value[index]
       const itemSelected = this.getOptionById(options, selectIndex)
 
       if (!itemSelected) return null
