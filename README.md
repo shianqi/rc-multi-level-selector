@@ -32,10 +32,12 @@ These are all of the available props (and their default values) for the main `<M
   className: '',
   selectClassName: '',
 
+  value: null,
   options: [],
   subOptionKey: 'item',
   Selector: NativeSelector,
   onChange: () => {},
+  defaultValue: null,
   onDefaultValue: () => {}
 }
 ```

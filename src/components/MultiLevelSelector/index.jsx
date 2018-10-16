@@ -9,6 +9,7 @@ import { arrayEquals } from '../../utils'
 const InlineBlockDiv = styled.div`
   display: inline-block;
 `
+
 class MultiLevelSelector extends React.Component {
   constructor (props) {
     super(props)
@@ -236,6 +237,8 @@ MultiLevelSelector.defaultProps = {
   className: '',
   selectClassName: '',
 
+  value: null,
+  defaultValue: null,
   options: [],
   subOptionKey: 'item',
   Selector: NativeSelector,
@@ -248,11 +251,11 @@ MultiLevelSelector.propTypes = {
   selectClassName: PropTypes.string,
 
   value: PropTypes.array,
+  defaultValue: PropTypes.array,
   options: PropTypes.array,
   subOptionKey: PropTypes.string,
   Selector: PropTypes.func,
   onChange: PropTypes.func,
-  defaultValue: PropTypes.array,
   onDefaultValue: PropTypes.func
 }
 

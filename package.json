@@ -33,7 +33,7 @@
     "prop-types": "^15.6.2",
     "react": "^15.x.x || ^16.x.x",
     "react-dom": "^15.x.x || ^16.x.x",
-    "styled-components": "^3.3.3"
+    "styled-components": "^4.0.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.11",
@@ -51,8 +51,8 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "standard": "^12.0.1",
-    "style-loader": "^0.21.0",
-    "styled-components": "^3.4.9",
+    "style-loader": "^0.23.1",
+    "styled-components": "^4.0.0",
     "webpack": "^4.20.2",
     "webpack-command": "^0.4.1"
   },
