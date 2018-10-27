@@ -1,13 +1,14 @@
 import styled from 'styled-components'
+import { spacingUnit } from '../theme'
 
 const Button = styled.div`
   display: inline-block;
   font-size: 12px;
-  padding: 3px 8px;
+  padding: ${spacingUnit(1)}px ${spacingUnit(2)}px;
   color: white;
-  background: palevioletred;
-  border: 1px solid palevioletred;
-  margin: 0 4px;
+  background: ${props => props.theme.palette.primary.main};
+  border: 1px solid ${props => props.theme.palette.primary.main};
+  margin: ${spacingUnit(1)}px;
   border-radius: 4px;
   cursor: pointer;
 `

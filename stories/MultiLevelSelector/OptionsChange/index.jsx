@@ -1,4 +1,8 @@
 import React from 'react'
+import styled from 'styled-components'
+
+import Button from '@material-ui/core/Button'
+import { spacingUnit } from '../theme'
 
 import {
   Card,
@@ -7,7 +11,6 @@ import {
 } from '../components'
 
 import MultiLevelSelector from '../../../src/index.js'
-import Button from '../components/Button'
 
 const options1 = [
   {
@@ -43,6 +46,12 @@ const options2 = [{
   ]
 }]
 
+const StyledButton = styled(Button)`
+  && {
+    margin: ${spacingUnit(1)}px;
+  }
+`
+
 class OptionsChange extends React.PureComponent {
   constructor (props) {
     super(props)
@@ -75,9 +84,9 @@ class OptionsChange extends React.PureComponent {
         <Card>
           <Title>BASE USAGE</Title>
 
-          <Button onClick={this.onButtonClick}>
+          <StyledButton variant='contained' color='primary' onClick={this.onButtonClick}>
             change
-          </Button>
+          </StyledButton>
 
           <MultiLevelSelector
             options={useOption1 ? options1 : options2}

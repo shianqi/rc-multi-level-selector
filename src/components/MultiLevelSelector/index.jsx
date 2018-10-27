@@ -10,6 +10,31 @@ const InlineBlockDiv = styled.div`
   display: inline-block;
 `
 
+const getOptionById = (options, id) => {
+  if (options.length <= 0) {
+    return null
+  }
+  if (!id) {
+    return options[0]
+  }
+  return options.find(item => (`${item.id}` === `${id}`))
+}
+
+const getValueByOptions = (options) => {
+  let opt = options
+  const newValue = []
+
+  while (Array.isArray(opt)) {
+    if (opt.length <= 0) {
+      break
+    }
+    const { item, id } = getOptionById(opt)
+    newValue.push(id)
+    opt = item
+  }
+  return newValue
+}
+
 class MultiLevelSelector extends React.Component {
   constructor (props) {
     super(props)
@@ -17,16 +42,17 @@ class MultiLevelSelector extends React.Component {
     const { options, defaultValue, value } = props
     this.oldOptions = options
     this.state = {
-      value: defaultValue || value || this.getDefaultValue()
+      value: defaultValue || value || getValueByOptions(options)
     }
-
+    this.state = {
+      value: this.updateValue(props, value)
+    }
     this.handleOnChange = this.handleOnChange.bind(this)
     this.renderSelector = this.renderSelector.bind(this)
   }
 
   componentDidMount () {
     const { onDefaultValue } = this.props
-
     const value = this.getValue()
     onDefaultValue && onDefaultValue(this.getObjectsByValue(value))
   }
@@ -59,30 +85,11 @@ class MultiLevelSelector extends React.Component {
     }
   }
 
-  getValueByOptions (options) {
-    let opt = options
-    const newValue = []
-
-    while (Array.isArray(opt)) {
-      if (opt.length <= 0) {
-        break
-      }
-
-      const { item, id } = this.getOptionById(opt)
-      newValue.push(id)
-      opt = item
-    }
-    return newValue
-  }
-
   getValue (state) {
     const { value: stateValue = [] } = state || this.state || {}
     const { value: propsValue } = this.props
 
-    if (propsValue) {
-      return propsValue
-    }
-    return stateValue
+    return propsValue || stateValue
   }
 
   setValue (value) {
@@ -107,7 +114,7 @@ class MultiLevelSelector extends React.Component {
         break
       }
       const index = objects.length
-      const option = this.getOptionById(opts, value[index])
+      const option = getOptionById(opts, value[index])
       if (option) {
         const { item } = option
         objects.push(option)
@@ -118,16 +125,6 @@ class MultiLevelSelector extends React.Component {
     }
 
     return objects
-  }
-
-  getOptionById (options, id) {
-    if (options.length <= 0) {
-      return null
-    }
-    if (!id) {
-      return options[0]
-    }
-    return options.find(item => (`${item.id}` === `${id}`))
   }
 
   updateValue (props, state) {
@@ -143,39 +140,20 @@ class MultiLevelSelector extends React.Component {
       }
       const index = newValue.length
       if (oldValue[index] == null) {
-        const tail = this.getValueByOptions(opts)
+        const tail = getValueByOptions(opts)
         newValue = newValue.concat(tail)
         break
       }
-      const option = this.getOptionById(opts, oldValue[index])
+      const option = getOptionById(opts, oldValue[index])
       if (option) {
         const { item, id } = option
         newValue.push(id)
         opts = item
       } else {
-        const tail = this.getValueByOptions(opts)
+        const tail = getValueByOptions(opts)
         newValue = newValue.concat(tail)
         break
       }
-    }
-    return newValue
-  }
-
-  /**
-   * 根据 options 和 value 计算最新的 value
-   */
-  getDefaultValue () {
-    const { options } = this.props
-    let opts = options
-    const newValue = []
-
-    while (Array.isArray(opts)) {
-      if (opts.length <= 0) {
-        break
-      }
-      const { item, id } = this.getOptionById(opts)
-      newValue.push(id)
-      opts = item
     }
     return newValue
   }
@@ -188,7 +166,7 @@ class MultiLevelSelector extends React.Component {
     const itemIndex = subOptions.findIndex((item) => (`${item.id}` === `${id}`))
 
     let opts = subOptions[itemIndex][subOptionKey]
-    const tail = this.getValueByOptions(opts)
+    const tail = getValueByOptions(opts)
     const res = [...head, id, ...tail]
 
     this.setValue(res)
@@ -204,7 +182,7 @@ class MultiLevelSelector extends React.Component {
 
       const value = this.getValue()
       const selectIndex = value[index]
-      const itemSelected = this.getOptionById(options, selectIndex)
+      const itemSelected = getOptionById(options, selectIndex)
 
       if (!itemSelected) return null
 
