@@ -75,12 +75,12 @@ class OptionsChange extends React.PureComponent {
         <Card>
           <Title>BASE USAGE</Title>
           <MultiLevelSelector
-            value={locationsValue}
+            values={locationsValue}
             options={locations}
             onChange={this.onLocationChange}
           />
           <MultiLevelSelector
-            value={clientsValue}
+            values={clientsValue}
             options={clientsOptions}
             onChange={this.onClientChange}
           />

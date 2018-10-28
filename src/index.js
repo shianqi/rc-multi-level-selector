@@ -1,5 +1,5 @@
-import MultiLevelSelector from './components/MultiLevelSelector'
-import NativeSelector from './components/NativeSelector'
+import MultiLevelSelector from './MultiLevelSelector'
+import NativeSelector from './NativeSelector'
 
 export default MultiLevelSelector
 export {

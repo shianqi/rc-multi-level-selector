@@ -12,8 +12,6 @@ import OptionsChange from './OptionsChange'
 import MultipleLinkage from './MultipleLinkage'
 import InitValue from './InitValue/index'
 
-console.log(theme)
-
 const Container = (props) => (
   <MuiThemeProvider theme={theme}>
     <ThemeProvider theme={theme}>
