@@ -50,16 +50,20 @@ class OptionsChange extends React.PureComponent {
     this.onClientChange = this.onClientChange.bind(this)
   }
 
-  onLocationChange (value) {
+  onLocationChange (values) {
+    const { onChange } = this.props
     this.setState({
-      locationsValue: value.map(item => item.id)
+      locationsValue: values.map(item => item.id)
     })
+    onChange && onChange(values)
   }
 
-  onClientChange (value) {
+  onClientChange (values) {
+    const { onChange } = this.props
     this.setState({
-      clientsValue: value.map(item => item.id)
+      clientsValue: values.map(item => item.id)
     })
+    onChange && onChange(values)
   }
 
   render () {
@@ -73,7 +77,7 @@ class OptionsChange extends React.PureComponent {
     return (
       <Container>
         <Card>
-          <Title>BASE USAGE</Title>
+          <Title>Multiple Linkage</Title>
           <MultiLevelSelector
             values={locationsValue}
             options={locations}

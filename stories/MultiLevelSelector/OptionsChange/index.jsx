@@ -91,7 +91,6 @@ class OptionsChange extends React.PureComponent {
           <MultiLevelSelector
             options={useOption1 ? options1 : options2}
             onChange={this.onChangeMultiLevelSelector}
-            onDefaultValue={this.onChangeMultiLevelSelector}
           />
         </Card>
       </Container>

@@ -30,15 +30,14 @@ These are all of the available props (and their default values) for the main `<M
 ```javascript
 {
   className: '',
-  selectClassName: '',
+  selectorClassName: '',
 
-  value: null,
   options: [],
-  subOptionKey: 'item',
-  Selector: NativeSelector,
+  values: null,
+  defaultValues: [],
   onChange: () => {},
-  defaultValue: null,
-  onDefaultValue: () => {}
+  subOptionKey: 'item',
+  Selector: NativeSelector
 }
 ```
 
@@ -65,18 +64,3 @@ const options = [
 ...
 
 ```
-
-## Features
-
-- [x] Enable custom subOption key
-- [x] Enable fixed value
-- [x] Enable 'defaultValue' key for option
-- [x] Enable onDefaultValue
-- [x] Example with custom style
-- [ ] Add default selector not NativeSelector
-- [ ] Add ScrollSelector
-
-## Docs
-
-- [ ] Use Material UI demo
-- [ ] Enable Custom selector

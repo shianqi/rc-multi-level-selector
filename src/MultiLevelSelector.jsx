@@ -27,8 +27,9 @@ const getOptions = (options, subOptionKey) => {
 class MultiLevelSelector extends React.PureComponent {
   constructor (props) {
     super(props)
+    const { defaultValues } = this.props
     this.state = {
-      values: [],
+      values: defaultValues,
       render: true // 是否需要 render 组件
     }
     this.handleOnChange = this.handleOnChange.bind(this)
@@ -116,7 +117,6 @@ class MultiLevelSelector extends React.PureComponent {
   renderSelector (index, options) {
     const { values } = this.state
     const { Selector, selectorClassName, subOptionKey } = this.props
-
     // 没有渲染完成
     if (values.length > index) {
       const value = values[index]
@@ -174,24 +174,30 @@ MultiLevelSelector.defaultProps = {
   className: '',
   selectorClassName: '',
 
-  values: null,
-  defaultValues: null,
   options: [],
+  values: null,
+  defaultValues: [],
+  onChange: () => {},
   subOptionKey: 'item',
-  Selector: NativeSelector,
-  onChange: () => {}
+  Selector: NativeSelector
 }
 
 MultiLevelSelector.propTypes = {
   className: PropTypes.string,
   selectorClassName: PropTypes.string,
 
+  options: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object
+  ]),
   values: PropTypes.array,
   defaultValues: PropTypes.array,
-  options: PropTypes.array,
+  onChange: PropTypes.func,
   subOptionKey: PropTypes.string,
-  Selector: PropTypes.func,
-  onChange: PropTypes.func
+  Selector: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.object
+  ])
 }
 
 export default MultiLevelSelector

@@ -27,7 +27,7 @@ class BaseUsage extends React.PureComponent {
           <MultiLevelSelector
             options={options}
             onChange={onChange}
-            selectClassName={styles.select}
+            selectorClassName={styles.select}
           />
         </Card>
 

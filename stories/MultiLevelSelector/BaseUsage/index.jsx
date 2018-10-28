@@ -46,7 +46,6 @@ class BaseUsage extends React.PureComponent {
           <MultiLevelSelector
             options={options}
             onChange={this.onChangeMultiLevelSelector}
-            onDefaultValue={this.onChangeMultiLevelSelector}
           />
         </Card>
       </Container>
