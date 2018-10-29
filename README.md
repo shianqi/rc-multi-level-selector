@@ -27,19 +27,16 @@ $ npm install --save rc-multi-level-selector
 
 These are all of the available props (and their default values) for the main `<MultiLevelSelector />` component.
 
-```javascript
-{
-  className: '',
-  selectorClassName: '',
+* `className` - Apply a className to the control
+* `selectorClassName` - Apply classNames to Selector elements
 
-  options: [],
-  values: null,
-  defaultValues: [],
-  onChange: () => {},
-  subOptionKey: 'item',
-  Selector: NativeSelector
-}
-```
+* `options` - Specify the options the user can select from
+* `values` - Control the current values
+* `defaultValues` - The initial value passed to the uncontrolled component
+* `onChange` - subscribe to change events
+
+* `subOptionKey` - Key for custom subcomponent options
+* `Selector` - Use a custom selector component
 
 ## Example
 
