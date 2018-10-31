@@ -4,10 +4,14 @@
  */
 export const transformObjectToArray = (objectOptions) => {
   const keys = Object.keys(objectOptions)
-  return keys.map((key) => ({
-    id: key,
-    value: objectOptions[key].value
-  }))
+  return keys.map((key) => {
+    const { value, item, ...others } = objectOptions[key]
+    return {
+      id: key,
+      value: objectOptions[key].value,
+      ...others
+    }
+  })
 }
 
 /**

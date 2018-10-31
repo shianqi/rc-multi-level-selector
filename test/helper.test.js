@@ -54,6 +54,11 @@ const objectOptions = {
   }
 }
 
+const valueObjectsOptions = {
+  'Guangdong': { value: 'Guangdong' },
+  'Beijing': { value: 'Beijing', text: 'China - Beijing' }
+}
+
 const arrayOptionsDeep1 = [
   { id: 'China', value: 'China' },
   { id: 'United States', value: 'United States' }
@@ -67,6 +72,14 @@ test('transformObjectToArray', () => {
 test('transformObjectToArray', () => {
   expect(transformObjectToArray({}))
     .toEqual([])
+})
+
+test('transformObjectToArray', () => {
+  expect(transformObjectToArray(valueObjectsOptions))
+    .toEqual([
+      { id: 'Guangdong', value: 'Guangdong' },
+      { id: 'Beijing', value: 'Beijing', text: 'China - Beijing' }
+    ])
 })
 
 test('getDefaultValuesByOptions', () => {
