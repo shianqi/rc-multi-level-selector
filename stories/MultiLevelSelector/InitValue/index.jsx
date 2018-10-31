@@ -10,6 +10,7 @@ class InitValue extends React.PureComponent {
       options: [{
         id: 'daily',
         value: 'daily',
+        test: 'test',
         item: [
           { id: '0', value: '00:00' }
         ]

@@ -16,6 +16,7 @@ const InlineBlockDiv = styled.div`
 `
 
 const getOptions = (options, subOptionKey) => {
+  console.log(options)
   if (Array.isArray(options)) {
     return deepTransformArrayToObject(options, subOptionKey)
   } else if (typeof options === 'object') {
@@ -42,6 +43,7 @@ class MultiLevelSelector extends React.PureComponent {
   static handleControlledComponent (props) {
     const { options: propsOptions, values, onChange, subOptionKey } = props
     const options = getOptions(propsOptions, subOptionKey)
+    console.log('-----', options)
     const {
       options: unMatchedOptions,
       values: matchedValues
@@ -99,6 +101,8 @@ class MultiLevelSelector extends React.PureComponent {
   render () {
     const { className } = this.props
     const { render, options } = this.state
+
+    console.log(options)
 
     if (!render) {
       return null

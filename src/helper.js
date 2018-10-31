@@ -23,8 +23,11 @@ export const deepTransformArrayToObject = (arrayOptions, subOptionKey) => {
     return null
   }
   for (const arrayOption of arrayOptions) {
-    const { id, value, [subOptionKey]: item } = arrayOption
-    const newOption = { value }
+    const { id, value, [subOptionKey]: item, ...others } = arrayOption
+    const newOption = {
+      value,
+      ...others
+    }
     const object = deepTransformArrayToObject(item, subOptionKey)
     if (object != null) {
       newOption[subOptionKey] = object

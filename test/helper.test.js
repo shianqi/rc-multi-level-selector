@@ -20,7 +20,7 @@ const arrayOptions = [
           { id: 'Shenzhen', value: 'Shenzhen' }
         ]
       },
-      { id: 'Beijing', value: 'Beijing' }
+      { id: 'Beijing', value: 'Beijing', text: 'China - Beijing' }
     ]
   },
   {
@@ -43,7 +43,7 @@ const objectOptions = {
           'Shenzhen': { value: 'Shenzhen' }
         }
       },
-      'Beijing': { value: 'Beijing' }
+      'Beijing': { value: 'Beijing', text: 'China - Beijing' }
     }
   },
   'United States': {
@@ -103,7 +103,7 @@ test('matchOptionsAndValues', () => {
             'Shenzhen': { value: 'Shenzhen' }
           }
         },
-        'Beijing': { value: 'Beijing' }
+        'Beijing': { value: 'Beijing', text: 'China - Beijing' }
       },
       values: ['China']
     })
