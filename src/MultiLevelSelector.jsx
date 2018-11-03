@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -104,17 +104,21 @@ class MultiLevelSelector extends React.PureComponent {
       return null
     }
 
+    const Selectors = this.getSelector(0, options)
+
     return (
       <InlineBlockDiv className={className}>
-        { this.renderSelector(0, options) }
+        { Selectors }
       </InlineBlockDiv>
     )
   }
 
   /**
-   * 渲染第 index 个 Selector
+   * 获取第index个需要渲染的 Selector
+   * @param {*} index
+   * @param {*} options
    */
-  renderSelector (index, options) {
+  getSelector (index, options) {
     const { values } = this.state
     const { Selector, selectorClassName, subOptionKey } = this.props
     // 没有渲染完成
@@ -123,21 +127,19 @@ class MultiLevelSelector extends React.PureComponent {
       const selectorOptions = transformObjectToArray(options)
       const selectedItem = options[value]
 
-      return (
-        <Fragment>
-          <Selector
-            value={value}
-            options={selectorOptions}
-            onChange={(value) => {
-              this.handleOnChange(value, index, options)
-            }}
-            className={selectorClassName}
-          />
-          { this.renderSelector(index + 1, selectedItem[subOptionKey]) }
-        </Fragment>
-      )
+      return [
+        <Selector
+          key={value}
+          value={value}
+          options={selectorOptions}
+          onChange={(value) => {
+            this.handleOnChange(value, index, options)
+          }}
+          className={selectorClassName}
+        />
+      ].concat(this.getSelector(index + 1, selectedItem[subOptionKey]))
     }
-    return null
+    return []
   }
 
   /**
