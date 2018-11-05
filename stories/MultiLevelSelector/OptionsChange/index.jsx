@@ -48,7 +48,7 @@ const options2 = [{
 
 const StyledButton = styled(Button)`
   && {
-    margin: ${spacingUnit(1)}px;
+    margin-right: ${spacingUnit(1)}px;
   }
 `
 

@@ -11,6 +11,7 @@ import CustomStyle from './CustomStyle'
 import OptionsChange from './OptionsChange'
 import MultipleLinkage from './MultipleLinkage'
 import InitValue from './InitValue/index'
+import MaterialUI from './Material-UI'
 
 const Container = (props) => (
   <MuiThemeProvider theme={theme}>
@@ -41,6 +42,13 @@ storiesOf('Advanced', module)
   .add('multiple linkage', () => (
     <Container>
       <MultipleLinkage onChange={action('onChange')} />
+    </Container>
+  ))
+
+storiesOf('Custom Select', module)
+  .add('Material-UI', () => (
+    <Container>
+      <MaterialUI onChange={action('onChange')} />
     </Container>
   ))
 

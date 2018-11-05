@@ -97,14 +97,14 @@ class MultiLevelSelector extends React.PureComponent {
   }
 
   render () {
-    const { className } = this.props
+    const { className, Selector } = this.props
     const { render, options } = this.state
 
     if (!render) {
       return null
     }
 
-    const Selectors = this.getSelector(0, options)
+    const Selectors = this.getSelector(0, options, Selector)
 
     return (
       <InlineBlockDiv className={className}>
@@ -118,14 +118,21 @@ class MultiLevelSelector extends React.PureComponent {
    * @param {*} index
    * @param {*} options
    */
-  getSelector (index, options) {
+  getSelector (index, options, OptionsSelector) {
     const { values } = this.state
-    const { Selector, selectorClassName, subOptionKey } = this.props
+    const {
+      Selector: PropsSelector,
+      selectorClassName,
+      subOptionKey
+    } = this.props
+
     // 没有渲染完成
     if (values.length > index) {
       const value = values[index]
       const selectorOptions = transformObjectToArray(options)
       const selectedItem = options[value]
+
+      const Selector = OptionsSelector || PropsSelector
 
       return [
         <Selector
@@ -137,7 +144,13 @@ class MultiLevelSelector extends React.PureComponent {
           }}
           className={selectorClassName}
         />
-      ].concat(this.getSelector(index + 1, selectedItem[subOptionKey]))
+      ].concat(
+        this.getSelector(
+          index + 1,
+          selectedItem[subOptionKey],
+          selectedItem.Selector || PropsSelector
+        )
+      )
     }
     return []
   }
