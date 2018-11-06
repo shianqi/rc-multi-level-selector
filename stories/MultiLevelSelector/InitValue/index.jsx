@@ -31,7 +31,6 @@ class InitValue extends React.PureComponent {
     const { values, options } = this.state
     return (
       <div>
-        ?
         <MultiLevelSelector
           values={values}
           options={options}

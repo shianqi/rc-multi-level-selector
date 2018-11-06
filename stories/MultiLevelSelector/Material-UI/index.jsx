@@ -17,10 +17,7 @@ const MaterialSelect = (props) => (
   >
     {
       props.options.map(item => (
-        <MenuItem
-          key={item.id}
-          value={item.id}
-        >
+        <MenuItem key={item.id} value={item.id}>
           {item.value}
         </MenuItem>
       ))

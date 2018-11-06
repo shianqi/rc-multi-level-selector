@@ -5,3 +5,4 @@ lib/
 .out/
 yarn-error.log
 yarn.lock
+.next/
