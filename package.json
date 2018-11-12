@@ -51,6 +51,7 @@
     "@storybook/addon-actions": "^4.0.0",
     "@storybook/react": "^4.0.0",
     "@storybook/storybook-deployer": "^2.3.0",
+    "@zeit/next-mdx": "^1.2.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
@@ -68,5 +69,9 @@
     "styled-components": "^4.0.0",
     "webpack": "^4.20.2",
     "webpack-command": "^0.4.1"
+  },
+  "dependencies": {
+    "react-jss": "^8.6.1",
+    "remark-highlight.js": "^5.0.0"
   }
 }

@@ -66,25 +66,21 @@ class AppWrapper extends React.PureComponent {
     const { children } = this.props
 
     return (
-      <MuiThemeProvider theme={theme}>
-        <ThemeProvider theme={theme}>
-          <Root>
-            <GlobalStyled />
-            <AppBar
-              open={open}
-              handleDrawerOpen={this.handleDrawerOpen}
-            />
-            <Drawer
-              open={open}
-              handleDrawerClose={this.handleDrawerClose}
-            />
-            <Main>
-              <Toolbar />
-              {children}
-            </Main>
-          </Root>
-        </ThemeProvider>
-      </MuiThemeProvider>
+      <Root>
+        <GlobalStyled />
+        <AppBar
+          open={open}
+          handleDrawerOpen={this.handleDrawerOpen}
+        />
+        <Drawer
+          open={open}
+          handleDrawerClose={this.handleDrawerClose}
+        />
+        <Main>
+          <Toolbar />
+          {children}
+        </Main>
+      </Root>
     )
   }
 }
