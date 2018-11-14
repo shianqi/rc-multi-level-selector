@@ -18,6 +18,7 @@ class MyDocument extends Document {
           />
           {/* PWA primary color */}
           <meta name='theme-color' content={pageContext.theme.palette.primary.main} />
+          <head dangerouslySetInnerHTML={{ __html: '<!--jss-insertion-point-app-->' }} />
           {this.props.styleTags}
         </Head>
         <body>
@@ -27,36 +28,34 @@ class MyDocument extends Document {
       </html>
     )
   }
-}
 
-MyDocument.getInitialProps = ({ renderPage }) => {
-  const sheet = new ServerStyleSheet()
+  static getInitialProps ({ renderPage }) {
+    const sheet = new ServerStyleSheet()
 
-  let pageContext
-  const page = renderPage(App => props => {
-    pageContext = props.pageContext
-    return sheet.collectStyles(<App {...props} />)
-  })
+    let pageContext
+    const page = renderPage(App => props => {
+      pageContext = props.pageContext
+      return sheet.collectStyles(<App {...props} />)
+    })
 
-  // const page = renderPage(App => props => sheet.collectStyles(<App {...props} />))
-  const styleTags = sheet.getStyleElement()
-  // return { ...page, styleTags }
+    const styleTags = sheet.getStyleElement()
 
-  return {
-    ...page,
-    styleTags,
-    pageContext,
-    // Styles fragment is rendered after the app and page rendering finish.
-    styles: (
-      <React.Fragment>
-        <style
-          id='jss-server-side'
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: pageContext.sheetsRegistry.toString() }}
-        />
-        {flush() || null}
-      </React.Fragment>
-    )
+    return {
+      ...page,
+      styleTags,
+      pageContext,
+      // Styles fragment is rendered after the app and page rendering finish.
+      styles: (
+        <React.Fragment>
+          <style
+            id='jss-server-side'
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{ __html: pageContext.sheetsRegistry.toString() }}
+          />
+          {flush() || null}
+        </React.Fragment>
+      )
+    }
   }
 }
 

@@ -2,10 +2,16 @@ import React from 'react'
 import App, { Container } from 'next/app'
 import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
-import { MuiThemeProvider } from '@material-ui/core/styles'
+import { create } from 'jss'
+import { MuiThemeProvider, jssPreset } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import JssProvider from 'react-jss/lib/JssProvider'
 import getPageContext from '../docs/src/utils/getPageContext'
+
+const jss = create({
+  ...jssPreset(),
+  insertionPoint: 'jss-insertion-point-app'
+})
 
 class MyApp extends App {
   constructor (props) {
@@ -26,15 +32,14 @@ class MyApp extends App {
     return (
       <Container>
         <Head>
-          <title>My page</title>
+          <title>rc-multi-level-selector</title>
         </Head>
         {/* Wrap every page in Jss and Theme providers */}
         <JssProvider
           registry={this.pageContext.sheetsRegistry}
           generateClassName={this.pageContext.generateClassName}
+          jss={jss}
         >
-          {/* MuiThemeProvider makes the theme available down the React
-              tree thanks to React context. */}
           <MuiThemeProvider
             theme={this.pageContext.theme}
             sheetsManager={this.pageContext.sheetsManager}

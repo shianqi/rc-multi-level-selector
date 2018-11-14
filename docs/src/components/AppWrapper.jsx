@@ -1,11 +1,9 @@
 import React from 'react'
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components'
-import { MuiThemeProvider } from '@material-ui/core/styles'
+import styled, { createGlobalStyle } from 'styled-components'
 import Toolbar from '@material-ui/core/Toolbar'
 
 import AppBar from './AppBar'
 import Drawer from './AppDrawer'
-import theme from '../utils/theme'
 
 const GlobalStyled = createGlobalStyle`
   html {
