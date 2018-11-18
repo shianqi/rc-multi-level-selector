@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PageContext from './PageContext'
 
 // const Base = styled.p`
 //   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -38,12 +39,14 @@ const Code = styled.code`
 const Pre = styled.pre`
 `
 
-const getDocs = name => require(`../pages/${name}.mdx`).default
+const getDocs = (name, lang) => require(`../pages/${name}${lang}.mdx`).default
 
 class Document extends React.PureComponent {
   render () {
+    const { userLanguage } = this.context
+    const long = userLanguage === 'en' ? '' : `-${userLanguage}`
     const { name = 'installation' } = this.props
-    const Component = getDocs(name)
+    const Component = getDocs(name, long)
 
     return (
       <Component
@@ -63,5 +66,7 @@ class Document extends React.PureComponent {
     )
   }
 }
+
+Document.contextType = PageContext
 
 export default Document
