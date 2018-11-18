@@ -34,9 +34,14 @@ const InlineCode = styled.code`
 `
 
 const Code = styled.code`
+  overflow-x: auto;
 `
 
 const Pre = styled.pre`
+  overflow-x: auto;
+  padding: 12px 18px;
+  background: #fff;
+  border-radius: 4px;
 `
 
 const getDocs = (name, lang) => require(`../pages/${name}${lang}.mdx`).default
