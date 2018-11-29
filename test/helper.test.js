@@ -4,7 +4,8 @@ import {
   matchOptionsAndValues,
   transformObjectToArray,
   getDefaultValuesByOptions,
-  deepTransformArrayToObject
+  deepTransformArrayToObject,
+  addNullOptions
 } from '../src/helper'
 
 const arrayOptions = [
@@ -54,6 +55,40 @@ const objectOptions = {
   }
 }
 
+const objectOptionsWithNullOptions = {
+  'NullOption': {
+    value: '请选择'
+  },
+  'China': {
+    value: 'China',
+    item: {
+      'NullOption': {
+        value: '请选择'
+      },
+      'Guangdong': {
+        value: 'Guangdong',
+        item: {
+          'NullOption': {
+            value: '请选择'
+          },
+          'Guangzhou': { value: 'Guangzhou' },
+          'Shenzhen': { value: 'Shenzhen' }
+        }
+      },
+      'Beijing': { value: 'Beijing', text: 'China - Beijing' }
+    }
+  },
+  'United States': {
+    value: 'United States',
+    item: {
+      'NullOption': {
+        value: '请选择'
+      },
+      'California': { value: 'California' }
+    }
+  }
+}
+
 const valueObjectsOptions = {
   'Guangdong': { value: 'Guangdong' },
   'Beijing': { value: 'Beijing', text: 'China - Beijing' }
@@ -65,17 +100,38 @@ const arrayOptionsDeep1 = [
 ]
 
 test('transformObjectToArray', () => {
-  expect(transformObjectToArray(objectOptions))
+  expect(transformObjectToArray({
+    options: objectOptions,
+    nullOption: {
+      id: 'NullOption',
+      value: '请选择',
+      display: false
+    }
+  }))
     .toEqual(arrayOptionsDeep1)
 })
 
 test('transformObjectToArray', () => {
-  expect(transformObjectToArray({}))
+  expect(transformObjectToArray({
+    options: {},
+    nullOption: {
+      id: 'NullOption',
+      value: '请选择',
+      display: false
+    }
+  }))
     .toEqual([])
 })
 
 test('transformObjectToArray', () => {
-  expect(transformObjectToArray(valueObjectsOptions))
+  expect(transformObjectToArray({
+    options: valueObjectsOptions,
+    nullOption: {
+      id: 'NullOption',
+      value: '请选择',
+      display: false
+    }
+  }))
     .toEqual([
       { id: 'Guangdong', value: 'Guangdong' },
       { id: 'Beijing', value: 'Beijing', text: 'China - Beijing' }
@@ -83,12 +139,30 @@ test('transformObjectToArray', () => {
 })
 
 test('getDefaultValuesByOptions', () => {
-  expect(getDefaultValuesByOptions(objectOptions, 'item'))
+  expect(getDefaultValuesByOptions(
+    objectOptions,
+    'item',
+    {
+      id: 'NULL',
+      value: 'NULL',
+      display: true
+    },
+    true
+  ))
     .toEqual(['China', 'Guangdong', 'Guangzhou'])
 })
 
 test('getDefaultValuesByOptions', () => {
-  expect(getDefaultValuesByOptions({}, 'item'))
+  expect(getDefaultValuesByOptions(
+    {},
+    'item',
+    {
+      id: 'NULL',
+      value: 'NULL',
+      display: true
+    },
+    true
+  ))
     .toEqual([])
 })
 
@@ -129,4 +203,17 @@ test('getValueObjects', () => {
 test('deepTransformArrayToObject', () => {
   expect(deepTransformArrayToObject(arrayOptions, 'item'))
     .toEqual(objectOptions)
+})
+
+test('addNullOptions', () => {
+  expect(addNullOptions({
+    options: objectOptions,
+    subOptionKey: 'item',
+    nullOption: {
+      id: 'NullOption',
+      value: '请选择',
+      display: false
+    }
+  }))
+    .toEqual(objectOptionsWithNullOptions)
 })

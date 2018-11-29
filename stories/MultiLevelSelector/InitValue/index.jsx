@@ -6,7 +6,7 @@ class InitValue extends React.PureComponent {
     super(props)
 
     this.state = {
-      values: ['realtime'],
+      values: [''],
       options: [{
         id: 'daily',
         value: 'daily',
@@ -33,7 +33,13 @@ class InitValue extends React.PureComponent {
       <div>
         <MultiLevelSelector
           values={values}
+          autoSelect={false}
           options={options}
+          nullOption={{
+            id: 'NULL_OPTIONS',
+            value: 'NULL_VALUE',
+            display: true
+          }}
           onChange={this.onChange}
         />
       </div>

@@ -8,18 +8,32 @@ import {
   matchOptionsAndValues,
   transformObjectToArray,
   getDefaultValuesByOptions,
-  deepTransformArrayToObject
+  deepTransformArrayToObject,
+  addNullOptions
 } from './helper'
 
 const InlineBlockDiv = styled.div`
   display: inline-block;
 `
 
-const getOptions = (options, subOptionKey) => {
+/**
+ * 规范 options 为对象结构
+ * @param {*} options
+ * @param {*} subOptionKey
+ */
+const getOptions = (options, subOptionKey, nullOption, autoSelect) => {
+  let newOptions
   if (Array.isArray(options)) {
-    return deepTransformArrayToObject(options, subOptionKey)
+    newOptions = deepTransformArrayToObject(options, subOptionKey)
   } else if (typeof options === 'object') {
-    return options
+    newOptions = options
+  }
+
+  if (newOptions) {
+    if (autoSelect) {
+      return newOptions
+    }
+    return addNullOptions({ options: newOptions, subOptionKey, nullOption })
   }
   throw new Error('"options" must be an array or an object')
 }
@@ -39,9 +53,9 @@ class MultiLevelSelector extends React.PureComponent {
    * 处理受控组件
    * 用 propsValues 和 options 匹配，判断是否渲染组件或者更新通知父组件更新状态
    */
-  static handleControlledComponent (props) {
-    const { options: propsOptions, values, onChange, subOptionKey } = props
-    const options = getOptions(propsOptions, subOptionKey)
+  static handleControlledComponent (props, state) {
+    const { options: propsOptions, values, onChange, subOptionKey, nullOption, autoSelect } = props
+    const options = getOptions(propsOptions, subOptionKey, nullOption, autoSelect)
     const {
       options: unMatchedOptions,
       values: matchedValues
@@ -53,7 +67,7 @@ class MultiLevelSelector extends React.PureComponent {
     }
 
     // 值和选项不能完全匹配，需要通知父组件更新，并且不渲染组件
-    const surplusDefaultValues = getDefaultValuesByOptions(unMatchedOptions, subOptionKey)
+    const surplusDefaultValues = getDefaultValuesByOptions(unMatchedOptions, subOptionKey, nullOption, autoSelect)
     const newValues = matchedValues.concat(surplusDefaultValues)
     const valueObjects = getValueObjects(options, newValues, subOptionKey)
     onChange(valueObjects)
@@ -64,9 +78,10 @@ class MultiLevelSelector extends React.PureComponent {
    * 处理非受控组件
    */
   static handleUnControlledComponent (props, state) {
-    const { options: propsOptions, subOptionKey, onChange } = props
-    const options = getOptions(propsOptions, subOptionKey)
+    const { options: propsOptions, subOptionKey, nullOption, onChange, autoSelect } = props
+    const options = getOptions(propsOptions, subOptionKey, nullOption, autoSelect)
     const { values } = state
+
     const {
       options: unMatchedOptions,
       values: matchedValues
@@ -77,7 +92,7 @@ class MultiLevelSelector extends React.PureComponent {
       return { options, render: true }
     }
     // 值和选项不能完全匹配，更新值并渲染组件
-    const surplusDefaultValues = getDefaultValuesByOptions(unMatchedOptions, subOptionKey)
+    const surplusDefaultValues = getDefaultValuesByOptions(unMatchedOptions, subOptionKey, nullOption, autoSelect)
     const newValues = matchedValues.concat(surplusDefaultValues)
 
     const valueObjects = getValueObjects(options, newValues, subOptionKey)
@@ -123,13 +138,14 @@ class MultiLevelSelector extends React.PureComponent {
     const {
       Selector: PropsSelector,
       selectorClassName,
-      subOptionKey
+      subOptionKey,
+      nullOption
     } = this.props
 
     // 没有渲染完成
     if (values.length > index) {
       const value = values[index]
-      const selectorOptions = transformObjectToArray(options)
+      const selectorOptions = transformObjectToArray({ options, nullOption })
       const selectedItem = options[value]
 
       const Selector = OptionsSelector || PropsSelector
@@ -159,14 +175,14 @@ class MultiLevelSelector extends React.PureComponent {
    * 处理选中事件
    */
   handleOnChange (value, index, options) {
-    const { subOptionKey } = this.props
+    const { subOptionKey, nullOption, autoSelect } = this.props
     const { values } = this.state
 
     const invariableValues = values.slice(0, index)
     const selectedItem = options[value]
 
     let subOptions = selectedItem[subOptionKey]
-    const variableValues = getDefaultValuesByOptions(subOptions, subOptionKey)
+    const variableValues = getDefaultValuesByOptions(subOptions, subOptionKey, nullOption, autoSelect)
     const newValues = invariableValues.concat([value]).concat(variableValues)
 
     this.setValues(newValues)
@@ -193,7 +209,13 @@ MultiLevelSelector.defaultProps = {
   values: null,
   defaultValues: [],
   onChange: () => {},
+  autoSelect: true,
   subOptionKey: 'item',
+  nullOption: {
+    id: 'NULL',
+    value: 'NULL',
+    display: true
+  },
   Selector: NativeSelector
 }
 
@@ -208,7 +230,10 @@ MultiLevelSelector.propTypes = {
   values: PropTypes.array,
   defaultValues: PropTypes.array,
   onChange: PropTypes.func,
+  autoSelect: PropTypes.bool,
+
   subOptionKey: PropTypes.string,
+  nullOption: PropTypes.object,
   Selector: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.object
