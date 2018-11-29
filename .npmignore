@@ -1,6 +1,13 @@
+.cache
+.next
+.out
 .storybook/
-.out/
+docs/
+pages/
 src/
 stories/
+test/
+.editorconfig
+next.config.js
 package-lock.json
 yarn.lock
