@@ -139,7 +139,8 @@ class MultiLevelSelector extends React.PureComponent {
       Selector: PropsSelector,
       selectorClassName,
       subOptionKey,
-      nullOption
+      nullOption,
+      getOptionsKey
     } = this.props
 
     // 没有渲染完成
@@ -152,7 +153,7 @@ class MultiLevelSelector extends React.PureComponent {
 
       return [
         <Selector
-          key={value}
+          key={getOptionsKey(selectorOptions, value, index)}
           value={value}
           options={selectorOptions}
           onChange={(value) => {
@@ -206,11 +207,13 @@ MultiLevelSelector.defaultProps = {
   selectorClassName: '',
 
   options: [],
+  // TODO:
   values: null,
   defaultValues: [],
   onChange: () => {},
   autoSelect: true,
   subOptionKey: 'item',
+  getOptionsKey: (option, value, index) => (`${value}-${index}`),
   nullOption: {
     id: 'NULL',
     value: 'NULL',
@@ -231,6 +234,8 @@ MultiLevelSelector.propTypes = {
   defaultValues: PropTypes.array,
   onChange: PropTypes.func,
   autoSelect: PropTypes.bool,
+
+  getOptionsKey: PropTypes.func,
 
   subOptionKey: PropTypes.string,
   nullOption: PropTypes.object,

@@ -27,16 +27,38 @@ $ npm install --save rc-multi-level-selector
 
 These are all of the available props (and their default values) for the main `<MultiLevelSelector />` component.
 
-* `className` - Apply a className to the control
-* `selectorClassName` - Apply classNames to Selector elements
+|key|default value|description|
+|---|---|---|
+| `className?: string` | `''` | Apply a className to the control |
+| `selectorClassName?: string` | `''` | Apply classNames to Selector elements |
+| `options: object[]|object` | `[]` | Specify the options the user can select from |
+| `values?: string[]` | `[]` | Control the current values |
+| `defaultValues?: string[]` | `[]` | The initial value passed to the uncontrolled component |
+| `onChange?: function` | `() => {}` | Subscribe to change events |
+| `subOptionKey?: string` | `'item'` | Key for custom subcomponent options |
+| `Selector?: function|object` | [`NativeSelector`](./src/NativeSelector/index.jsx) | Use a custom selector component |
+| `getOptionsKey?: function` | (option, value, index) => (`${value}-${index}`) | Get keys to help React identify which items have changed |
+| `autoSelect?: bool` | `true` | Automatically select optional options  |
+| `nullOption?: object` | `{id: 'NULL', value: 'NULL', display: true}` | If `autoSelect` is `false`, selected empty object |
 
-* `options` - Specify the options the user can select from
-* `values` - Control the current values
-* `defaultValues` - The initial value passed to the uncontrolled component
-* `onChange` - subscribe to change events
+<!-- 
 
-* `subOptionKey` - Key for custom subcomponent options
-* `Selector` - Use a custom selector component
+  autoSelect: true,
+  nullOption: {
+    id: 'NULL',
+    value: 'NULL',
+    display: true
+  },
+
+  autoSelect: PropTypes.bool,
+  nullOption: PropTypes.object,
+
+  
+  
+  
+  -->
+
+
 
 ## Example
 
@@ -61,5 +83,3 @@ const options = [
 ...
 
 ```
-
-[Try it on Codepen]()
