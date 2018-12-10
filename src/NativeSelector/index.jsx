@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Select from './Select'
 
 class NativeSelector extends React.PureComponent {
   constructor (props) {
@@ -32,7 +31,7 @@ class NativeSelector extends React.PureComponent {
     } = this.props
 
     return (
-      <Select
+      <select
         style={style}
         value={value}
         ref={this.ref}
@@ -43,7 +42,7 @@ class NativeSelector extends React.PureComponent {
         className={className}
       >
         {this.renderOptions()}
-      </Select>
+      </select>
     )
   }
 }
