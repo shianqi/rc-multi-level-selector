@@ -1,0 +1,47 @@
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
+import MultiLevelSelector from '../../../../src/MultiLevelSelector.jsx'
+import options from '../../shared/options'
+const MaterialSelect = (props) => (
+  <Select
+    value={props.value}
+    onChange={e => props.onChange(e.target.value)}
+  >
+    {
+      props.options.map(item => (
+        <MenuItem key={item.id} value={item.id}>
+          {item.value}
+        </MenuItem>
+      ))
+    }
+  </Select>
+)
+
+# 使用 Material-UI
+
+<MultiLevelSelector
+  options={options}
+  Selector={MaterialSelect}
+/>
+
+```
+const MaterialSelect = (props) => (
+  <Select
+    value={props.value}
+    onChange={e => props.onChange(e.target.value)}
+  >
+    {
+      props.options.map(item => (
+        <MenuItem key={item.id} value={item.id}>
+          {item.value}
+        </MenuItem>
+      ))
+    }
+  </Select>
+)
+
+<MultiLevelSelector
+  options={options}
+  Selector={MaterialSelect}
+/>
+```

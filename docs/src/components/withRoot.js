@@ -4,16 +4,11 @@ import PageContext from './PageContext'
 
 const withRoot = (Component) => {
   class WithRoot extends React.PureComponent {
-    constructor (props) {
-      super(props)
-
-      this.state = {
-        userLanguage: 'zh'
-      }
-      this.toggleUserLanguage = this.toggleUserLanguage.bind(this)
+    state = {
+      userLanguage: 'zh'
     }
 
-    toggleUserLanguage (language) {
+    toggleUserLanguage = (language) => {
       this.setState({
         userLanguage: language
       })

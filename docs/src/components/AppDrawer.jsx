@@ -1,14 +1,11 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 // import List from '@material-ui/core/List'
-import Divider from '@material-ui/core/Divider'
-import IconButton from '@material-ui/core/IconButton'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-// import { mailFolderListItems, otherMailFolderListItems } from './tileData'
+import Hidden from '@material-ui/core/Hidden'
+import Menus from './Menus'
 
 const drawerWidth = 240
 
@@ -39,7 +36,7 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen
     }),
     width: theme.spacing.unit * 7,
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       width: theme.spacing.unit * 9
     }
   },
@@ -52,32 +49,48 @@ const styles = theme => ({
   }
 })
 
+const Nav = styled.nav`
+  display: flex;
+`
+
+const StyledHidden = styled(Hidden)`
+  display: flex;
+`
+
 class MiniDrawer extends React.Component {
   render () {
-    const { classes, theme, open, handleDrawerClose } = this.props
+    const { classes, theme, open, handleDrawerToggle } = this.props
 
     return (
-      <Drawer
-        variant='permanent'
-        classes={{
-          paper: classNames(classes.drawerPaper, !open && classes.drawerPaperClose)
-        }}
-        open={open}
-      >
-        <div className={classes.toolbar}>
-          <img
-            className={classes.menuAvatar}
-            src=''
-          />
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        {/* <List>{mailFolderListItems}</List> */}
-        <Divider />
-        {/* <List>{otherMailFolderListItems}</List> */}
-      </Drawer>
+      <Nav>
+        <StyledHidden mdUp implementation='css'>
+          <Drawer
+            variant='temporary'
+            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            open={open}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper
+            }}
+            ModalProps={{
+              keepMounted: true
+            }}
+          >
+            <Menus />
+          </Drawer>
+        </StyledHidden>
+        <StyledHidden smDown implementation='css'>
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper
+            }}
+            variant='permanent'
+            open
+          >
+            <Menus />
+          </Drawer>
+        </StyledHidden>
+      </Nav>
     )
   }
 }

@@ -41,38 +41,27 @@ const Main = styled.main`
 `
 
 class AppWrapper extends React.PureComponent {
-  constructor (props) {
-    super(props)
-    this.state = {
-      open: false
-    }
-
-    this.handleDrawerOpen = this.handleDrawerOpen.bind(this)
-    this.handleDrawerClose = this.handleDrawerClose.bind(this)
+  state = {
+    mobileOpen: false
   }
 
-  handleDrawerOpen () {
-    this.setState({ open: true })
-  }
-
-  handleDrawerClose () {
-    this.setState({ open: false })
+  handleDrawerToggle = () => {
+    this.setState(state => ({ mobileOpen: !state.mobileOpen }))
   }
 
   render () {
-    const { open } = this.state
+    const { mobileOpen } = this.state
     const { children } = this.props
 
     return (
       <Root>
         <GlobalStyled />
         <AppBar
-          open={open}
-          handleDrawerOpen={this.handleDrawerOpen}
+          handleDrawerToggle={this.handleDrawerToggle}
         />
         <Drawer
-          open={open}
-          handleDrawerClose={this.handleDrawerClose}
+          open={mobileOpen}
+          handleDrawerToggle={this.handleDrawerToggle}
         />
         <Main>
           <Toolbar />

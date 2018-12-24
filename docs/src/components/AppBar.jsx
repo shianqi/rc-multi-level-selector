@@ -1,4 +1,5 @@
 import React from 'react'
+import styled from 'styled-components'
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -13,15 +14,28 @@ const GithubIcon = (props) => (
   </SvgIcon>
 )
 
+const MenuButton = styled(IconButton)`
+  margin-left: 12px;
+  ${props => props.theme.breakpoints.up('md')} {
+    display: none;
+  }
+`
+
+const Title = styled(Typography)`
+  margin-left: 12px;
+  ${props => props.theme.breakpoints.up('md')} {
+    margin-left: ${props => props.theme.spacing.unit * 3}px;
+  }
+`
+
 const drawerWidth = 240
 
 const styles = theme => ({
   appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
-    })
+    marginLeft: drawerWidth,
+    [theme.breakpoints.up('md')]: {
+      width: `calc(100% - ${drawerWidth}px)`
+    }
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -30,10 +44,6 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
     })
-  },
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 36
   },
   menuGrow: {
     flex: '1 1 auto'
@@ -50,24 +60,19 @@ const styles = theme => ({
 })
 
 class AppBarComponent extends React.PureComponent {
-  constructor (props) {
-    super(props)
-    this.state = {
-      anchorEl: null,
-      accountMenuOpen: false
-    }
-    this.handleAccountMenuOpen = this.handleAccountMenuOpen.bind(this)
-    this.handleAccountMenuClose = this.handleAccountMenuClose.bind(this)
+  state = {
+    anchorEl: null,
+    accountMenuOpen: false
   }
 
-  handleAccountMenuOpen (event) {
+  handleAccountMenuOpen = (event) => {
     this.setState({
       accountMenuOpen: true,
       anchorEl: event.currentTarget
     })
   };
 
-  handleAccountMenuClose () {
+  handleAccountMenuClose = () => {
     this.setState({ accountMenuOpen: false })
   };
 
@@ -77,27 +82,23 @@ class AppBarComponent extends React.PureComponent {
     const {
       classes,
       open,
-      handleDrawerOpen
+      handleDrawerToggle
     } = this.props
 
     return (
-      <AppBar
-        position='absolute'
-        className={`${classes.appBar} ${open && classes.appBarShift}`}
-      >
+      <AppBar position='fixed' className={classes.appBar}>
         <Toolbar disableGutters={!open}>
-          <IconButton
+          <MenuButton
             color='inherit'
             aria-label='Open drawer'
-            onClick={handleDrawerOpen}
-            className={`${classes.menuButton} ${open && classes.hide}`}
+            onClick={handleDrawerToggle}
           >
             <MenuIcon />
-          </IconButton>
+          </MenuButton>
 
-          <Typography variant='h6' color='inherit' noWrap>
+          <Title variant='h6' color='inherit' noWrap>
             rc-multi-level-selector
-          </Typography>
+          </Title>
           <div className={classes.menuGrow} />
           <IconButton
             component='a'
