@@ -3,15 +3,19 @@ import App, { Container } from 'next/app'
 import Head from 'next/head'
 import { ThemeProvider } from 'styled-components'
 import { create } from 'jss'
+import { Provider } from 'react-redux'
 import { MuiThemeProvider, jssPreset } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import JssProvider from 'react-jss/lib/JssProvider'
 import getPageContext from '../docs/src/utils/getPageContext'
+import configureStore from '../docs/src/redux/store'
 
 const jss = create({
   ...jssPreset(),
   insertionPoint: 'jss-insertion-point-app'
 })
+
+const store = configureStore()
 
 class MyApp extends App {
   constructor (props) {
@@ -50,7 +54,9 @@ class MyApp extends App {
                 to render collected styles on server side. */}
 
             <ThemeProvider theme={this.pageContext.theme}>
-              <Component pageContext={this.pageContext} {...pageProps} />
+              <Provider store={store}>
+                <Component pageContext={this.pageContext} {...pageProps} />
+              </Provider>
             </ThemeProvider>
           </MuiThemeProvider>
         </JssProvider>

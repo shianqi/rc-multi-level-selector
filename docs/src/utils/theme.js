@@ -29,4 +29,6 @@ const theme = createMuiTheme({
   }
 })
 
+export const spacingUnit = theme.spacing.unit
+
 export default theme

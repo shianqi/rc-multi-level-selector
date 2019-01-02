@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import styled from 'styled-components'
 import Router, { withRouter } from 'next/router'
+import { connect } from 'react-redux'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
@@ -9,6 +10,9 @@ import Collapse from '@material-ui/core/Collapse'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import ExpandMore from '@material-ui/icons/ExpandMore'
 import pages from '../shared/pages'
+
+import MenuAction from '../redux/menu/action'
+import { bindActionCreators } from 'redux'
 
 const MenusContainer = styled.div`
 `
@@ -21,11 +25,11 @@ const LogoContainer = styled.div`
   padding: 24px;
 `
 
-class Menus extends React.PureComponent {
-  state = {
-    menuOpenState: {}
-  }
+const StyledListItem = styled(ListItem)`
+  padding-left: ${props => props.theme.spacing.unit * (3 + props.deep * 2)}px;
+`
 
+class Menus extends React.PureComponent {
   render () {
     return (
       <MenusContainer>
@@ -33,29 +37,23 @@ class Menus extends React.PureComponent {
           <Logo src='/static/images/logo.png' />
         </LogoContainer>
         <Divider />
-        { this.renderNavItems(pages) }
+        { this.renderNavItems(pages, 0) }
       </MenusContainer>
     )
   }
 
   handleClick = (item) => () => {
-    const { menuOpenState } = this.state
+    const { actions } = this.props
     const { children, path } = item
     if (children) {
-      this.setState({
-        menuOpenState: {
-          ...menuOpenState,
-          [path]: !menuOpenState[path]
-        }
-      })
+      actions.toggleMenuOpenState(path)
     } else {
       Router.push(path)
     }
   }
 
-  renderNavItems = (lists) => {
-    const { menuOpenState } = this.state
-    const { router } = this.props
+  renderNavItems = (lists, deep) => {
+    const { router, menuOpenState } = this.props
     const { route } = router
 
     const items = lists.map((item) => {
@@ -64,18 +62,19 @@ class Menus extends React.PureComponent {
 
       return (
         <Fragment key={path}>
-          <ListItem
+          <StyledListItem
             button
+            deep={deep}
             selected={route === path}
             onClick={this.handleClick(item)}
           >
             <ListItemText primary={item.name} />
             {children && (isOpen ? <ExpandLess /> : <ExpandMore />)}
-          </ListItem>
+          </StyledListItem>
           {
             children && (
               <Collapse in={isOpen} unmountOnExit>
-                {this.renderNavItems(item.children)}
+                {this.renderNavItems(item.children, deep + 1)}
               </Collapse>
             )
           }
@@ -94,4 +93,16 @@ class Menus extends React.PureComponent {
   }
 }
 
-export default withRouter(Menus)
+const mapStateToProps = (state) => {
+  const { menu } = state
+  const { menuOpenState } = menu
+  return {
+    menuOpenState
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(MenuAction, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Menus))
