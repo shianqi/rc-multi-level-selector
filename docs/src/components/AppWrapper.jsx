@@ -1,7 +1,11 @@
 import React from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import Toolbar from '@material-ui/core/Toolbar'
 
+import AppAction from '../redux/app/action'
 import AppBar from './AppBar'
 import Drawer from './AppDrawer'
 
@@ -51,13 +55,15 @@ class AppWrapper extends React.PureComponent {
 
   render () {
     const { mobileOpen } = this.state
-    const { children } = this.props
+    const { children, actions, language } = this.props
 
     return (
       <Root>
         <GlobalStyled />
         <AppBar
+          language={language}
           handleDrawerToggle={this.handleDrawerToggle}
+          handleChangeLanguage={actions.changeLanguage}
         />
         <Drawer
           open={mobileOpen}
@@ -72,4 +78,18 @@ class AppWrapper extends React.PureComponent {
   }
 }
 
-export default AppWrapper
+const mapStateToProps = (state) => {
+  const { app, menu } = state
+  const { menuOpenState } = menu
+  const { language } = app
+  return {
+    language,
+    menuOpenState
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(AppAction, dispatch)
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppWrapper)

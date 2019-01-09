@@ -20,6 +20,9 @@ const styles = theme => ({
   menuAvatar: {
     marginRight: '10px'
   },
+  docked: {
+    height: '100%'
+  },
   drawerPaper: {
     position: 'relative',
     whiteSpace: 'nowrap',
@@ -54,12 +57,18 @@ const Nav = styled.nav`
 `
 
 const StyledHidden = styled(Hidden)`
-  display: flex;
+  height: 100%;
 `
 
 class MiniDrawer extends React.Component {
   render () {
-    const { classes, theme, open, handleDrawerToggle } = this.props
+    const {
+      classes,
+      theme,
+      open,
+      language,
+      handleDrawerToggle
+    } = this.props
 
     return (
       <Nav>
@@ -76,18 +85,19 @@ class MiniDrawer extends React.Component {
               keepMounted: true
             }}
           >
-            <Menus />
+            <Menus language={language} />
           </Drawer>
         </StyledHidden>
         <StyledHidden smDown implementation='css'>
           <Drawer
             classes={{
+              docked: classes.docked,
               paper: classes.drawerPaper
             }}
             variant='permanent'
             open
           >
-            <Menus />
+            <Menus language={language} />
           </Drawer>
         </StyledHidden>
       </Nav>

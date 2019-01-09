@@ -6,25 +6,34 @@ const theme = createMuiTheme({
       main: '#202329'
     },
     secondary: {
-      main: '#fff',
-      light: '#7986cb',
-      dark: '#303f9f',
-      contrastText: '#fff'
+      main: '#f45421'
     }
   },
   typography: {
     useNextVariants: true,
     h1: {
       fontSize: '3.5rem',
+      lineHeight: 1.5,
       fontWeight: 600
     },
     h2: {
       fontSize: '2.125rem',
+      lineHeight: 1.5,
       fontWeight: 600
     },
+    h3: {
+      fontSize: '2rem',
+      lineHeight: 1.5
+    },
     h4: {
-      fontSize: '1.25rem',
-      fontWeight: 600
+      fontSize: '1.75rem',
+      lineHeight: 1.5
+    },
+    h5: {
+      lineHeight: 1.5
+    },
+    h6: {
+      lineHeight: 1.5
     }
   }
 })

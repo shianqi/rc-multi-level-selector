@@ -8,7 +8,6 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Divider from '@material-ui/core/Divider'
 import Collapse from '@material-ui/core/Collapse'
 import ExpandLess from '@material-ui/icons/ExpandLess'
-import ExpandMore from '@material-ui/icons/ExpandMore'
 import pages from '../shared/pages'
 
 import MenuAction from '../redux/menu/action'
@@ -19,6 +18,7 @@ const MenusContainer = styled.div`
 
 const Logo = styled.img`
   width: 168px;
+  cursor: pointer;
 `
 
 const LogoContainer = styled.div`
@@ -29,12 +29,20 @@ const StyledListItem = styled(ListItem)`
   padding-left: ${props => props.theme.spacing.unit * (3 + props.deep * 2)}px;
 `
 
+const StyledExpandLess = styled(ExpandLess)`
+  transition: all 0.3s;
+  transform: ${(props) => (props.open ? 'rotate(0)' : 'rotate(180deg)')};
+`
+
 class Menus extends React.PureComponent {
   render () {
     return (
       <MenusContainer>
         <LogoContainer>
-          <Logo src='/static/images/logo.png' />
+          <Logo
+            onClick={() => { Router.push('/') }}
+            src='/static/images/logo@1x.png'
+          />
         </LogoContainer>
         <Divider />
         { this.renderNavItems(pages, 0) }
@@ -53,7 +61,7 @@ class Menus extends React.PureComponent {
   }
 
   renderNavItems = (lists, deep) => {
-    const { router, menuOpenState } = this.props
+    const { router, menuOpenState, language } = this.props
     const { route } = router
 
     const items = lists.map((item) => {
@@ -68,8 +76,8 @@ class Menus extends React.PureComponent {
             selected={route === path}
             onClick={this.handleClick(item)}
           >
-            <ListItemText primary={item.name} />
-            {children && (isOpen ? <ExpandLess /> : <ExpandMore />)}
+            <ListItemText primary={item.name[language]} />
+            {children && (<StyledExpandLess open={isOpen} />)}
           </StyledListItem>
           {
             children && (
@@ -94,9 +102,11 @@ class Menus extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => {
-  const { menu } = state
+  const { app, menu } = state
+  const { language } = app
   const { menuOpenState } = menu
   return {
+    language,
     menuOpenState
   }
 }

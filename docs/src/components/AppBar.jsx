@@ -6,7 +6,11 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import SvgIcon from '@material-ui/core/SvgIcon'
 import IconButton from '@material-ui/core/IconButton'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+
 import MenuIcon from '@material-ui/icons/Menu'
+import LanguageIcon from '@material-ui/icons/Language'
 
 const GithubIcon = (props) => (
   <SvgIcon {...props}>
@@ -62,32 +66,41 @@ const styles = theme => ({
 class AppBarComponent extends React.PureComponent {
   state = {
     anchorEl: null,
-    accountMenuOpen: false
+    languageMenuOpen: false
   }
 
-  handleAccountMenuOpen = (event) => {
+  handlelanguageMenuOpen = (event) => {
     this.setState({
-      accountMenuOpen: true,
+      languageMenuOpen: true,
       anchorEl: event.currentTarget
     })
-  };
+  }
 
-  handleAccountMenuClose = () => {
-    this.setState({ accountMenuOpen: false })
-  };
+  handleLanguageMenuClose = () => {
+    this.setState({ languageMenuOpen: false })
+  }
+
+  handleChangeLanguage = (value) => {
+    const { handleChangeLanguage } = this.props
+    handleChangeLanguage(value)
+    this.handleLanguageMenuClose()
+  }
 
   render () {
-    const { accountMenuOpen } = this.state
+    const {
+      anchorEl,
+      languageMenuOpen
+    } = this.state
 
     const {
       classes,
-      open,
+      language,
       handleDrawerToggle
     } = this.props
 
     return (
       <AppBar position='fixed' className={classes.appBar}>
-        <Toolbar disableGutters={!open}>
+        <Toolbar disableGutters>
           <MenuButton
             color='inherit'
             aria-label='Open drawer'
@@ -100,17 +113,54 @@ class AppBarComponent extends React.PureComponent {
             rc-multi-level-selector
           </Title>
           <div className={classes.menuGrow} />
+
+          <IconButton
+            color='inherit'
+            aria-owns={languageMenuOpen ? 'menu-appbar' : null}
+            aria-haspopup='true'
+            className={classes.userButton}
+            onClick={this.handlelanguageMenuOpen}
+          >
+            <LanguageIcon color='inherit' />
+          </IconButton>
+
           <IconButton
             component='a'
-            aria-owns={accountMenuOpen ? 'menu-appbar' : null}
-            aria-haspopup='true'
             color='inherit'
             target='_blank'
             href='https://github.com/shianqi/rc-multi-level-selector'
-            className={`${open ? classes.userButtonMenuOpen : classes.userButton}`}
+            className={classes.userButton}
           >
             <GithubIcon color='inherit' />
           </IconButton>
+
+          <Menu
+            id='menu-appbar'
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right'
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right'
+            }}
+            open={languageMenuOpen}
+            onClose={this.handleLanguageMenuClose}
+          >
+            <MenuItem
+              selected={language === 'en'}
+              onClick={() => { this.handleChangeLanguage('en') }}
+            >
+              English
+            </MenuItem>
+            <MenuItem
+              selected={language === 'zh'}
+              onClick={() => { this.handleChangeLanguage('zh') }}
+            >
+              中文
+            </MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
     )

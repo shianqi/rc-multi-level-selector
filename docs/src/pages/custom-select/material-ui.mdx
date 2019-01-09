@@ -17,8 +17,31 @@ const MaterialSelect = (props) => (
   </Select>
 )
 
+# Use Material-UI
+
 <MultiLevelSelector
   options={options}
   Selector={MaterialSelect}
-  onChange={onChange}
 />
+
+```
+const MaterialSelect = (props) => (
+  <Select
+    value={props.value}
+    onChange={e => props.onChange(e.target.value)}
+  >
+    {
+      props.options.map(item => (
+        <MenuItem key={item.id} value={item.id}>
+          {item.value}
+        </MenuItem>
+      ))
+    }
+  </Select>
+)
+
+<MultiLevelSelector
+  options={options}
+  Selector={MaterialSelect}
+/>
+```

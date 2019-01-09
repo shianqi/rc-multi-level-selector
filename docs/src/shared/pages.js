@@ -1,28 +1,46 @@
 export default [
   {
-    name: 'Getting Started',
+    name: {
+      en: 'Getting Started',
+      zh: '开始'
+    },
     path: '/getting-started',
     children: [
       {
-        name: 'Installation',
+        name: {
+          en: 'Installation',
+          zh: '安装'
+        },
         path: '/getting-started/installation'
       },
       {
-        name: 'Usage',
+        name: {
+          en: 'Usage',
+          zh: '使用'
+        },
         path: '/getting-started/usage'
       }
     ]
   },
   {
-    name: 'Custom Select',
+    name: {
+      en: 'Custom Select',
+      zh: '自定义选择器'
+    },
     path: '/custom-select',
     children: [
       {
-        name: 'basics',
+        name: {
+          en: 'basics',
+          zh: '基本'
+        },
         path: '/custom-select/basics'
       },
       {
-        name: 'material-ui',
+        name: {
+          en: 'use Material-UI',
+          zh: '使用 Material-UI'
+        },
         path: '/custom-select/material-ui'
       }
     ]
