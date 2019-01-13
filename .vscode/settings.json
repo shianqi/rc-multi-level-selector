@@ -1,0 +1,8 @@
+{
+  "path-intellisense.mappings": {
+    "COMPONENTS": "${workspaceRoot}/src/components",
+    "REDUX": "${workspaceRoot}/src/redux",
+    "SHARED": "${workspaceRoot}/src/shared",
+    "UTILS": "${workspaceRoot}/src/utils"
+  }
+}

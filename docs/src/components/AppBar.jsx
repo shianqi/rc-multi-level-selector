@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import Router from 'next/router'
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import SvgIcon from '@material-ui/core/SvgIcon'
+import LinearProgress from '@material-ui/core/LinearProgress'
 import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -69,6 +71,18 @@ class AppBarComponent extends React.PureComponent {
     languageMenuOpen: false
   }
 
+  componentDidMount () {
+    const { toggleLoadingState } = this.props
+    Router.events.on('routeChangeStart', () => { toggleLoadingState(true) })
+    Router.events.on('routeChangeComplete', () => { toggleLoadingState(false) })
+  }
+
+  componentWillUnmount () {
+    const { toggleLoadingState } = this.props
+    Router.events.off('routeChangeStart', () => { toggleLoadingState(true) })
+    Router.events.off('routeChangeComplete', () => { toggleLoadingState(false) })
+  }
+
   handlelanguageMenuOpen = (event) => {
     this.setState({
       languageMenuOpen: true,
@@ -94,6 +108,7 @@ class AppBarComponent extends React.PureComponent {
 
     const {
       classes,
+      loading,
       language,
       handleDrawerToggle
     } = this.props
@@ -110,7 +125,7 @@ class AppBarComponent extends React.PureComponent {
           </MenuButton>
 
           <Title variant='h6' color='inherit' noWrap>
-            rc-multi-level-selector
+            RC-multi-level-selector
           </Title>
           <div className={classes.menuGrow} />
 
@@ -162,6 +177,7 @@ class AppBarComponent extends React.PureComponent {
             </MenuItem>
           </Menu>
         </Toolbar>
+        { loading && <LinearProgress color='secondary' /> }
       </AppBar>
     )
   }

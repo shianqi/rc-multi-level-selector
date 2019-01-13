@@ -1,0 +1,42 @@
+import styled from 'styled-components'
+import Link from 'next/link'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+import Empty from 'COMPONENTS/base/Empty'
+import { load } from 'UTILS/helper'
+const Logo = styled.img`
+  margin: 0 auto;
+  max-width: 512px;
+  width: 100%;
+  display: block;
+`
+const StyledButton = styled(Button)`
+  & + & {
+    margin-left: 8px;
+  }
+`
+
+<Empty height='72px' />
+<Logo src={load('/static/images/logo@2x.png')} />
+<Empty height='128px' />
+
+<Typography align='center' variant='h4' color='inherit'>
+  专注于处理多个选择器级联
+  <br/>
+  关系的 React 组件
+</Typography>
+
+<Empty height='16px' />
+
+<Typography align='center'>
+  <Link href="/getting-started/installation">
+    <StyledButton variant="contained" color="secondary">
+      入门
+    </StyledButton>
+  </Link>
+  <Link href="/example">
+    <StyledButton variant="outlined" color="secondary">
+      更多例子 >
+    </StyledButton>
+  </Link>
+</Typography>

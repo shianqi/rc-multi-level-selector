@@ -1,11 +1,14 @@
 import { createActions } from 'redux-actions'
 
 const {
-  changeLanguage
+  changeLanguage,
+  toggleLoadingState
 } = createActions(
-  'CHANGE_LANGUAGE'
+  'CHANGE_LANGUAGE',
+  'TOGGLE_LOADING_STATE'
 )
 
 export default {
-  changeLanguage
+  changeLanguage,
+  toggleLoadingState
 }

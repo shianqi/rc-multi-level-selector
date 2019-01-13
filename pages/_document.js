@@ -3,6 +3,8 @@ import Document, { Head, Main, NextScript } from 'next/document'
 import flush from 'styled-jsx/server'
 import { ServerStyleSheet } from 'styled-components'
 
+import { load } from 'UTILS/helper'
+
 class MyDocument extends Document {
   render () {
     const { pageContext } = this.props
@@ -16,6 +18,12 @@ class MyDocument extends Document {
             name='viewport'
             content='minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no'
           />
+
+          <link rel='icon' href={load('/static/images/favicon.png')} sizes='32x32' />
+          <link rel='icon' href={load('/static/images/favicon.png')} sizes='192x192' />
+          <link rel='apple-touch-icon-precomposed' href={load('/static/images/favicon.png')} />
+          <meta name='msapplication-TileImage' content={load('/static/images/favicon.png')} />
+
           {/* PWA primary color */}
           <meta name='theme-color' content={pageContext.theme.palette.primary.main} />
           <head dangerouslySetInnerHTML={{ __html: '<!--jss-insertion-point-app-->' }} />

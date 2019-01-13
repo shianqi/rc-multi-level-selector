@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "COMPONENTS/*": ["docs/src/components/*"],
+      "REDUX/*": ["docs/src/redux/*"],
+      "SHARED/*": ["docs/src/shared/*"],
+      "UTILS/*": ["docs/src/utils/*"],
+    }
+  },
+  "exclude": [
+    ".cache",
+    ".next",
+    ".out",
+    ".storybook",
+    "node_modules",
+    "dist",
+  ]
+}

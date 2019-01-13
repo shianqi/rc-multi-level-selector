@@ -2,12 +2,12 @@ import React from 'react'
 import withRoot from 'COMPONENTS/withRoot'
 import Document from 'COMPONENTS/Document'
 
-class HomePage extends React.Component {
+class SingleLocation extends React.Component {
   render () {
     return (
-      <Document name={`getting-started/installation`} />
+      <Document name={`example/single-location`} />
     )
   }
 }
 
-export default withRoot(HomePage)
+export default withRoot(SingleLocation)

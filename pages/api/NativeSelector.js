@@ -2,12 +2,12 @@ import React from 'react'
 import withRoot from 'COMPONENTS/withRoot'
 import Document from 'COMPONENTS/Document'
 
-class HomePage extends React.Component {
+class NativeSelector extends React.Component {
   render () {
     return (
-      <Document name={`getting-started/installation`} />
+      <Document name={`api/NativeSelector`} />
     )
   }
 }
 
-export default withRoot(HomePage)
+export default withRoot(NativeSelector)

@@ -1,8 +1,13 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { Fragment } from 'react'
+import styled, { createGlobalStyle } from 'styled-components'
 import { connect } from 'react-redux'
 
 import Typography from '@material-ui/core/Typography'
+import NovaCodeHighlighting from 'UTILS/novaCodeHighlighting'
+
+const GlobaNova = createGlobalStyle`
+  ${NovaCodeHighlighting};
+`
 
 // const Base = styled.p`
 //   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -89,23 +94,27 @@ class Document extends React.PureComponent {
     const Component = getDocs(name, long)
 
     return (
-      <Component
-        components={{
-          h1: H1,
-          h2: H2,
-          h3: H3,
-          h4: H4,
-          h5: H5,
-          h6: H6,
-          ul: UL,
-          li: LI,
-          p: P,
-          a: A,
-          pre: Pre,
-          code: Code,
-          inlineCode: InlineCode
-        }}
-      />
+      <Fragment>
+        <GlobaNova />
+        <Component
+          components={{
+            h1: H1,
+            h2: H2,
+            h3: H3,
+            h4: H4,
+            h5: H5,
+            h6: H6,
+            ul: UL,
+            li: LI,
+            p: P,
+            a: A,
+            pre: Pre,
+            code: Code,
+            inlineCode: InlineCode
+          }}
+        />
+      </Fragment>
+
     )
   }
 }

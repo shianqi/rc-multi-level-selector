@@ -10,7 +10,7 @@ import Collapse from '@material-ui/core/Collapse'
 import ExpandLess from '@material-ui/icons/ExpandLess'
 import pages from '../shared/pages'
 
-import MenuAction from '../redux/menu/action'
+import MenuAction from 'REDUX/menu/action'
 import { bindActionCreators } from 'redux'
 
 const MenusContainer = styled.div`

@@ -7,8 +7,8 @@ import { Provider } from 'react-redux'
 import { MuiThemeProvider, jssPreset } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import JssProvider from 'react-jss/lib/JssProvider'
-import getPageContext from '../docs/src/utils/getPageContext'
-import configureStore from '../docs/src/redux/store'
+import getPageContext from 'UTILS/getPageContext'
+import configureStore from 'REDUX/store'
 
 const jss = create({
   ...jssPreset(),
@@ -36,7 +36,7 @@ class MyApp extends App {
     return (
       <Container>
         <Head>
-          <title>rc-multi-level-selector</title>
+          <title>RC-multi-level-selector</title>
         </Head>
         {/* Wrap every page in Jss and Theme providers */}
         <JssProvider

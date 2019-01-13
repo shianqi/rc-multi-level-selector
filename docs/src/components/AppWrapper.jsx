@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 
 import Toolbar from '@material-ui/core/Toolbar'
 
-import AppAction from '../redux/app/action'
+import AppAction from 'REDUX/app/action'
 import AppBar from './AppBar'
 import Drawer from './AppDrawer'
 
@@ -55,13 +55,15 @@ class AppWrapper extends React.PureComponent {
 
   render () {
     const { mobileOpen } = this.state
-    const { children, actions, language } = this.props
+    const { children, actions, language, loading } = this.props
 
     return (
       <Root>
         <GlobalStyled />
         <AppBar
+          loading={loading}
           language={language}
+          toggleLoadingState={actions.toggleLoadingState}
           handleDrawerToggle={this.handleDrawerToggle}
           handleChangeLanguage={actions.changeLanguage}
         />
@@ -81,8 +83,9 @@ class AppWrapper extends React.PureComponent {
 const mapStateToProps = (state) => {
   const { app, menu } = state
   const { menuOpenState } = menu
-  const { language } = app
+  const { language, loading } = app
   return {
+    loading,
     language,
     menuOpenState
   }
