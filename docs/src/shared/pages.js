@@ -8,40 +8,61 @@ export default [
     children: [
       {
         name: {
-          en: 'Installation',
-          zh: '安装'
+          en: 'Installation & Usage',
+          zh: '安装 & 使用'
         },
         path: '/getting-started/installation'
-      },
-      {
-        name: {
-          en: 'Usage',
-          zh: '使用'
-        },
-        path: '/getting-started/usage'
       }
     ]
   },
   {
     name: {
       en: 'Custom Select',
-      zh: '自定义选择器'
+      zh: '自定义样式'
     },
     path: '/custom-select',
     children: [
       {
         name: {
-          en: 'basics',
+          en: 'Basics',
           zh: '基本'
         },
         path: '/custom-select/basics'
       },
       {
         name: {
-          en: 'use Material-UI',
+          en: 'Use Material-UI',
           zh: '使用 Material-UI'
         },
         path: '/custom-select/material-ui'
+      }
+    ]
+  },
+  {
+    name: {
+      en: 'Advanced Usage',
+      zh: '高级用法'
+    },
+    path: '/advanced-usage',
+    children: [
+      {
+        name: {
+          en: 'Basics',
+          zh: '基本'
+        },
+        path: '/advanced-usage/basics'
+      }, {
+        name: {
+          en: 'Uncontrolled component',
+          zh: '非受控组件'
+        },
+        path: '/advanced-usage/uncontrolled-component'
+      }, {
+        name: {
+          en: 'Controlled component',
+          zh: '受控组件'
+        },
+        path: '/advanced-usage/controlled-component'
       }
     ]
   },
@@ -77,7 +98,7 @@ export default [
     children: [
       {
         name: {
-          en: 'basics',
+          en: 'Basics',
           zh: '基础'
         },
         path: '/example/basics'

@@ -2,12 +2,17 @@
 .next
 .out
 .storybook/
+.vscode/
 docs/
 pages/
 src/
+static/
 stories/
 test/
 .editorconfig
+.gitignore
+env-config.js
+jsconfig.json
 next.config.js
 package-lock.json
 yarn.lock

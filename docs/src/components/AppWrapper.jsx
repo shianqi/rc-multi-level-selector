@@ -14,15 +14,18 @@ const GlobalStyled = createGlobalStyle`
     height: 100%;
     width: 100%;
   }
+
   body {
     margin: 0;
     height: 100%;
     width: 100%;
   }
+
   #root {
     display: flex;
     flex: 1 1 0;
   }
+
   #__next {
     height: 100%;
   }

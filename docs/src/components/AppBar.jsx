@@ -22,6 +22,7 @@ const GithubIcon = (props) => (
 
 const MenuButton = styled(IconButton)`
   margin-left: 12px;
+
   ${props => props.theme.breakpoints.up('md')} {
     display: none;
   }
@@ -29,6 +30,7 @@ const MenuButton = styled(IconButton)`
 
 const Title = styled(Typography)`
   margin-left: 12px;
+
   ${props => props.theme.breakpoints.up('md')} {
     margin-left: ${props => props.theme.spacing.unit * 3}px;
   }

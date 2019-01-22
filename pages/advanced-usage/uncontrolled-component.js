@@ -5,7 +5,7 @@ import Document from 'COMPONENTS/Document'
 class HomePage extends React.Component {
   render () {
     return (
-      <Document name={`getting-started/usage`} />
+      <Document name={`advanced-usage/uncontrolled-component`} />
     )
   }
 }

@@ -14,6 +14,7 @@ import MenuAction from 'REDUX/menu/action'
 import { bindActionCreators } from 'redux'
 
 const MenusContainer = styled.div`
+  display: block;
 `
 
 const Logo = styled.img`

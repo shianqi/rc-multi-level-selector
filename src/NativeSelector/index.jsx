@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 class NativeSelector extends React.PureComponent {
   constructor (props) {
@@ -52,16 +51,6 @@ NativeSelector.defaultProps = {
   className: '',
   options: [],
   value: ''
-}
-
-NativeSelector.propTypes = {
-  style: PropTypes.object,
-  className: PropTypes.string,
-  options: PropTypes.array,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ])
 }
 
 export default NativeSelector

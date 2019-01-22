@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Drawer from '@material-ui/core/Drawer'
 // import List from '@material-ui/core/List'
@@ -103,11 +102,6 @@ class MiniDrawer extends React.Component {
       </Nav>
     )
   }
-}
-
-MiniDrawer.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
 }
 
 export default withStyles(styles, { withTheme: true })(MiniDrawer)

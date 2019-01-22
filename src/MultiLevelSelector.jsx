@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import NativeSelector from './NativeSelector/index'
@@ -220,29 +219,6 @@ MultiLevelSelector.defaultProps = {
     display: true
   },
   Selector: NativeSelector
-}
-
-MultiLevelSelector.propTypes = {
-  className: PropTypes.string,
-  selectorClassName: PropTypes.string,
-
-  options: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.object
-  ]),
-  values: PropTypes.array,
-  defaultValues: PropTypes.array,
-  onChange: PropTypes.func,
-  autoSelect: PropTypes.bool,
-
-  getOptionsKey: PropTypes.func,
-
-  subOptionKey: PropTypes.string,
-  nullOption: PropTypes.object,
-  Selector: PropTypes.oneOfType([
-    PropTypes.func,
-    PropTypes.object
-  ])
 }
 
 export default MultiLevelSelector

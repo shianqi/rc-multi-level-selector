@@ -12,8 +12,8 @@ import {
 import styles from './index.css'
 
 const StyledNativeSelector = styled(NativeSelector)`
-  color: ${props => props.theme.palette.primary.main};;
-  border-color: ${props => props.theme.palette.primary.main};;
+  color: ${props => props.theme.palette.primary.main};
+  border-color: ${props => props.theme.palette.primary.main};
 `
 
 class BaseUsage extends React.PureComponent {
