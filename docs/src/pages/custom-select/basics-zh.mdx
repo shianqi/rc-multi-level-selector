@@ -1,3 +1,111 @@
-# 自定义选择器
+import Link from 'next/link'
+import AnchorLink from 'COMPONENTS/base/AnchorLink'
 
-#### 自定义选择器是 `rc-multi-level-selector` 灵活的关键，你可以通过编写不同的选择器来因对复杂的场景，而不用关心复杂的多级操作。
+## 自定义样式
+
+`RC-multi-level-selector` 只专注于 JavaScript 逻辑，你可以使用您喜欢的任何样式解决方案（纯
+CSS 或任意的 css-in-js 库）。
+
+本文只提供一些常见的技术方案，但您其中的原理可以适用于其他解决方案。
+
+这里提供了以下样式解决方案的示例：
+
+* [Raw CSS](#raw-css)
+* [styled-components](#styled-components)
+* [CSS Modules](#css-modules)
+
+#### <AnchorLink id='raw-css'>原始 CSS</AnchorLink>
+
+**index.js**
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import MultiLevelSelector from 'rc-multi-level-selector'
+
+const options = [
+  {
+    id: 1, value: 'item 1',
+    item: [ { id: 2, value: 'item 2' }, { id: 3, value: 'item 3' } ]
+  },
+  {
+    id: 4, value: 'item 4',
+    item: [ { id: 5, value: 'item 5' }, { id: 6, value: 'item 6' } ]
+  }
+]
+
+ReactDOM.render(
+  <MultiLevelSelector
+    options={options}
+    className='mult-selector'
+    selectorClassName='selector'
+  />,
+  document.querySelector('#app')
+);
+```
+
+**style.css**
+
+```css
+.selector {
+  color: palevioletred;
+  border-color: palevioletred;
+}
+
+.mult-selector {
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.38);
+}
+```
+
+在 [CodeSandbox](https://codesandbox.io/s/y0n8kkpl2z) 上在线尝试
+
+#### <AnchorLink id='styled-components'>styled-components</AnchorLink>
+
+**index.jsx**
+
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import styled from "styled-components";
+import MultiLevelSelector, { NativeSelector } from "rc-multi-level-selector";
+
+const options = [
+  {
+    id: 1,
+    value: "item 1",
+    item: [{ id: 2, value: "item 2" }, { id: 3, value: "item 3" }]
+  },
+  {
+    id: 4,
+    value: "item 4",
+    item: [{ id: 5, value: "item 5" }, { id: 6, value: "item 6" }]
+  }
+];
+
+const StyledMultiLevelSelector = styled(MultiLevelSelector)`
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.38);
+`;
+
+const StyledSelector = styled(NativeSelector)`
+  color: palevioletred;
+  border-color: palevioletred;
+`;
+
+ReactDOM.render(
+  <StyledMultiLevelSelector
+    options={options}
+    className="mult-selector"
+    selectorClassName="selector"
+    Selector={StyledSelector}
+  />,
+  document.querySelector("#root")
+);
+```
+
+在 [CodeSandbox](https://codesandbox.io/s/jvno5kv503) 上在线尝试
+
+#### <AnchorLink id='css-modules'>CSS Modules</AnchorLink>

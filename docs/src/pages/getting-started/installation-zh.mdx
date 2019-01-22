@@ -1,8 +1,15 @@
-# 安装
+import Link from 'next/link'
+import StyledLink from 'COMPONENTS/base/Link'
 
-rc-multi-level-selector
+## 安装 & 使用
 
-Install `rc-multi-level-selector` as a dependency
+<br />
+
+#### 安装
+
+*****
+
+用 npm 或者 yarn，将 `rc-multi-level-selector` 作为依赖安装：
 
 ```bash
 # Yarn
@@ -12,4 +19,67 @@ $ yarn add rc-multi-level-selector
 $ npm install --save rc-multi-level-selector
 ```
 
-## 快速导引
+> **注意：**
+>
+> `rc-multi-level-selector` 使用了 [getDerivedStateFromProps](https://reactjs.org/docs/react-component.html#static-getderivedstatefromprops) API，
+> 请确保安装了大于或等于 v16.4.0 版本的 `react` 及 `react-dom`
+
+<br />
+
+#### 使用
+
+*****
+
+import MultiLevelSelector from '../../../../src/MultiLevelSelector.jsx'
+const options = [
+  {
+    id: 1, value: 'item 1',
+    item: [ { id: 2, value: 'item 2' }, { id: 3, value: 'item 3' } ]
+  },
+  {
+    id: 4, value: 'item 4',
+    item: [ { id: 5, value: 'item 5' }, { id: 6, value: 'item 6' } ]
+  }
+]
+
+简单的几行代码就可以完成一个级联选择器
+
+```jsx
+import React from 'react';
+import ReactDOM from 'react-dom';
+import MultiLevelSelector from 'rc-multi-level-selector'
+
+const options = [
+  {
+    id: 1, value: 'item 1',
+    item: [ { id: 2, value: 'item 2' }, { id: 3, value: 'item 3' } ]
+  },
+  {
+    id: 4, value: 'item 4',
+    item: [ { id: 5, value: 'item 5' }, { id: 6, value: 'item 6' } ]
+  }
+]
+
+ReactDOM.render(
+  <MultiLevelSelector
+    options={options}
+    onChange={console.log}
+  />,
+  document.querySelector('#app')
+);
+```
+
+**效果：**
+
+<MultiLevelSelector
+  options={options}
+  onChange={console.log}
+/>
+
+<br />
+<br />
+<br />
+
+更多请看 <Link href='/custom-select/basics'><StyledLink>自定义样式</StyledLink></Link>
+、<Link href='/advanced-usage/basics'><StyledLink>高级用法</StyledLink></Link>
+和 <Link href='/example/basics'><StyledLink>例子</StyledLink></Link>
