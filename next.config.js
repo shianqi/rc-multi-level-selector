@@ -36,5 +36,6 @@ module.exports = withMDX({
 
     return config
   },
+  assetPrefix: '/rc-multi-level-selector',
   pageExtensions: ['js', 'jsx', 'md', 'mdx']
 })

@@ -12,6 +12,7 @@ import pages from '../shared/pages'
 
 import MenuAction from 'REDUX/menu/action'
 import { bindActionCreators } from 'redux'
+import { load } from 'UTILS/helper'
 
 const MenusContainer = styled.div`
   display: block;
@@ -42,7 +43,7 @@ class Menus extends React.PureComponent {
         <LogoContainer>
           <Logo
             onClick={() => { Router.push('/') }}
-            src='/static/images/logo@1x.png'
+            src={load('/static/images/logo@1x.png')}
           />
         </LogoContainer>
         <Divider />
