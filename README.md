@@ -1,13 +1,13 @@
-# rc-multi-level-selector
+# <a href='https://shianqi.github.io/rc-multi-level-selector/'><img src='./static/images/logo@1x.png' height='93' width='248' alt='RC-multi-level-selector Logo' aria-label='shianqi.github.io/rc-multi-level-selector' /></a>
 
 [![npm](https://img.shields.io/npm/v/rc-multi-level-selector.svg)](https://www.npmjs.com/package/rc-multi-level-selector)
 [![rc-multi-level-selector](https://img.shields.io/npm/dm/rc-multi-level-selector.svg)](https://www.npmjs.com/package/rc-multi-level-selector)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/shianqi/rc-multi-level-selector/master/LICENSE)
 
-A React multilevel selector component.
+React components that focus on handling multiple selector cascading relationships
 
-## Demos
+## Documentation
 
 [https://shianqi.github.io/rc-multi-level-selector/](https://shianqi.github.io/rc-multi-level-selector/)
 
@@ -35,9 +35,9 @@ These are all of the available props (and their default values) for the main `<M
 | `values?` | `string[]` | `[]` | Control the current values |
 | `defaultValues?` | `string[]` | `[]` | The initial value passed to the uncontrolled component |
 | `onChange?` | `function` | `() => {}` | Subscribe to change events |
-| `subOptionKey?` | `string` | `'item'` | Key for custom subcomponent options |
+| `optionFormat?` | `function` | `(option) => (option)` | Custom subcomponent options |
 | `Selector?` | `function` &#124; `object` | [`NativeSelector`](./src/NativeSelector/index.jsx) | Use a custom selector component |
-| `getOptionsKey?` | `function` | `(option, value, index) => (`${value}-${index}`)` | Get keys to help React identify which items have changed |
+| `getOptionsKey?` | `function` | `(option, value, index) => (value + '-' + index)` | Get keys to help React identify which items have changed |
 | `autoSelect?` | `bool` | `true` | Automatically select optional options  |
 | `nullOption?` | `object` | `{id: 'NULL', value: 'NULL', display: true}` | If `autoSelect` is `false`, selected empty object |
 
@@ -48,12 +48,21 @@ import MultiLevelSelector from 'rc-multi-level-selector'
 
 const options = [
   {
-    id: 1, value: 'item 1',
-    items: [ { id: 2, value: 'item 2' }, { id: 3, value: 'item 3' } ]
+    id: 'China', value: 'China',
+    items: [
+      {
+        id: 'Guangdong', value: 'Guangdong',
+        items: [
+          { id: 'Guangzhou', value: 'Guangzhou' },
+          { id: 'Shenzhen', value: 'Shenzhen' }
+        ]
+      },
+      { id: 'Beijing', value: 'Beijing', text: 'China - Beijing' }
+    ]
   },
   {
-    id: 4, value: 'item 4',
-    items: [ { id: 5, value: 'item 5' }, { id: 6, value: 'item 6' } ]
+    id: 'United States', value: 'United States',
+    items: [{ id: 'California', value: 'California' }]
   }
 ]
 
@@ -64,3 +73,9 @@ const options = [
 ...
 
 ```
+
+Try it on [CodeSandbox](https://codesandbox.io/s/rj0xlp2o5p)
+
+## License
+
+MIT
