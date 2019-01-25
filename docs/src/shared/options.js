@@ -1,10 +1,10 @@
 const objectOptions = {
   'China': {
     value: 'China',
-    item: {
+    items: {
       'Guangdong': {
         value: 'Guangdong',
-        item: {
+        items: {
           'Guangzhou': { value: 'Guangzhou' },
           'Shenzhen': { value: 'Shenzhen' }
         }
@@ -14,10 +14,10 @@ const objectOptions = {
   },
   'United States': {
     value: 'United States',
-    item: {
+    items: {
       'California': {
         value: 'California',
-        item: {
+        items: {
           'Los Angeles': { value: 'Los Angeles' },
           'San Diego': { value: 'San Diego' }
         }

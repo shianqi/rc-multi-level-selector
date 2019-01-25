@@ -16,6 +16,8 @@ const newAlias = {
   UTILS: resolve(__dirname, 'docs/src/utils')
 }
 
+const isProd = process.env.NODE_ENV === 'production'
+
 module.exports = withMDX({
   webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
     // polyfills
@@ -36,6 +38,6 @@ module.exports = withMDX({
 
     return config
   },
-  assetPrefix: '/rc-multi-level-selector',
+  assetPrefix: isProd ? '/rc-multi-level-selector' : '',
   pageExtensions: ['js', 'jsx', 'md', 'mdx']
 })

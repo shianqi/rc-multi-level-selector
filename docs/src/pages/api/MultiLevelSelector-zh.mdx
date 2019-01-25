@@ -10,7 +10,7 @@ These are all of the available props (and their default values) for the main `<M
 | `values?` | `string[]` | `[]` | Control the current values |
 | `defaultValues?` | `string[]` | `[]` | The initial value passed to the uncontrolled component |
 | `onChange?` | `function` | `() => {}` | Subscribe to change events |
-| `subOptionKey?` | `string` | `'item'` | Key for custom subcomponent options |
+| `optionFormat?` | `function` | `(option) => (option)` | Custom subcomponent options |
 | `Selector?` | `function` &#124; `object` | [`NativeSelector`](./src/NativeSelector/index.jsx) | Use a custom selector component |
 | `getOptionsKey?` | `function` | `(option, value, index) => (value + '-' + index)` | Get keys to help React identify which items have changed |
 | `autoSelect?` | `bool` | `true` | Automatically select optional options  |

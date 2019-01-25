@@ -1,0 +1,27 @@
+import MultiLevelSelector from '../../../../lib'
+const options = [
+  {
+    key: 1,
+    name: 'item 1',
+    child: [ { key: 2, name: 'item 2' }, { key: 3, name: 'item 3' } ]
+  },
+  {
+    key: 4,
+    name: 'item 4',
+    child: [ { key: 5, name: 'item 5' }, { key: 6, name: 'item 6' } ]
+  }
+]
+
+## 格式化选项
+
+###### Under construction... 🚧
+
+<MultiLevelSelector
+  options={options}
+  optionFormat={(item) => ({
+    id: item.key,
+    value: item.name,
+    items: item.child
+  })}
+  onChange={(value) => {console.log(value)}}
+/>

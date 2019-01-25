@@ -49,11 +49,11 @@ import MultiLevelSelector from 'rc-multi-level-selector'
 const options = [
   {
     id: 1, value: 'item 1',
-    item: [ { id: 2, value: 'item 2' }, { id: 3, value: 'item 3' } ]
+    items: [ { id: 2, value: 'item 2' }, { id: 3, value: 'item 3' } ]
   },
   {
     id: 4, value: 'item 4',
-    item: [ { id: 5, value: 'item 5' }, { id: 6, value: 'item 6' } ]
+    items: [ { id: 5, value: 'item 5' }, { id: 6, value: 'item 6' } ]
   }
 ]
 

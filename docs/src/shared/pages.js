@@ -63,6 +63,12 @@ export default [
           zh: '受控组件'
         },
         path: '/advanced-usage/controlled-component'
+      }, {
+        name: {
+          en: 'Format option',
+          zh: '格式化选项'
+        },
+        path: '/advanced-usage/format-option'
       }
     ]
   },

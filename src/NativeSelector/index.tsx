@@ -1,14 +1,8 @@
-import React from 'react'
+import * as React from 'react'
+import { SelectorProps } from '../type'
 
-class NativeSelector extends React.PureComponent {
-  constructor (props) {
-    super(props)
-
-    this.ref = React.createRef()
-    this.renderOptions = this.renderOptions.bind(this)
-  }
-
-  renderOptions () {
+class NativeSelector extends React.PureComponent<SelectorProps, {}> {
+  renderOptions = () => {
     const { options } = this.props
 
     return options.map((option) => (
@@ -26,14 +20,11 @@ class NativeSelector extends React.PureComponent {
       value,
       onChange,
       className,
-      style
     } = this.props
 
     return (
       <select
-        style={style}
         value={value}
-        ref={this.ref}
         onChange={(e) => {
           const { value } = e.target
           onChange(value)
@@ -44,13 +35,13 @@ class NativeSelector extends React.PureComponent {
       </select>
     )
   }
-}
 
-NativeSelector.defaultProps = {
-  style: {},
-  className: '',
-  options: [],
-  value: ''
+  static defaultProps: SelectorProps = {
+    className: '',
+    options: [],
+    value: '',
+    onChange: () => {}
+  }
 }
 
 export default NativeSelector

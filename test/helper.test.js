@@ -5,18 +5,19 @@ import {
   transformObjectToArray,
   getDefaultValuesByOptions,
   deepTransformArrayToObject,
+  deepFormatObjectOptions,
   addNullOptions
-} from '../src/helper'
+} from '../lib/helper'
 
 const arrayOptions = [
   {
     id: 'China',
     value: 'China',
-    item: [
+    items: [
       {
         id: 'Guangdong',
         value: 'Guangdong',
-        item: [
+        items: [
           { id: 'Guangzhou', value: 'Guangzhou' },
           { id: 'Shenzhen', value: 'Shenzhen' }
         ]
@@ -27,7 +28,7 @@ const arrayOptions = [
   {
     id: 'United States',
     value: 'United States',
-    item: [
+    items: [
       { id: 'California', value: 'California' }
     ]
   }
@@ -36,10 +37,10 @@ const arrayOptions = [
 const objectOptions = {
   'China': {
     value: 'China',
-    item: {
+    items: {
       'Guangdong': {
         value: 'Guangdong',
-        item: {
+        items: {
           'Guangzhou': { value: 'Guangzhou' },
           'Shenzhen': { value: 'Shenzhen' }
         }
@@ -49,7 +50,7 @@ const objectOptions = {
   },
   'United States': {
     value: 'United States',
-    item: {
+    items: {
       'California': { value: 'California' }
     }
   }
@@ -61,13 +62,13 @@ const objectOptionsWithNullOptions = {
   },
   'China': {
     value: 'China',
-    item: {
+    items: {
       'NullOption': {
         value: '请选择'
       },
       'Guangdong': {
         value: 'Guangdong',
-        item: {
+        items: {
           'NullOption': {
             value: '请选择'
           },
@@ -80,7 +81,7 @@ const objectOptionsWithNullOptions = {
   },
   'United States': {
     value: 'United States',
-    item: {
+    items: {
       'NullOption': {
         value: '请选择'
       },
@@ -100,48 +101,85 @@ const arrayOptionsDeep1 = [
 ]
 
 test('transformObjectToArray', () => {
-  expect(transformObjectToArray({
-    options: objectOptions,
-    nullOption: {
+  expect(transformObjectToArray(
+    objectOptions,
+    {
       id: 'NullOption',
       value: '请选择',
       display: false
     }
-  }))
-    .toEqual(arrayOptionsDeep1)
+  )).toEqual(arrayOptionsDeep1)
 })
 
 test('transformObjectToArray', () => {
-  expect(transformObjectToArray({
-    options: {},
-    nullOption: {
+  expect(transformObjectToArray(
+    {},
+    {
       id: 'NullOption',
       value: '请选择',
       display: false
-    }
-  }))
-    .toEqual([])
+    })
+  ).toEqual([])
 })
 
 test('transformObjectToArray', () => {
-  expect(transformObjectToArray({
-    options: valueObjectsOptions,
-    nullOption: {
+  expect(transformObjectToArray(
+    valueObjectsOptions,
+    {
       id: 'NullOption',
       value: '请选择',
       display: false
     }
-  }))
-    .toEqual([
-      { id: 'Guangdong', value: 'Guangdong' },
-      { id: 'Beijing', value: 'Beijing', text: 'China - Beijing' }
-    ])
+  )).toEqual([
+    { id: 'Guangdong', value: 'Guangdong' },
+    { id: 'Beijing', value: 'Beijing', text: 'China - Beijing' }
+  ])
+})
+
+const errorObjectOptions = {
+  'China': {
+    value2: 'China',
+    items2: {
+      'Guangdong': {
+        value2: 'Guangdong',
+        items2: {
+          'Guangzhou': { value2: 'Guangzhou' },
+          'Shenzhen': { value2: 'Shenzhen' }
+        }
+      },
+      'Beijing': { value2: 'Beijing', text: 'China - Beijing' }
+    }
+  },
+  'United States': {
+    value2: 'United States',
+    items2: {
+      'California': { value2: 'California' }
+    }
+  }
+}
+
+test('deepFormatObjectOptions', () => {
+  expect(deepFormatObjectOptions(
+    objectOptions, (option) => (option)
+  )).toEqual(objectOptions)
+})
+
+test('deepFormatObjectOptions', () => {
+  expect(deepFormatObjectOptions(
+    errorObjectOptions, (option) => {
+      const { value2, items2, ...otherOption } = option
+      return {
+        value: value2,
+        items: items2,
+        ...otherOption
+      }
+    }
+  )).toEqual(objectOptions)
 })
 
 test('getDefaultValuesByOptions', () => {
   expect(getDefaultValuesByOptions(
     objectOptions,
-    'item',
     {
       id: 'NULL',
       value: 'NULL',
@@ -155,7 +193,6 @@ test('getDefaultValuesByOptions', () => {
 test('getDefaultValuesByOptions', () => {
   expect(getDefaultValuesByOptions(
     {},
-    'item',
     {
       id: 'NULL',
       value: 'NULL',
@@ -167,12 +204,12 @@ test('getDefaultValuesByOptions', () => {
 })
 
 test('matchOptionsAndValues', () => {
-  expect(matchOptionsAndValues(objectOptions, ['China', 'ShangHai'], 'item'))
+  expect(matchOptionsAndValues(objectOptions, ['China', 'ShangHai']))
     .toEqual({
       options: {
         'Guangdong': {
           value: 'Guangdong',
-          item: {
+          items: {
             'Guangzhou': { value: 'Guangzhou' },
             'Shenzhen': { value: 'Shenzhen' }
           }
@@ -184,7 +221,7 @@ test('matchOptionsAndValues', () => {
 })
 
 test('matchOptionsAndValues', () => {
-  expect(matchOptionsAndValues(objectOptions, ['China', 'Guangdong', 'Shenzhen'], 'item'))
+  expect(matchOptionsAndValues(objectOptions, ['China', 'Guangdong', 'Shenzhen']))
     .toEqual({
       options: null,
       values: ['China', 'Guangdong', 'Shenzhen']
@@ -192,7 +229,7 @@ test('matchOptionsAndValues', () => {
 })
 
 test('getValueObjects', () => {
-  expect(getValueObjects(objectOptions, ['China', 'Guangdong', 'Shenzhen'], 'item'))
+  expect(getValueObjects(objectOptions, ['China', 'Guangdong', 'Shenzhen']))
     .toEqual([
       { id: 'China', value: 'China' },
       { id: 'Guangdong', value: 'Guangdong' },
@@ -201,19 +238,17 @@ test('getValueObjects', () => {
 })
 
 test('deepTransformArrayToObject', () => {
-  expect(deepTransformArrayToObject(arrayOptions, 'item'))
+  expect(deepTransformArrayToObject(arrayOptions, (options) => (options)))
     .toEqual(objectOptions)
 })
 
 test('addNullOptions', () => {
-  expect(addNullOptions({
-    options: objectOptions,
-    subOptionKey: 'item',
-    nullOption: {
+  expect(addNullOptions(
+    objectOptions,
+    {
       id: 'NullOption',
       value: '请选择',
       display: false
     }
-  }))
-    .toEqual(objectOptionsWithNullOptions)
+  )).toEqual(objectOptionsWithNullOptions)
 })
