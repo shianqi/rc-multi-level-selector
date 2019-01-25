@@ -9,6 +9,7 @@
       "REDUX/*": ["docs/src/redux/*"],
       "SHARED/*": ["docs/src/shared/*"],
       "UTILS/*": ["docs/src/utils/*"],
+      "ENV/*": ["env/*"]
     }
   },
   "exclude": [

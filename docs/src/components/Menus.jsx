@@ -13,6 +13,7 @@ import pages from '../shared/pages'
 import MenuAction from 'REDUX/menu/action'
 import { bindActionCreators } from 'redux'
 import { load } from 'UTILS/helper'
+import { assetPrefix } from 'ENV'
 
 const MenusContainer = styled.div`
   display: block;
@@ -42,7 +43,7 @@ class Menus extends React.PureComponent {
       <MenusContainer>
         <LogoContainer>
           <Logo
-            onClick={() => { Router.push('/') }}
+            onClick={() => { Router.push('/', `${assetPrefix}/`) }}
             src={load('/static/images/logo@1x.png')}
           />
         </LogoContainer>
@@ -58,7 +59,7 @@ class Menus extends React.PureComponent {
     if (children) {
       actions.toggleMenuOpenState(path)
     } else {
-      Router.push(path)
+      Router.push(path, `${assetPrefix}${path}`)
     }
   }
 

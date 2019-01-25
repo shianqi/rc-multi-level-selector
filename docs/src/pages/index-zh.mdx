@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Empty from 'COMPONENTS/base/Empty'
 import { load } from 'UTILS/helper'
+import { assetPrefix } from 'ENV'
 const Logo = styled.img`
   margin: 0 auto;
   max-width: 512px;
@@ -29,12 +30,12 @@ const StyledButton = styled(Button)`
 <Empty height='32px' />
 
 <Typography align='center'>
-  <Link href="/getting-started/installation">
+  <Link href="/getting-started/installation" as={`${assetPrefix}/getting-started/installation`}>
     <StyledButton variant="contained" color="secondary">
       入门
     </StyledButton>
   </Link>
-  <Link href="/example/basics">
+  <Link href="/example/basics" as={`${assetPrefix}/example/basics`}>
     <StyledButton variant="outlined" color="secondary">
       更多例子 >
     </StyledButton>

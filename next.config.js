@@ -1,4 +1,5 @@
 const { resolve } = require('path')
+const { assetPrefix } = require('./env')
 const highlight = require('remark-highlight.js')
 const withMDX = require('@zeit/next-mdx')({
   extension: /.mdx?$/,
@@ -13,10 +14,9 @@ const newAlias = {
   COMPONENTS: resolve(__dirname, 'docs/src/components'),
   REDUX: resolve(__dirname, 'docs/src/redux'),
   SHARED: resolve(__dirname, 'docs/src/shared'),
-  UTILS: resolve(__dirname, 'docs/src/utils')
+  UTILS: resolve(__dirname, 'docs/src/utils'),
+  ENV: resolve(__dirname, 'env')
 }
-
-const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = withMDX({
   webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
@@ -38,6 +38,6 @@ module.exports = withMDX({
 
     return config
   },
-  assetPrefix: isProd ? '/rc-multi-level-selector' : '',
+  assetPrefix,
   pageExtensions: ['js', 'jsx', 'md', 'mdx']
 })

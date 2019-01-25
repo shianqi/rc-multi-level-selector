@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import StyledLink from 'COMPONENTS/base/Link'
+import Typography from '@material-ui/core/Typography'
+import { assetPrefix } from 'ENV'
 
 ## 安装 & 使用
 
@@ -80,6 +82,15 @@ ReactDOM.render(
 <br />
 <br />
 
-更多请看 <Link href='/custom-select/basics'><StyledLink>自定义样式</StyledLink></Link>
-、<Link href='/advanced-usage/basics'><StyledLink>高级用法</StyledLink></Link>
-和 <Link href='/example/basics'><StyledLink>例子</StyledLink></Link>
+<Typography>
+  更多请看
+  <Link href='/custom-select/basics' as={`${assetPrefix}/custom-select/basics`}>
+    <StyledLink>自定义样式</StyledLink>
+  </Link>、
+  <Link href='/advanced-usage/basics' as={`${assetPrefix}/advanced-usage/basics`}>
+    <StyledLink>高级用法</StyledLink>
+  </Link>和
+  <Link href='/example/basics' as={`${assetPrefix}/example/basics`}>
+    <StyledLink>例子</StyledLink>
+  </Link>
+</Typography>
