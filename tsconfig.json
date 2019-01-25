@@ -3,8 +3,7 @@
     "outDir": "./lib",
     "noImplicitAny": true,
     "target": "es5",
-    "jsx": "react",
-    "declaration": true
+    "jsx": "react"
   },
   "include": [
     "./src/**/*"

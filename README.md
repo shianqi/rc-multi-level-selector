@@ -1,4 +1,4 @@
-# <a href='https://shianqi.github.io/rc-multi-level-selector/'><img src='./static/images/logo@1x.png' height='93' width='248' alt='RC-multi-level-selector Logo' aria-label='shianqi.github.io/rc-multi-level-selector' /></a>
+# <a href='https://shianqi.github.io/rc-multi-level-selector/'><img src='https://shianqi.github.io/rc-multi-level-selector/static/images/logo@1x.png' height='93' width='248' alt='RC-multi-level-selector Logo' aria-label='shianqi.github.io/rc-multi-level-selector' /></a>
 
 [![npm](https://img.shields.io/npm/v/rc-multi-level-selector.svg)](https://www.npmjs.com/package/rc-multi-level-selector)
 [![rc-multi-level-selector](https://img.shields.io/npm/dm/rc-multi-level-selector.svg)](https://www.npmjs.com/package/rc-multi-level-selector)
