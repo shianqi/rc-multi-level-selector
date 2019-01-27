@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { SelectorProps } from '../type'
+import { SelectorProps } from './type'
 
 class NativeSelector extends React.PureComponent<SelectorProps, {}> {
   renderOptions = () => {

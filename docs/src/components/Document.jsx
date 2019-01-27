@@ -27,6 +27,9 @@ const H1 = styled((props) => (
   <Typography {...props} variant='h1' />
 ))`
   opacity: 1;
+  border-bottom: 1px solid #eaecef;
+  margin-bottom: 16px;
+  margin-top: 24px;
   position: relative;
 `
 
@@ -34,6 +37,9 @@ const H2 = styled((props) => (
   <Typography {...props} variant='h2' />
 ))`
   opacity: 1;
+  border-bottom: 1px solid #eaecef;
+  margin-bottom: 16px;
+  margin-top: 24px;
   position: relative;
 `
 
@@ -41,6 +47,9 @@ const H3 = styled((props) => (
   <Typography {...props} variant='h3' />
 ))`
   opacity: 1;
+  border-bottom: 1px solid #eaecef;
+  margin-bottom: 16px;
+  margin-top: 24px;
   position: relative;
 `
 
@@ -48,6 +57,9 @@ const H4 = styled((props) => (
   <Typography {...props} variant='h4' />
 ))`
   opacity: 1;
+  border-bottom: 1px solid #eaecef;
+  margin-bottom: 16px;
+  margin-top: 24px;
   position: relative;
 `
 

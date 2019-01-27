@@ -1,12 +1,13 @@
 import * as React from 'react'
+import NativeSelector from './NativeSelector'
+
 import {
   ObjectOptionsType,
   SelectorProps,
-  NullOption,
-  OptionFormateType
+  MultiLevelSelectorProps,
+  MultiLevelSelectorState
 } from './type'
 
-import NativeSelector from './NativeSelector/index'
 import {
   getValueObjects,
   matchOptionsAndValues,
@@ -16,30 +17,6 @@ import {
   deepFormatObjectOptions,
   addNullOptions
 } from './helper'
-
-type OnMultiLevelSelectorChange = (valueObjects: {}) => void
-
-type GetOptionsKey = (option: any, value: string, index: number) => string
-
-interface MultiLevelSelectorProps {
-  className?: string,
-  selectorClassName? :string,
-  options: any,
-  optionFormat: OptionFormateType,
-  values?: string[],
-  defaultValues?: [],
-  onChange?: OnMultiLevelSelectorChange,
-  autoSelect?: boolean,
-  nullOption?: NullOption,
-  getOptionsKey?: GetOptionsKey,
-  Selector?: React.ComponentType<SelectorProps>
-}
-
-interface MultiLevelSelectorState {
-  values: string[],
-  render: boolean,
-  options?: ObjectOptionsType,
-}
 
 class MultiLevelSelector extends React.PureComponent<MultiLevelSelectorProps, MultiLevelSelectorState> {
   constructor (props: MultiLevelSelectorProps) {

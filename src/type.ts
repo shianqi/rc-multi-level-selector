@@ -43,3 +43,27 @@ export type NullOption = {
 }
 
 export type OptionFormateType = (option: any) => any
+
+type OnMultiLevelSelectorChange = (valueObjects: {}) => void
+
+type GetOptionsKey = (option: any, value: string, index: number) => string
+
+export interface MultiLevelSelectorProps {
+  className?: string,
+  selectorClassName? :string,
+  options: any,
+  optionFormat: OptionFormateType,
+  values?: string[],
+  defaultValues?: [],
+  onChange?: OnMultiLevelSelectorChange,
+  autoSelect?: boolean,
+  nullOption?: NullOption,
+  getOptionsKey?: GetOptionsKey,
+  Selector?: React.ComponentType<SelectorProps>
+}
+
+export interface MultiLevelSelectorState {
+  values: string[],
+  render: boolean,
+  options?: ObjectOptionsType,
+}
