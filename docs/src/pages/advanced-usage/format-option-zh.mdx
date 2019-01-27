@@ -14,7 +14,61 @@ const options = [
 
 ## 格式化选项
 
-###### Under construction... 🚧
+`options` 是一个嵌套结构的对象（或数组），当你的选项的数据结构的键不匹配时，需要逐层遍历这个对象（或数组），这是非常麻烦的。
+
+所以我们提供了一个 `optionFormat` API，去遍历整个 `options`，并在传入子组件前允许改变它的值。
+
+#### 例子🌰
+
+**index.jsx**
+
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import MultiLevelSelector from "rc-multi-level-selector";
+
+const options = [
+  {
+    key: "China",
+    name: "China",
+    child: [
+      {
+        key: "Guangdong",
+        name: "Guangdong",
+        child: [
+          { key: "Guangzhou", name: "Guangzhou" },
+          { key: "Shenzhen", name: "Shenzhen" }
+        ]
+      },
+      { key: "Beijing", name: "Beijing", text: "China - Beijing" }
+    ]
+  },
+  {
+    key: "United States",
+    name: "United States",
+    child: [{ key: "California", name: "California" }]
+  }
+];
+
+function App() {
+  return (
+    <MultiLevelSelector
+      options={options}
+      onChange={value => {
+        console.log(value);
+      }}
+      optionFormat={option => ({
+        id: option.key,
+        value: option.name,
+        items: option.child
+      })}
+    />
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
 
 <MultiLevelSelector
   options={options}
@@ -25,3 +79,8 @@ const options = [
   })}
   onChange={(value) => {console.log(value)}}
 />
+
+<br />
+<br />
+
+在 [CodeSandbox](https://codesandbox.io/s/347ox6ol0p) 上在线尝试

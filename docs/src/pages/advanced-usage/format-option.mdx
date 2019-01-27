@@ -1,0 +1,89 @@
+import MultiLevelSelector from '../../../../lib'
+const options = [
+  {
+    key: 1,
+    name: 'item 1',
+    child: [ { key: 2, name: 'item 2' }, { key: 3, name: 'item 3' } ]
+  },
+  {
+    key: 4,
+    name: 'item 4',
+    child: [ { key: 5, name: 'item 5' }, { key: 6, name: 'item 6' } ]
+  }
+]
+
+## Format option
+
+`options` is a nested structure of objects (or arrays).
+When the keys of your option's data structure do not match,
+you need to traverse the object (or array) layer by layer,
+which is very cumbersome.
+
+So we provide an `optionFormat` API that traverses the entire `options` and allows it to change its value before passing in the child component.
+
+#### Example
+
+**index.jsx**
+
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import MultiLevelSelector from "rc-multi-level-selector";
+
+const options = [
+  {
+    key: "China",
+    name: "China",
+    child: [
+      {
+        key: "Guangdong",
+        name: "Guangdong",
+        child: [
+          { key: "Guangzhou", name: "Guangzhou" },
+          { key: "Shenzhen", name: "Shenzhen" }
+        ]
+      },
+      { key: "Beijing", name: "Beijing", text: "China - Beijing" }
+    ]
+  },
+  {
+    key: "United States",
+    name: "United States",
+    child: [{ key: "California", name: "California" }]
+  }
+];
+
+function App() {
+  return (
+    <MultiLevelSelector
+      options={options}
+      onChange={value => {
+        console.log(value);
+      }}
+      optionFormat={option => ({
+        id: option.key,
+        value: option.name,
+        items: option.child
+      })}
+    />
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+<MultiLevelSelector
+  options={options}
+  optionFormat={(item) => ({
+    id: item.key,
+    value: item.name,
+    items: item.child
+  })}
+  onChange={(value) => {console.log(value)}}
+/>
+
+<br />
+<br />
+
+Try it on [CodeSandbox](https://codesandbox.io/s/347ox6ol0p)

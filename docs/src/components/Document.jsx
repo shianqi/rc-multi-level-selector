@@ -31,6 +31,10 @@ const H1 = styled((props) => (
   margin-bottom: 16px;
   margin-top: 24px;
   position: relative;
+
+  &:first-child {
+    margin-top: 0;
+  }
 `
 
 const H2 = styled((props) => (
@@ -41,6 +45,10 @@ const H2 = styled((props) => (
   margin-bottom: 16px;
   margin-top: 24px;
   position: relative;
+
+  &:first-child {
+    margin-top: 0;
+  }
 `
 
 const H3 = styled((props) => (
@@ -51,6 +59,10 @@ const H3 = styled((props) => (
   margin-bottom: 16px;
   margin-top: 24px;
   position: relative;
+
+  &:first-child {
+    margin-top: 0;
+  }
 `
 
 const H4 = styled((props) => (
@@ -61,6 +73,10 @@ const H4 = styled((props) => (
   margin-bottom: 16px;
   margin-top: 24px;
   position: relative;
+
+  &:first-child {
+    margin-top: 0;
+  }
 `
 
 const H5 = styled((props) => (
@@ -92,6 +108,7 @@ const P = styled((props) => (
   <Typography {...props} variant='body1' />
 ))`
   opacity: 1;
+  margin-bottom: 16px;
 `
 
 const UL = styled.ul`
