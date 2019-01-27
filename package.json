@@ -1,6 +1,6 @@
 {
   "name": "rc-multi-level-selector",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A React multilevel selector component",
   "types": "./lib/index.d.ts",
   "main": "./lib/index.js",
@@ -14,7 +14,7 @@
     "eslint": "standard",
     "eslint-lib": "standard --parser typescript-eslint-parser --plugin typescript  src/*.tsx",
     "stylelint": "stylelint './docs/**/*.jsx'",
-    "publish": "npm run build && npm publish",
+    "publish-lib": "npm run build && npm publish",
     "tag": "git tag v$npm_package_version && git push origin --tags",
     "test": "jest",
     "test-watch": "jest --watch"

@@ -2,6 +2,7 @@
 .next
 .vscode/
 docs/
+env/
 out/
 pages/
 src/
