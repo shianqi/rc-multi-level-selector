@@ -1,6 +1,6 @@
 {
   "name": "rc-multi-level-selector",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A React multilevel selector component",
   "types": "./lib/index.d.ts",
   "main": "./lib/index.js",
