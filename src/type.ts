@@ -51,7 +51,7 @@ type GetOptionsKey = (option: any, value: string, index: number) => string
 export interface MultiLevelSelectorProps {
   className?: string,
   selectorClassName? :string,
-  options: any,
+  options: OptionsType,
   optionFormat: OptionFormateType,
   values?: string[],
   defaultValues?: [],
