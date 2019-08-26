@@ -8,19 +8,24 @@ import {
 /**
  * 将对象形式的 Options 转换为 Array，只转换第一层
  */
-export const transformObjectToArray = (options: ObjectOptionsType, nullOption: NullOption) => {
+export const transformObjectToArray = (
+  options: ObjectOptionsType,
+  nullOption: NullOption
+) => {
   const { id: nullOptionKey, display } = nullOption
   const keys = Object.keys(options)
-  return keys.filter((key) => {
-    return display ? true : (nullOptionKey !== key)
-  }).map((key) => {
-    const { value, items, ...others } = options[key]
-    return {
-      id: key,
-      value: options[key].value,
-      ...others
-    }
-  })
+  return keys
+    .filter(key => {
+      return display ? true : nullOptionKey !== key
+    })
+    .map(key => {
+      const { value, items, ...others } = options[key]
+      return {
+        id: key,
+        value: options[key].value,
+        ...others
+      }
+    })
 }
 
 /**
@@ -28,7 +33,10 @@ export const transformObjectToArray = (options: ObjectOptionsType, nullOption: N
  * @param objectOptions
  * @param objectOptionFormate
  */
-export const deepFormatObjectOptions = (objectOptions: {[key: string]: any}, optionFormat: OptionFormateType) => {
+export const deepFormatObjectOptions = (
+  objectOptions: { [key: string]: any },
+  optionFormat: OptionFormateType
+) => {
   if (objectOptions) {
     const newOptions: ObjectOptionsType = {}
     const keys = Object.keys(objectOptions)
@@ -55,28 +63,32 @@ export const deepFormatObjectOptions = (objectOptions: {[key: string]: any}, opt
  * 将 Array 类型的 Options 格式化，并且转换成 Object 类型
  * @param {*} options Array 形式的 options
  */
-export const deepTransformArrayToObject = (arrayOptions: any[], optionFormat: OptionFormateType) => {
+export const deepTransformArrayToObject = (
+  arrayOptions: any[],
+  optionFormat: OptionFormateType
+) => {
   const options: ObjectOptionsType = {}
-  if (arrayOptions) {
-    for (const arrayOption of arrayOptions) {
-      const { id, items, ...others } = optionFormat(arrayOption)
-      const newOption: ObjectOptionType = others
-      const object = deepTransformArrayToObject(items, optionFormat)
-      if (object != null) {
-        newOption.items = object
-      }
-      options[id] = newOption
+
+  for (const arrayOption of arrayOptions) {
+    const { id, items, ...others } = optionFormat(arrayOption)
+    const newOption: ObjectOptionType = others
+    const object = deepTransformArrayToObject(items, optionFormat)
+    if (object != null) {
+      newOption.items = object
     }
-    return options
+    options[id] = newOption
   }
-  return null
+  return options
 }
 
 /**
  * 用 values 和 options 匹配，并返回合法的部分 legalValues 和剩余的 options
  * 如果完全匹配，则返回的 options 为 null
  */
-export const matchOptionsAndValues = (options: ObjectOptionsType, values: string[]) => {
+export const matchOptionsAndValues = (
+  options: ObjectOptionsType,
+  values: string[]
+) => {
   let opts = options
   const newValues = []
   for (const value of values) {
@@ -100,7 +112,10 @@ export const matchOptionsAndValues = (options: ObjectOptionsType, values: string
 /**
  * 通过 keys 获取对象形式的 values
  */
-export const getValueObjects = (options: ObjectOptionsType, values: string[]) => {
+export const getValueObjects = (
+  options: ObjectOptionsType,
+  values: string[]
+) => {
   let opts = options
   const newValues = []
   for (const value of values) {
@@ -123,7 +138,11 @@ export const getValueObjects = (options: ObjectOptionsType, values: string[]) =>
  * @param {*} options 给定的 Options
  * @returns {array} 默认匹配的 values
  */
-export const getDefaultValuesByOptions = (options: ObjectOptionsType, nullOption: NullOption, autoSelect: boolean) => {
+export const getDefaultValuesByOptions = (
+  options: ObjectOptionsType,
+  nullOption: NullOption,
+  autoSelect: boolean
+) => {
   const { id } = nullOption
 
   const values = []
@@ -151,7 +170,10 @@ export const getDefaultValuesByOptions = (options: ObjectOptionsType, nullOption
  * 为对象添加空值，并且空值在前
  * @param {*} options
  */
-export const addNullOptions = (options: ObjectOptionsType, nullOption: NullOption) => {
+export const addNullOptions = (
+  options: ObjectOptionsType,
+  nullOption: NullOption
+) => {
   if (options) {
     const newOptions: ObjectOptionsType = {}
     const keys = Object.keys(options)

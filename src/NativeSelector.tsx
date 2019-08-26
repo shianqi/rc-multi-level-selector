@@ -5,27 +5,20 @@ class NativeSelector extends React.PureComponent<SelectorProps, {}> {
   renderOptions = () => {
     const { options } = this.props
 
-    return options.map((option) => (
-      <option
-        key={option.id}
-        value={option.id}
-      >
+    return options.map(option => (
+      <option key={option.id} value={option.id}>
         {option.value}
       </option>
     ))
   }
 
   render () {
-    const {
-      value,
-      onChange,
-      className,
-    } = this.props
+    const { value, onChange, className } = this.props
 
     return (
       <select
         value={value}
-        onChange={(e) => {
+        onChange={e => {
           const { value } = e.target
           onChange(value)
         }}

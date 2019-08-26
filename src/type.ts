@@ -1,16 +1,16 @@
 import * as React from 'react'
 
 type Option = {
-  id: any,
+  id: any
   value: any
 }
 
 type OnChange = (value?: string) => void
 
 export interface SelectorProps {
-  className?: string,
-  options: Option[],
-  value?: string,
+  className?: string
+  options: Option[]
+  value?: string
   onChange?: OnChange
 }
 
@@ -19,16 +19,16 @@ export type ObjectOptionsType = {
 }
 
 export type ObjectOptionType = {
-  id?: string,
-  value: string,
-  items?: ObjectOptionsType,
+  id?: string
+  value: string
+  items?: ObjectOptionsType
   Selector?: React.ComponentType<SelectorProps>
 }
 
 export type ArrayOptionType = {
-  id: string,
-  value: string,
-  items?: ArrayOptionsType,
+  id: string
+  value: string
+  items?: ArrayOptionsType
   Selector?: React.ComponentType<SelectorProps>
 }
 
@@ -37,8 +37,8 @@ export type ArrayOptionsType = ArrayOptionType[]
 export type OptionsType = ArrayOptionsType | ObjectOptionsType
 
 export type NullOption = {
-  id: string,
-  value: string,
+  id: string
+  value: string
   display: boolean
 }
 
@@ -49,21 +49,21 @@ type OnMultiLevelSelectorChange = (valueObjects: {}) => void
 type GetOptionsKey = (option: any, value: string, index: number) => string
 
 export interface MultiLevelSelectorProps {
-  className?: string,
-  selectorClassName? :string,
-  options: OptionsType,
-  optionFormat: OptionFormateType,
-  values?: string[],
-  defaultValues?: [],
-  onChange?: OnMultiLevelSelectorChange,
-  autoSelect?: boolean,
-  nullOption?: NullOption,
-  getOptionsKey?: GetOptionsKey,
+  className?: string
+  selectorClassName?: string
+  options: OptionsType
+  optionFormat: OptionFormateType
+  values?: string[]
+  defaultValues?: []
+  onChange?: OnMultiLevelSelectorChange
+  autoSelect?: boolean
+  nullOption?: NullOption
+  getOptionsKey?: GetOptionsKey
   Selector?: React.ComponentType<SelectorProps>
 }
 
 export interface MultiLevelSelectorState {
-  values: string[],
-  render: boolean,
-  options?: ObjectOptionsType,
+  values: string[]
+  render: boolean
+  options?: ObjectOptionsType
 }

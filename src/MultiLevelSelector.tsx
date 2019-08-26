@@ -18,7 +18,10 @@ import {
   addNullOptions
 } from './helper'
 
-class MultiLevelSelector extends React.PureComponent<MultiLevelSelectorProps, MultiLevelSelectorState> {
+class MultiLevelSelector extends React.PureComponent<
+  MultiLevelSelectorProps,
+  MultiLevelSelectorState
+> {
   constructor (props: MultiLevelSelectorProps) {
     super(props)
     const { defaultValues } = this.props
@@ -33,13 +36,11 @@ class MultiLevelSelector extends React.PureComponent<MultiLevelSelectorProps, Mu
    * 处理受控组件
    * 用 propsValues 和 options 匹配，判断是否渲染组件或者更新通知父组件更新状态
    */
-  static handleControlledComponent (props: MultiLevelSelectorProps, state: MultiLevelSelectorState) {
-    const {
-      values,
-      onChange,
-      nullOption,
-      autoSelect,
-    } = props
+  static handleControlledComponent (
+    props: MultiLevelSelectorProps,
+    state: MultiLevelSelectorState
+  ) {
+    const { values, onChange, nullOption, autoSelect } = props
 
     const options = this.getOptions(props, state)
     const {
@@ -53,7 +54,11 @@ class MultiLevelSelector extends React.PureComponent<MultiLevelSelectorProps, Mu
     }
 
     // 值和选项不能完全匹配，需要通知父组件更新，并且不渲染组件
-    const surplusDefaultValues = getDefaultValuesByOptions(unMatchedOptions, nullOption, autoSelect)
+    const surplusDefaultValues = getDefaultValuesByOptions(
+      unMatchedOptions,
+      nullOption,
+      autoSelect
+    )
     const newValues = matchedValues.concat(surplusDefaultValues)
     const valueObjects = getValueObjects(options, newValues)
     onChange(valueObjects)
@@ -63,12 +68,11 @@ class MultiLevelSelector extends React.PureComponent<MultiLevelSelectorProps, Mu
   /**
    * 处理非受控组件
    */
-  static handleUnControlledComponent (props: MultiLevelSelectorProps, state: MultiLevelSelectorState) {
-    const {
-      onChange,
-      autoSelect,
-      nullOption
-    } = props
+  static handleUnControlledComponent (
+    props: MultiLevelSelectorProps,
+    state: MultiLevelSelectorState
+  ) {
+    const { onChange, autoSelect, nullOption } = props
     const options = this.getOptions(props, state)
     const { values } = state
 
@@ -82,7 +86,11 @@ class MultiLevelSelector extends React.PureComponent<MultiLevelSelectorProps, Mu
       return { options, render: true }
     }
     // 值和选项不能完全匹配，更新值并渲染组件
-    const surplusDefaultValues = getDefaultValuesByOptions(unMatchedOptions, nullOption, autoSelect)
+    const surplusDefaultValues = getDefaultValuesByOptions(
+      unMatchedOptions,
+      nullOption,
+      autoSelect
+    )
     const newValues = matchedValues.concat(surplusDefaultValues)
 
     const valueObjects = getValueObjects(options, newValues)
@@ -93,7 +101,10 @@ class MultiLevelSelector extends React.PureComponent<MultiLevelSelectorProps, Mu
   /**
    * 判断是否受控组件，进行相应处理
    */
-  static getDerivedStateFromProps (props: MultiLevelSelectorProps, state: MultiLevelSelectorState) {
+  static getDerivedStateFromProps (
+    props: MultiLevelSelectorProps,
+    state: MultiLevelSelectorState
+  ) {
     const { values } = props
     if (values) {
       return MultiLevelSelector.handleControlledComponent(props, state)
@@ -111,20 +122,14 @@ class MultiLevelSelector extends React.PureComponent<MultiLevelSelectorProps, Mu
 
     const Selectors = this.getSelector(0, options, Selector)
 
-    return (
-      <span className={className}>
-        { Selectors }
-      </span>
-    )
+    return <span className={className}>{Selectors}</span>
   }
 
-  static getOptions (props: MultiLevelSelectorProps, state: MultiLevelSelectorState) {
-    const {
-      options,
-      nullOption,
-      autoSelect,
-      optionFormat
-    } = props
+  static getOptions (
+    props: MultiLevelSelectorProps,
+    state: MultiLevelSelectorState
+  ) {
+    const { options, nullOption, autoSelect, optionFormat } = props
 
     let newOptions
     if (Array.isArray(options)) {
@@ -167,24 +172,21 @@ class MultiLevelSelector extends React.PureComponent<MultiLevelSelectorProps, Mu
       const selectorOptions = transformObjectToArray(options, nullOption)
       const selectedItem = options[value]
 
-      const Selector: React.ComponentType<SelectorProps> = OptionsSelector || PropsSelector
+      const Selector: React.ComponentType<SelectorProps> =
+        OptionsSelector || PropsSelector
 
       return [
         <Selector
           key={getOptionsKey(selectorOptions, value, index)}
           value={value}
           options={selectorOptions}
-          onChange={(value) => {
+          onChange={value => {
             this.handleOnChange(value, index, options)
           }}
           className={selectorClassName}
         />
       ].concat(
-        this.getSelector(
-          index + 1,
-          selectedItem.items,
-          selectedItem.Selector
-        )
+        this.getSelector(index + 1, selectedItem.items, selectedItem.Selector)
       )
     }
     return []
@@ -200,8 +202,12 @@ class MultiLevelSelector extends React.PureComponent<MultiLevelSelectorProps, Mu
     const invariableValues = values.slice(0, index)
     const selectedItem = options[value]
 
-    let subOptions = selectedItem.items
-    const variableValues = getDefaultValuesByOptions(subOptions, nullOption, autoSelect)
+    const subOptions = selectedItem.items
+    const variableValues = getDefaultValuesByOptions(
+      subOptions,
+      nullOption,
+      autoSelect
+    )
     const newValues = invariableValues.concat([value]).concat(variableValues)
 
     this.setValues(newValues)
@@ -224,12 +230,12 @@ class MultiLevelSelector extends React.PureComponent<MultiLevelSelectorProps, Mu
     selectorClassName: '',
 
     options: [],
-    optionFormat: (option) => (option),
+    optionFormat: option => option,
     values: null,
     defaultValues: [],
     onChange: () => {},
     autoSelect: true,
-    getOptionsKey: (option, value, index) => (`${value}-${index}`),
+    getOptionsKey: (option, value, index) => `${value}-${index}`,
     nullOption: {
       id: 'NULL',
       value: 'NULL',
