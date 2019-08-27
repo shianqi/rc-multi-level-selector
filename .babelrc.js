@@ -4,23 +4,24 @@ const env = {
 }
 
 module.exports = {
-  "presets": [
-    "@babel/preset-env",
-    "@babel/preset-react"
+  presets: [
+    '@babel/preset-env',
+    '@babel/preset-react',
+    '@babel/preset-typescript'
   ],
-  "plugins": [
-    ["babel-plugin-transform-define", env],
+  plugins: [
+    ['babel-plugin-transform-define', env],
     [
-      "babel-plugin-styled-components",
+      'babel-plugin-styled-components',
       {
-        "ssr": true,
-        "displayName": true,
-        "preprocess": false
+        ssr: true,
+        displayName: true,
+        preprocess: false
       }
     ],
-    "@babel/plugin-syntax-dynamic-import",
-    "@babel/plugin-syntax-import-meta",
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-proposal-json-strings"
+    '@babel/plugin-syntax-dynamic-import',
+    '@babel/plugin-syntax-import-meta',
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-proposal-json-strings'
   ]
 }
