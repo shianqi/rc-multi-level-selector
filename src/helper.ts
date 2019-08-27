@@ -69,16 +69,20 @@ export const deepTransformArrayToObject = (
 ) => {
   const options: ObjectOptionsType = {}
 
-  for (const arrayOption of arrayOptions) {
-    const { id, items, ...others } = optionFormat(arrayOption)
-    const newOption: ObjectOptionType = others
-    const object = deepTransformArrayToObject(items, optionFormat)
-    if (object != null) {
-      newOption.items = object
+  if (arrayOptions) {
+    for (const arrayOption of arrayOptions) {
+      const { id, items, ...others } = optionFormat(arrayOption)
+      const newOption: ObjectOptionType = others
+      const object = deepTransformArrayToObject(items, optionFormat)
+      if (object != null) {
+        newOption.items = object
+      }
+      options[id] = newOption
     }
-    options[id] = newOption
+    return options
   }
-  return options
+
+  return null
 }
 
 /**
