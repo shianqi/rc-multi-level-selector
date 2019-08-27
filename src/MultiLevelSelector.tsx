@@ -175,8 +175,11 @@ class MultiLevelSelector extends React.PureComponent<
       const Selector: React.ComponentType<SelectorProps> =
         OptionsSelector || PropsSelector
 
+      const { items, Selector: NextSelector, ...otherProps } = selectedItem
+
       return [
         <Selector
+          {...otherProps}
           key={getOptionsKey(selectorOptions, value, index)}
           value={value}
           options={selectorOptions}
@@ -185,9 +188,7 @@ class MultiLevelSelector extends React.PureComponent<
           }}
           className={selectorClassName}
         />
-      ].concat(
-        this.getSelector(index + 1, selectedItem.items, selectedItem.Selector)
-      )
+      ].concat(this.getSelector(index + 1, items, NextSelector))
     }
     return []
   }
