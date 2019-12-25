@@ -73,16 +73,24 @@ class AppBarComponent extends React.PureComponent {
     languageMenuOpen: false
   }
 
-  componentDidMount () {
+  routeChangeStart = () => {
     const { toggleLoadingState } = this.props
-    Router.events.on('routeChangeStart', () => { toggleLoadingState(true) })
-    Router.events.on('routeChangeComplete', () => { toggleLoadingState(false) })
+    toggleLoadingState(true)
+  }
+
+  routeChangeComplete = () => {
+    const { toggleLoadingState } = this.props
+    toggleLoadingState(false)
+  }
+
+  componentDidMount () {
+    Router.events.on('routeChangeStart', this.routeChangeStart)
+    Router.events.on('routeChangeComplete', this.routeChangeComplete)
   }
 
   componentWillUnmount () {
-    const { toggleLoadingState } = this.props
-    Router.events.off('routeChangeStart', () => { toggleLoadingState(true) })
-    Router.events.off('routeChangeComplete', () => { toggleLoadingState(false) })
+    Router.events.off('routeChangeStart', this.routeChangeStart)
+    Router.events.off('routeChangeComplete', this.routeChangeComplete)
   }
 
   handlelanguageMenuOpen = (event) => {

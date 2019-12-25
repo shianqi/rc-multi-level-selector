@@ -5,7 +5,7 @@ module.exports = {
     es6: true,
     jest: true
   },
-  extends: ['standard'],
+  extends: ['standard', 'plugin:react/recommended'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly'
@@ -17,5 +17,8 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  plugins: ['babel', 'typescript', 'standard']
+  plugins: ['babel', 'typescript', 'standard'],
+  rules: {
+    'react/prop-types': 0,
+  }
 }
