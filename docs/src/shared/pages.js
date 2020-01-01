@@ -51,19 +51,22 @@ export default [
           zh: '基本'
         },
         path: '/advanced-usage/basics'
-      }, {
+      },
+      {
         name: {
           en: 'Uncontrolled component',
           zh: '非受控组件'
         },
         path: '/advanced-usage/uncontrolled-component'
-      }, {
+      },
+      {
         name: {
           en: 'Controlled component',
           zh: '受控组件'
         },
         path: '/advanced-usage/controlled-component'
-      }, {
+      },
+      {
         name: {
           en: 'Format option',
           zh: '格式化选项'
@@ -74,24 +77,24 @@ export default [
   },
   {
     name: {
-      en: 'API',
-      zh: 'API'
+      en: 'Documents',
+      zh: '文档'
     },
-    path: '/api',
+    path: '/docs',
     children: [
       {
         name: {
           en: 'MultiLevelSelector',
           zh: 'MultiLevelSelector'
         },
-        path: '/api/MultiLevelSelector'
+        path: '/docs/MultiLevelSelector'
       },
       {
         name: {
           en: 'NativeSelector',
           zh: 'NativeSelector'
         },
-        path: '/api/NativeSelector'
+        path: '/docs/NativeSelector'
       }
     ]
   },

@@ -5,6 +5,7 @@ import Drawer from '@material-ui/core/Drawer'
 // import List from '@material-ui/core/List'
 import Hidden from '@material-ui/core/Hidden'
 import Menus from './Menus'
+import { spacing } from 'UTILS/theme'
 
 const drawerWidth = 240
 
@@ -37,9 +38,9 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    width: theme.spacing.unit * 7,
+    width: spacing(7),
     [theme.breakpoints.up('md')]: {
-      width: theme.spacing.unit * 9
+      width: spacing(9)
     }
   },
   toolbar: {
@@ -61,13 +62,7 @@ const StyledHidden = styled(Hidden)`
 
 class MiniDrawer extends React.Component {
   render () {
-    const {
-      classes,
-      theme,
-      open,
-      language,
-      handleDrawerToggle
-    } = this.props
+    const { classes, theme, open, language, handleDrawerToggle } = this.props
 
     return (
       <Nav>

@@ -4,9 +4,7 @@ import Document from 'COMPONENTS/Document'
 
 class NativeSelector extends React.Component {
   render () {
-    return (
-      <Document name={`api/NativeSelector`} />
-    )
+    return <Document name='docs/NativeSelector' />
   }
 }
 

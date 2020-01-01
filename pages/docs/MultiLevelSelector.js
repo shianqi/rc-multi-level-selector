@@ -4,9 +4,7 @@ import Document from 'COMPONENTS/Document'
 
 class MultiLevelSelector extends React.Component {
   render () {
-    return (
-      <Document name={`api/MultiLevelSelector`} />
-    )
+    return <Document name='docs/MultiLevelSelector' />
   }
 }
 

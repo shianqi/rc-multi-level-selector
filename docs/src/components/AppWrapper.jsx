@@ -8,6 +8,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import AppAction from 'REDUX/app/action'
 import AppBar from './AppBar'
 import Drawer from './AppDrawer'
+import { spacing } from 'UTILS/theme'
 
 const GlobalStyled = createGlobalStyle`
   html {
@@ -44,7 +45,7 @@ const Main = styled.main`
   flex-grow: 1;
   overflow-y: auto;
   background-color: ${props => props.theme.palette.background.default};
-  padding: ${props => props.theme.spacing.unit * 3}px;
+  padding: ${spacing(3)}px;
 `
 
 class AppWrapper extends React.PureComponent {
@@ -83,7 +84,7 @@ class AppWrapper extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { app, menu } = state
   const { menuOpenState } = menu
   const { language, loading } = app
@@ -94,7 +95,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(AppAction, dispatch)
 })
 

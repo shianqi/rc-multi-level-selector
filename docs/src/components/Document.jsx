@@ -4,11 +4,7 @@ import { connect } from 'react-redux'
 
 import Typography from '@material-ui/core/Typography'
 import novaCodeHighlighting from 'UTILS/novaCodeHighlighting'
-import {
-  paletteGrey,
-  spacingUnit,
-  paletteSecondaryMain
-} from 'UTILS/theme'
+import { paletteGrey, spacing, paletteSecondaryMain } from 'UTILS/theme'
 
 const GlobaNova = createGlobalStyle`
   ${novaCodeHighlighting};
@@ -23,9 +19,7 @@ const DocumentStyle = createGlobalStyle`
   }
 `
 
-const H1 = styled((props) => (
-  <Typography {...props} variant='h1' />
-))`
+const H1 = styled(props => <Typography {...props} variant='h1' />)`
   opacity: 1;
   border-bottom: 1px solid #eaecef;
   margin-bottom: 16px;
@@ -37,9 +31,7 @@ const H1 = styled((props) => (
   }
 `
 
-const H2 = styled((props) => (
-  <Typography {...props} variant='h2' />
-))`
+const H2 = styled(props => <Typography {...props} variant='h2' />)`
   opacity: 1;
   border-bottom: 1px solid #eaecef;
   margin-bottom: 16px;
@@ -51,9 +43,7 @@ const H2 = styled((props) => (
   }
 `
 
-const H3 = styled((props) => (
-  <Typography {...props} variant='h3' />
-))`
+const H3 = styled(props => <Typography {...props} variant='h3' />)`
   opacity: 1;
   border-bottom: 1px solid #eaecef;
   margin-bottom: 16px;
@@ -65,9 +55,7 @@ const H3 = styled((props) => (
   }
 `
 
-const H4 = styled((props) => (
-  <Typography {...props} variant='h4' />
-))`
+const H4 = styled(props => <Typography {...props} variant='h4' />)`
   opacity: 1;
   border-bottom: 1px solid #eaecef;
   margin-bottom: 16px;
@@ -79,16 +67,12 @@ const H4 = styled((props) => (
   }
 `
 
-const H5 = styled((props) => (
-  <Typography {...props} variant='h5' />
-))`
+const H5 = styled(props => <Typography {...props} variant='h5' />)`
   opacity: 1;
   position: relative;
 `
 
-const H6 = styled((props) => (
-  <Typography {...props} variant='h6' />
-))`
+const H6 = styled(props => <Typography {...props} variant='h6' />)`
   opacity: 1;
   position: relative;
 `
@@ -104,9 +88,7 @@ const A = styled.a`
   }
 `
 
-const P = styled((props) => (
-  <Typography {...props} variant='body1' />
-))`
+const P = styled(props => <Typography {...props} variant='body1' />)`
   opacity: 1;
   margin-bottom: 16px;
 `
@@ -174,7 +156,7 @@ const Pre = styled.pre`
 
 const Blockquote = styled.blockquote`
   margin: 16px 0;
-  border-left: ${spacingUnit}px solid ${paletteSecondaryMain};
+  border-left: ${spacing}px solid ${paletteSecondaryMain};
   background: ${paletteGrey[200]};
   padding: 16px 24px;
 `
@@ -189,7 +171,7 @@ class Document extends React.PureComponent {
     const Component = getDocs(name, long)
 
     return (
-      <Fragment>
+      <>
         <GlobaNova />
         <DocumentStyle />
         <Component
@@ -214,12 +196,12 @@ class Document extends React.PureComponent {
             inlineCode: InlineCode
           }}
         />
-      </Fragment>
+      </>
     )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { app } = state
   const { language } = app
   return {

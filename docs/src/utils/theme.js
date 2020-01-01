@@ -42,10 +42,13 @@ const theme = createMuiTheme({
   }
 })
 
-export const spacingUnit = theme.spacing.unit
+export const spacing = theme.spacing
 
-export const paletteGrey = theme.palette.grey
-export const palettePrimaryMain = theme.palette.primary.main
-export const paletteSecondaryMain = theme.palette.secondary.main
+export const paletteGrey = () => theme.palette.grey
+export const palettePrimaryMain = () => theme.palette.primary.main
+export const paletteSecondaryMain = () => theme.palette.secondary.main
+
+export const breakpointsUp = theme.breakpoints.up
+export const breakpointsDown = theme.breakpoints.down
 
 export default theme

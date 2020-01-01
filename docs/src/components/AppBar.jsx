@@ -13,8 +13,9 @@ import MenuItem from '@material-ui/core/MenuItem'
 
 import MenuIcon from '@material-ui/icons/Menu'
 import LanguageIcon from '@material-ui/icons/Language'
+import { spacing, breakpointsUp } from 'UTILS/theme'
 
-const GithubIcon = (props) => (
+const GithubIcon = props => (
   <SvgIcon {...props}>
     <path d='M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.4 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8 0 3.2.9.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1 .9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3' />
   </SvgIcon>
@@ -23,7 +24,7 @@ const GithubIcon = (props) => (
 const MenuButton = styled(IconButton)`
   margin-left: 12px;
 
-  ${props => props.theme.breakpoints.up('md')} {
+  ${breakpointsUp('md')} {
     display: none;
   }
 `
@@ -31,8 +32,8 @@ const MenuButton = styled(IconButton)`
 const Title = styled(Typography)`
   margin-left: 12px;
 
-  ${props => props.theme.breakpoints.up('md')} {
-    margin-left: ${props => props.theme.spacing.unit * 3}px;
+  ${breakpointsUp('md')} {
+    margin-left: ${spacing(3)}px;
   }
 `
 
@@ -93,7 +94,7 @@ class AppBarComponent extends React.PureComponent {
     Router.events.off('routeChangeComplete', this.routeChangeComplete)
   }
 
-  handlelanguageMenuOpen = (event) => {
+  handlelanguageMenuOpen = event => {
     this.setState({
       languageMenuOpen: true,
       anchorEl: event.currentTarget
@@ -104,24 +105,16 @@ class AppBarComponent extends React.PureComponent {
     this.setState({ languageMenuOpen: false })
   }
 
-  handleChangeLanguage = (value) => {
+  handleChangeLanguage = value => {
     const { handleChangeLanguage } = this.props
     handleChangeLanguage(value)
     this.handleLanguageMenuClose()
   }
 
   render () {
-    const {
-      anchorEl,
-      languageMenuOpen
-    } = this.state
+    const { anchorEl, languageMenuOpen } = this.state
 
-    const {
-      classes,
-      loading,
-      language,
-      handleDrawerToggle
-    } = this.props
+    const { classes, loading, language, handleDrawerToggle } = this.props
 
     return (
       <AppBar position='fixed' className={classes.appBar}>
@@ -175,19 +168,23 @@ class AppBarComponent extends React.PureComponent {
           >
             <MenuItem
               selected={language === 'en'}
-              onClick={() => { this.handleChangeLanguage('en') }}
+              onClick={() => {
+                this.handleChangeLanguage('en')
+              }}
             >
               English
             </MenuItem>
             <MenuItem
               selected={language === 'zh'}
-              onClick={() => { this.handleChangeLanguage('zh') }}
+              onClick={() => {
+                this.handleChangeLanguage('zh')
+              }}
             >
               中文
             </MenuItem>
           </Menu>
         </Toolbar>
-        { loading && <LinearProgress color='secondary' /> }
+        {loading && <LinearProgress color='secondary' />}
       </AppBar>
     )
   }

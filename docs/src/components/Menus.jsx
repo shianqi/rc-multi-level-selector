@@ -13,7 +13,8 @@ import pages from '../shared/pages'
 import MenuAction from 'REDUX/menu/action'
 import { bindActionCreators } from 'redux'
 import { load } from 'UTILS/helper'
-import { assetPrefix } from 'ENV'
+import { assetPrefix } from 'CONFIG/env'
+import { spacing } from 'UTILS/theme'
 
 const MenusContainer = styled.div`
   display: block;
@@ -29,12 +30,12 @@ const LogoContainer = styled.div`
 `
 
 const StyledListItem = styled(ListItem)`
-  padding-left: ${props => props.theme.spacing.unit * (3 + props.deep * 2)}px;
+  padding-left: ${props => spacing(3 + props.deep * 2)}px;
 `
 
 const StyledExpandLess = styled(ExpandLess)`
   transition: all 0.3s;
-  transform: ${(props) => (props.open ? 'rotate(0)' : 'rotate(180deg)')};
+  transform: ${props => (props.open ? 'rotate(0)' : 'rotate(180deg)')};
 `
 
 class Menus extends React.PureComponent {
@@ -43,17 +44,19 @@ class Menus extends React.PureComponent {
       <MenusContainer>
         <LogoContainer>
           <Logo
-            onClick={() => { Router.push('/', `${assetPrefix}/`) }}
+            onClick={() => {
+              Router.push('/', `${assetPrefix}/`)
+            }}
             src={load('/static/images/logo@1x.png')}
           />
         </LogoContainer>
         <Divider />
-        { this.renderNavItems(pages, 0) }
+        {this.renderNavItems(pages, 0)}
       </MenusContainer>
     )
   }
 
-  handleClick = (item) => () => {
+  handleClick = item => () => {
     const { actions } = this.props
     const { children, path } = item
     if (children) {
@@ -67,7 +70,7 @@ class Menus extends React.PureComponent {
     const { router, menuOpenState, language } = this.props
     const { route } = router
 
-    const items = lists.map((item) => {
+    const items = lists.map(item => {
       const { children, path } = item
       const isOpen = menuOpenState[item.path]
 
@@ -80,31 +83,26 @@ class Menus extends React.PureComponent {
             onClick={this.handleClick(item)}
           >
             <ListItemText primary={item.name[language]} />
-            {children && (<StyledExpandLess open={isOpen} />)}
+            {children && <StyledExpandLess open={isOpen} />}
           </StyledListItem>
-          {
-            children && (
-              <Collapse in={isOpen} unmountOnExit>
-                {this.renderNavItems(item.children, deep + 1)}
-              </Collapse>
-            )
-          }
+          {children && (
+            <Collapse in={isOpen} unmountOnExit>
+              {this.renderNavItems(item.children, deep + 1)}
+            </Collapse>
+          )}
         </Fragment>
       )
     })
 
     return (
-      <List
-        component='div'
-        disablePadding
-      >
+      <List component='div' disablePadding>
         {items}
       </List>
     )
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { app, menu } = state
   const { language } = app
   const { menuOpenState } = menu
@@ -114,7 +112,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(MenuAction, dispatch)
 })
 

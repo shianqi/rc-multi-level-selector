@@ -4,9 +4,7 @@ import Document from 'COMPONENTS/Document'
 
 class HomePage extends React.Component {
   render () {
-    return (
-      <Document name={'index'} />
-    )
+    return <Document name='index' />
   }
 }
 
